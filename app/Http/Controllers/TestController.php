@@ -9,7 +9,7 @@ class TestController extends Controller
 {
     public function index()
     {
-        $data = TestModel::orderBy('id')->paginate(5);
+        $data = TestModel::all();
         return view('index', compact('data'));
     }
 }

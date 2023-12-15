@@ -3,53 +3,39 @@
 @section('content')
 
     @foreach ($data as $item)
-        <li>{{ $item->textData }}</li>
+        <p>{{ $item->textData }}</p>
     @endforeach
-    <!--
-                      This example requires some changes to your config:
 
-                      ```
-                      // tailwind.config.js
-                      module.exports = {
-                        // ...
-                        plugins: [
-                          // ...
-                          require('@tailwindcss/forms'),
-                          require('@tailwindcss/aspect-ratio'),
-                        ],
-                      }
-                      ```
-                    -->
     <div class="bg-white">
         <!--
-                          Mobile menu
+                                              Mobile menu
 
-                          Off-canvas menu for mobile, show/hide based on off-canvas menu state.
-                        -->
+                                              Off-canvas menu for mobile, show/hide based on off-canvas menu state.
+                                            -->
         <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
             <!--
-                            Off-canvas menu backdrop, show/hide based on off-canvas menu state.
+                                                Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
-                            Entering: "transition-opacity ease-linear duration-300"
-                              From: "opacity-0"
-                              To: "opacity-100"
-                            Leaving: "transition-opacity ease-linear duration-300"
-                              From: "opacity-100"
-                              To: "opacity-0"
-                          -->
+                                                Entering: "transition-opacity ease-linear duration-300"
+                                                  From: "opacity-0"
+                                                  To: "opacity-100"
+                                                Leaving: "transition-opacity ease-linear duration-300"
+                                                  From: "opacity-100"
+                                                  To: "opacity-0"
+                                              -->
             <div class="fixed inset-0 bg-black bg-opacity-25"></div>
 
             <div class="fixed inset-0 z-40 flex">
                 <!--
-                              Off-canvas menu, show/hide based on off-canvas menu state.
+                                                  Off-canvas menu, show/hide based on off-canvas menu state.
 
-                              Entering: "transition ease-in-out duration-300 transform"
-                                From: "-translate-x-full"
-                                To: "translate-x-0"
-                              Leaving: "transition ease-in-out duration-300 transform"
-                                From: "translate-x-0"
-                                To: "-translate-x-full"
-                            -->
+                                                  Entering: "transition ease-in-out duration-300 transform"
+                                                    From: "-translate-x-full"
+                                                    To: "translate-x-0"
+                                                  Leaving: "transition ease-in-out duration-300 transform"
+                                                    From: "translate-x-0"
+                                                    To: "-translate-x-full"
+                                                -->
                 <div class="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
                     <div class="flex px-4 pb-2 pt-5">
                         <button type="button"
@@ -326,15 +312,15 @@
                                                     </div>
 
                                                     <!--
-                                                'Women' flyout menu, show/hide based on flyout menu state.
+                                                                    'Women' flyout menu, show/hide based on flyout menu state.
 
-                                                Entering: "transition ease-out duration-200"
-                                                  From: "opacity-0"
-                                                  To: "opacity-100"
-                                                Leaving: "transition ease-in duration-150"
-                                                  From: "opacity-100"
-                                                  To: "opacity-0"
-                                              -->
+                                                                    Entering: "transition ease-out duration-200"
+                                                                      From: "opacity-0"
+                                                                      To: "opacity-100"
+                                                                    Leaving: "transition ease-in duration-150"
+                                                                      From: "opacity-100"
+                                                                      To: "opacity-0"
+                                                                  -->
                                                     <div class="absolute inset-x-0 top-full text-sm text-gray-500">
                                                         <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
                                                         <div class="absolute inset-0 top-1/2 bg-white shadow"
@@ -357,15 +343,15 @@
                                                     </div>
 
                                                     <!--
-                                                'Women' flyout menu, show/hide based on flyout menu state.
+                                                                    'Women' flyout menu, show/hide based on flyout menu state.
 
-                                                Entering: "transition ease-out duration-200"
-                                                  From: "opacity-0"
-                                                  To: "opacity-100"
-                                                Leaving: "transition ease-in duration-150"
-                                                  From: "opacity-100"
-                                                  To: "opacity-0"
-                                              -->
+                                                                    Entering: "transition ease-out duration-200"
+                                                                      From: "opacity-0"
+                                                                      To: "opacity-100"
+                                                                    Leaving: "transition ease-in duration-150"
+                                                                      From: "opacity-100"
+                                                                      To: "opacity-0"
+                                                                  -->
 
                                                 </div>
 

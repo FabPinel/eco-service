@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,5 +18,3 @@ Route::get('/', function () {
 });
 
 Route::get('/', [TestController::class, 'index']);
-
-Route::resource('companies', CompanyController::class);
