@@ -9,11 +9,11 @@
 </head>
 
 <body class="antialiased">
-
+    @include('partials.navbar')
     <div class="content">
         @yield('content')
     </div>
-
+    @include('partials.footer')
 </body>
 
 </html>
