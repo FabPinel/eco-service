@@ -42,11 +42,11 @@
                                 <!-- Selected: "border-indigo-600 text-indigo-600", Not Selected: "border-transparent text-gray-900" -->
                                 <button id="tabs-1-tab-1"
                                     class="border-transparent text-gray-900 flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
-                                    aria-controls="tabs-1-panel-1" role="tab" type="button">Women</button>
+                                    aria-controls="tabs-1-panel-1" role="tab" type="button">Boutique</button>
                                 <!-- Selected: "border-indigo-600 text-indigo-600", Not Selected: "border-transparent text-gray-900" -->
                                 <button id="tabs-1-tab-2"
                                     class="border-transparent text-gray-900 flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
-                                    aria-controls="tabs-1-panel-2" role="tab" type="button">Men</button>
+                                    aria-controls="tabs-1-panel-2" role="tab" type="button">Zéro déchet</button>
                             </div>
                         </div>
 
@@ -170,10 +170,7 @@
 
                     <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                         <div class="flow-root">
-                            <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Company</a>
-                        </div>
-                        <div class="flow-root">
-                            <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Stores</a>
+                            <a href="#" class="-m-2 block p-2 font-medium text-gray-900">DIY</a>
                         </div>
                     </div>
 
@@ -218,10 +215,10 @@
         </div>
 
         <!-- Navigation -->
-        <header class="relative z-10">
+        <header class="relative z-10" x-data="{ isSticky: false }" @scroll.window="isSticky = window.scrollY >= $refs.nav.offsetHeight">
             <nav aria-label="Top">
                 <!-- Top navigation -->
-                <div class="bg-gray-900">
+                <div class="bg-gray-900" x-ref="nav">
                     <div class="ml-auto flex h-10 w-full items-center justify-end px-4 sm:px-6 lg:px-8">
                         <div class="flex items-center space-x-6">
                             <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Sign in</a>
@@ -232,7 +229,7 @@
                 
 
                 <!-- Secondary navigation -->
-                <div class="bg-black bg-opacity-50 backdrop-blur-md backdrop-filter fixed w-full">
+                <div :class="{ 'fixed top-0 w-full': isSticky }" class="bg-black bg-opacity-50 backdrop-blur-md backdrop-filter">
                     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div>
                             <div class="flex h-16 items-center justify-between">
@@ -255,7 +252,7 @@
                                                     <button type="button"
                                                         class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
                                                         aria-expanded="false">
-                                                        Women
+                                                        Boutique
                                                         <!-- Open: "bg-white", Closed: "" -->
                                                         <span
                                                             class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out"
@@ -286,7 +283,7 @@
                                                     <button type="button"
                                                         class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
                                                         aria-expanded="false">
-                                                        Men
+                                                        Zéro déchet
                                                         <!-- Open: "bg-white", Closed: "" -->
                                                         <span
                                                             class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out"
@@ -307,10 +304,7 @@
 
                                             </div>
 
-                                            <a href="#"
-                                                class="flex items-center text-sm font-medium text-white">Company</a>
-                                            <a href="#"
-                                                class="flex items-center text-sm font-medium text-white">Stores</a>
+                                            <a href="#" class="flex items-center text-sm font-medium text-white">DIY</a>
                                         </div>
                                     </div>
                                 </div>
@@ -329,7 +323,7 @@
 
                                     <!-- Search -->
                                     <a href="#" class="ml-2 p-2 text-white">
-                                        <span class="sr-only">Search</span>
+                                        <span class="sr-only">Recherche</span>
                                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                             stroke="currentColor" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -347,12 +341,12 @@
 
                                 <div class="flex flex-1 items-center justify-end">
                                     <a href="#"
-                                        class="hidden text-sm font-medium text-white lg:block">Search</a>
+                                        class="hidden text-sm font-medium text-white lg:block">Rechercher</a>
 
                                     <div class="flex items-center lg:ml-8">
                                         <!-- Help -->
                                         <a href="#" class="p-2 text-white lg:hidden">
-                                            <span class="sr-only">Help</span>
+                                            <span class="sr-only">Aide</span>
                                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -360,7 +354,7 @@
                                             </svg>
                                         </a>
                                         <a href="#"
-                                            class="hidden text-sm font-medium text-white lg:block">Help</a>
+                                            class="hidden text-sm font-medium text-white lg:block">Aide</a>
 
                                         <!-- Cart -->
                                         <div class="ml-4 flow-root lg:ml-8">
