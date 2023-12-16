@@ -1,5 +1,6 @@
-        <!-- Mobile menu -->           
-        <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
+<div x-data="{ isOpen: false }">      
+       <!-- Mobile menu -->           
+        <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true" x-show="isOpen" @click.away="isOpen = false">
             <!--
                 Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
@@ -25,14 +26,13 @@
                 -->
                 <div class="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
                     <div class="flex px-4 pb-2 pt-5">
-                        <button type="button"
-                            class="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400">
-                            <span class="sr-only">Close menu</span>
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
+                        <button type="button" @click="isOpen = false"
+                        class="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400">
+                        <span class="sr-only">Close menu</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                     </div>
 
                     <!-- Links -->
@@ -312,7 +312,7 @@
                                 <!-- Mobile menu and search (lg-) -->
                                 <div class="flex flex-1 items-center lg:hidden">
                                     <!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. -->
-                                    <button type="button" class="-ml-2 p-2 text-white">
+                                    <button type="button" class="-ml-2 p-2 text-white" @click="isOpen = !isOpen">
                                         <span class="sr-only">Open menu</span>
                                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                             stroke="currentColor" aria-hidden="true">
@@ -377,3 +377,4 @@
                 </div>
             </nav>
         </header>
+</div>
