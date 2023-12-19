@@ -21,3 +21,7 @@ Route::get('/', function () {
 Route::get('/', [TestController::class, 'index']);
 
 Route::resource('companies', CompanyController::class);
+
+Route::get('/category', function () {
+    return view('shop.category');
+});
