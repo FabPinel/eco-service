@@ -24,6 +24,7 @@ Route::resource('companies', CompanyController::class);
 
 Route::get('/category', function () {
     return view('shop.category');
+});
 
 Route::get('dashboard', function () {
     return view('admin.dashboard');
