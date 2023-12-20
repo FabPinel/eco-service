@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\productController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +25,10 @@ Route::resource('companies', CompanyController::class);
 
 Route::get('/category', function () {
     return view('shop.category');
+});
 
 Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
+
+Route::resource('/admin/index', productController::class);
