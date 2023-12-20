@@ -8,29 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-
-    protected $table = 'products';
-
-    protected $fillable = ['name', 'description', 'media', 'price', 'created_at', 'updated_at', 'id_discount', 'id_cart_item', 'id_inventory'];
-
-    protected $dates = ['created_at', 'updated_at'];
-
     protected $primaryKey = 'id';
-
-    public $timestamps = true;
-
-    public function discount()
-    {
-        return $this->belongsTo(Discount::class, 'id_discount');
-    }
-
-    public function cartItem()
-    {
-        return $this->belongsTo(Cart::class, 'id_cart_item');
-    }
-
-    public function inventory()
-    {
-        return $this->belongsTo(Inventory::class, 'id_inventory');
-    }
+    protected $fillable = ['name', 'description', 'media', 'price', 'quantity', 'id_category', 'created_at', 'updated_at',];
 }

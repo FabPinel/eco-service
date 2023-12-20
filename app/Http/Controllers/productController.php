@@ -9,7 +9,7 @@ class productController extends Controller
 {
     public function index()
     {
-        $products = Product::orderBy('id', 'desc')->paginate(5);
+        $products = Product::all();
         return view('admin.products.index', compact('products'));
     }
 
@@ -24,7 +24,8 @@ class productController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
-            'media' => 'image|max:10000'
+            'quantity' => 'required|numeric',
+            'media' => 'required|image|mimes:jpeg,,png,jpg,gif,svg|max:2048',
         ]);
 
         $data = $request->except('media');
@@ -36,7 +37,6 @@ class productController extends Controller
             $image->storeAs('public/images', $imageName);
             $data['media'] = $imageName;
         }
-
         Product::create($data);
 
         return redirect()->route('admin.products.index')->with('success', 'Product has been created successfully.');
@@ -44,30 +44,42 @@ class productController extends Controller
 
     public function show(Product $product)
     {
-        return view('admin.products.show', compact('Product'));
+        return view('shop.category', compact('product'));
     }
 
-    public function edit(Product $product)
+    public function edit(string $id)
     {
-        return view('admin.products.edit', compact('Product'));
+        $product = Product::find($id);
+        return view(('admin.products.edit'), compact('product'));
     }
 
     public function update(Request $request, Product $product)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'quantity' => 'required|numeric',
+            'media' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $product->fill($request->post())->save();
+        $input = $request->all();
 
-        return redirect()->route('admin.products')->with('success', 'Product Has Been updated successfully');
+        if ($request->hasFile('media')) {
+            $image = $request->file('media');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
+            $input['media'] = $imageName; // Ajoutez cette ligne pour mettre à jour le nom du fichier dans $input
+        }
+
+        $product->update($input);
+
+        return redirect()->route('admin.products.index')->with('success', 'Le produit a été mis à jour avec succès');
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('admin.products')->with('success', 'Product has been deleted successfully');
+        return redirect()->route('admin.index')->with('success', 'Product has been deleted successfully');
     }
 }

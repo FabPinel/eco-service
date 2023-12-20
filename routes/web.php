@@ -31,4 +31,10 @@ Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
-Route::resource('/admin/index', productController::class);
+Route::get('/admin/index', [productController::class, 'index'])->name('admin.products.index');
+Route::get('/admin/products/create', [productController::class, 'create'])->name('admin.products.create');
+Route::post('/admin/products', [productController::class, 'store'])->name('admin.products.store');
+Route::get('/admin/products/{id}', [productController::class, 'show'])->name('admin.products.show');
+Route::get('/admin/products/edit/{id}', [productController::class, 'edit'])->name('admin.products.edit');
+Route::put('/admin/products/{id}', [productController::class, 'update'])->name('admin.products.update');
+Route::delete('/admin/products/{id}', [productController::class, 'destroy'])->name('admin.products.destroy');
