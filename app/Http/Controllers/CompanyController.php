@@ -10,7 +10,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::orderBy('id', 'desc')->paginate(5);
-        return view('companies.index', compact('companies'));
+        return view('Companies.index', compact('companies'));
     }
 
     public function create()
@@ -38,6 +38,7 @@ class CompanyController extends Controller
 
     public function edit(Company $company)
     {
+        dd($company);
         return view('companies.edit', compact('company'));
     }
 
