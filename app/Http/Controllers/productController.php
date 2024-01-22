@@ -32,7 +32,7 @@ class productController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required|numeric',
+            'price' => 'required|float',
             'id_category' => 'required|numeric',
             'quantity' => 'required|numeric',
             'media' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
