@@ -2,9 +2,6 @@
 @section('title', 'Accueil')
 @section('content')
 
-    @foreach ($data as $item)
-        <li>{{ $item->textData }}</li>
-    @endforeach
     <div class="bg-white">
         <!-- Hero section -->
         <div class="relative bg-gray-900">
@@ -72,8 +69,7 @@
                                     </span>
                                     <span aria-hidden="true"
                                         class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"></span>
-                                    <span
-                                        class="relative mt-auto text-center text-xl font-bold text-white">Workspace</span>
+                                    <span class="relative mt-auto text-center text-xl font-bold text-white">Workspace</span>
                                 </a>
                                 <a href="#"
                                     class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto">
@@ -110,8 +106,7 @@
             </section>
 
             <!-- Featured section -->
-            <section aria-labelledby="social-impact-heading"
-                class="mx-auto max-w-7xl px-4 pt-24 sm:px-6 sm:pt-32 lg:px-8">
+            <section aria-labelledby="social-impact-heading" class="mx-auto max-w-7xl px-4 pt-24 sm:px-6 sm:pt-32 lg:px-8">
                 <div class="relative overflow-hidden rounded-lg">
                     <div class="absolute inset-0">
                         <img src="https://tailwindui.com/img/ecommerce-images/home-page-01-feature-section-01.jpg"
@@ -119,8 +114,7 @@
                     </div>
                     <div class="relative bg-gray-900 bg-opacity-75 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
                         <div class="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-                            <h2 id="social-impact-heading"
-                                class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                            <h2 id="social-impact-heading" class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                                 <span class="block sm:inline">Level up</span>
                                 <span class="block sm:inline">your desk</span>
                             </h2>

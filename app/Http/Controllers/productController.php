@@ -4,18 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class productController extends Controller
 {
     public function index()
     {
-        $products = Product::orderBy('id', 'desc')->paginate(5);
-        return view('admin.products.index', compact('products'));
+        $products = Product::all();
+        $categories = Category::all();
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     public function create()
     {
-        return view('admin.products.create');
+        $categories = Category::all();
+        return view('admin.products.create', compact('categories'));
+    }
+
+    public function createCategory()
+    {
+        return view('admin.category.create');
     }
 
     public function store(Request $request)
@@ -24,7 +33,9 @@ class productController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
-            'media' => 'image|max:10000'
+            'id_category' => 'required|numeric',
+            'quantity' => 'required|numeric',
+            'media' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
         ]);
 
         $data = $request->except('media');
@@ -36,38 +47,86 @@ class productController extends Controller
             $image->storeAs('public/images', $imageName);
             $data['media'] = $imageName;
         }
-
         Product::create($data);
 
         return redirect()->route('admin.products.index')->with('success', 'Product has been created successfully.');
     }
 
-    public function show(Product $product)
+    public function storeCategory(Request $request)
     {
-        return view('admin.products.show', compact('Product'));
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        Category::create($request->post());
+
+        return redirect()->route('admin.products.index')->with('success', 'Category has been created successfully.');
     }
 
-    public function edit(Product $product)
+    public function show(Product $product)
     {
-        return view('admin.products.edit', compact('Product'));
+        return view('shop.category', compact('product'));
+    }
+
+    public function edit(string $id)
+    {
+        $product = Product::find($id);
+        return view(('admin.products.edit'), compact('product'));
     }
 
     public function update(Request $request, Product $product)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'quantity' => 'required|numeric',
+            'media' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $product->fill($request->post())->save();
+        $input = $request->all();
 
-        return redirect()->route('admin.products')->with('success', 'Product Has Been updated successfully');
+        if ($request->hasFile('media')) {
+            $image = $request->file('media');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
+            $input['media'] = $imageName; // Ajoutez cette ligne pour mettre à jour le nom du fichier dans $input
+        }
+
+        $product->update($input);
+
+        return redirect()->route('admin.products.index')->with('success', 'Le produit a été mis à jour avec succès');
     }
 
-    public function destroy(Product $product)
+    public function destroy(string $id)
     {
-        $product->delete();
-        return redirect()->route('admin.products')->with('success', 'Product has been deleted successfully');
+        $produits = Product::findOrFail($id);
+
+        if (!is_null($produits->featured_image)) {
+            Storage::disk('public')->delete($produits->featured_image);
+        }
+
+        $produits->delete();
+
+        session()->flash('notif.success', 'Category deleted successfully!');
+
+        return redirect()->route('admin.products.index');
+    }
+
+
+    public function destroyCategory(string $id)
+    {
+        $category = Category::findOrFail($id);
+
+        if (!is_null($category->featured_image)) {
+            Storage::disk('public')->delete($category->featured_image);
+        }
+
+        $category->delete();
+
+        session()->flash('notif.success', 'Category deleted successfully!');
+
+        return redirect()->route('admin.products.index');
     }
 }
