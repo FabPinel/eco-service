@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\productController;
+use App\Http\Controllers\discountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,10 @@ Route::delete('/admin/products/{id}', [productController::class, 'destroy'])->na
 Route::get('/admin/category/create', [productController::class, 'createCategory'])->name('admin.category.create');
 Route::post('/admin/category', [productController::class, 'storeCategory'])->name('admin.category.store');
 Route::delete('/admin/category/{id}', [productController::class, 'destroyCategory'])->name('admin.category.destroy');
+Route::get('/admin/category/edit/{id}', [productController::class, 'editCategory'])->name('admin.category.edit');
+Route::put('/admin/category/{id}', [productController::class, 'updateCategory'])->name('admin.category.update');
+
+//Promo
+Route::get('/admin/discounts/create', [discountController::class, 'create'])->name('admin.discounts.create');
+Route::post('/admin/discounts', [discountController::class, 'store'])->name('admin.discounts.store');
+Route::delete('/admin/discounts/{id}', [discountController::class, 'destroy'])->name('admin.discounts.destroy');

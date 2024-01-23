@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Discount;
 use Illuminate\Support\Facades\Storage;
 
 class productController extends Controller
@@ -13,7 +14,8 @@ class productController extends Controller
     {
         $products = Product::all();
         $categories = Category::all();
-        return view('admin.products.index', compact('products', 'categories'));
+        $discounts = Discount::all();
+        return view('admin.products.index', compact('products', 'categories', 'discounts'));
     }
 
     public function create()
@@ -114,6 +116,22 @@ class productController extends Controller
         return redirect()->route('admin.products.index');
     }
 
+    public function editCategory(string $id)
+    {
+        $category = Category::find($id);
+        return view(('admin.category.edit'), compact('category'));
+    }
+
+    public function updateCategory(Request $request, Category $category)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+        $category->update($request->all());
+
+        return redirect()->route('admin.products.index')->with('success', 'La catégorie a été mise à jour avec succès');
+    }
 
     public function destroyCategory(string $id)
     {

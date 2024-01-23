@@ -37,9 +37,7 @@
                     <p class="mt-2 text-sm text-gray-700">La liste de tous les produits</p>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <a href="{{ route('admin.products.create') }}"
-                        class="block rounded-md bg-[#D8A48F] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#E4C8AF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter
-                        un produit</a>
+                    <a href="{{ route('admin.products.create') }}" class="block rounded-md bg-[#D8A48F] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#E4C8AF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter un produit</a>
                 </div>
             </div>
             <div class="mt-8 flow-root">
@@ -150,9 +148,7 @@
                     <p class="mt-2 text-sm text-gray-700">La liste de toutes les catégories</p>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <a href="{{ route('admin.category.create') }}"
-                        class="block rounded-md bg-[#D8A48F] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#E4C8AF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter
-                        une catégorie</a>
+                    <a href="{{ route('admin.category.create') }}" class="block rounded-md bg-[#D8A48F] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#E4C8AF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter une catégorie</a>
                 </div>
             </div>
             <div class="mt-8 flow-root">
@@ -196,7 +192,7 @@
                                         </td>
                                         <td
                                             class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href="{{ route('admin.products.edit', $category->id) }}"
+                                            <a href="{{ route('admin.category.edit', $category->id) }}"
                                                 class="text-slate-400 hover:text-slate-900">
                                                 <span class="material-icons">
                                                     edit
@@ -238,9 +234,7 @@
                     <p class="mt-2 text-sm text-gray-700">La liste de tous les codes promos</p>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <a href="{{ route('admin.category.create') }}"
-                        class="block rounded-md bg-[#D8A48F] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#E4C8AF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter
-                        une promotion</a>
+                    <a href="{{ route('admin.discounts.create') }}" class="block rounded-md bg-[#D8A48F] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#E4C8AF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter une promotion</a>
                 </div>
             </div>
             <div class="mt-8 flow-root">
@@ -273,27 +267,27 @@
                                     </th>
                                 </tr>
                             </thead>
-                            @foreach ($categories as $category)
+                            @foreach ($discounts as $discount)
                                 <tbody class="divide-y divide-gray-200 bg-white">
                                     <tr>
                                         <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                             <div class="flex items-center">
                                                 <div class="ml-4">
-                                                    <div class="font-medium text-gray-900">{{ $category->id }}</div>
+                                                    <div class="font-medium text-gray-900">{{ $discount->id }}</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                            <div class="text-gray-900">{{ $category->name }}</div>
+                                            <div class="text-gray-900">{{ $discount->name }}</div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                            <div class="text-gray-900">{{ $category->description }}</div>
+                                            <div class="text-gray-900">{{ $discount->description }}</div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                            <div class="text-gray-900">70%</div>
+                                            <div class="text-gray-900">{{ $discount->discount_percent }}%</div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                            <div class="text-gray-900">15€</div>
+                                            <div class="text-gray-900">{{ $discount->discount_amount }}€</div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                                             @if ($product->id_discount != null)
@@ -306,7 +300,7 @@
                                         </td>
                                         <td
                                             class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href="{{ route('admin.products.edit', $category->id) }}"
+                                            <a href="{{ route('admin.products.edit', $discount->id) }}"
                                                 class="text-slate-400 hover:text-slate-900">
                                                 <span class="material-icons">
                                                     edit
@@ -321,7 +315,7 @@
                                                 </span></a>
                                         </td>
                                         <td>
-                                            <form action="{{ route('admin.category.destroy', $category->id) }}"
+                                            <form action="{{ route('admin.discounts.destroy', $discount->id) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
