@@ -53,3 +53,4 @@ Route::post('/admin/discounts', [discountController::class, 'store'])->name('adm
 Route::delete('/admin/discounts/{id}', [discountController::class, 'destroy'])->name('admin.discounts.destroy');
 Route::get('/admin/discounts/edit/{id}', [discountController::class, 'edit'])->name('admin.discounts.edit');
 Route::put('/admin/discounts/{id}', [discountController::class, 'update'])->name('admin.discounts.update');
+Route::put('/admin/discounts/{id}/toggle-status', [discountController::class, 'toggleStatus'])->name('admin.discounts.toggle-status');

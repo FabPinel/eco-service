@@ -290,13 +290,15 @@
                                             <div class="text-gray-900">{{ $discount->discount_amount }}€</div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                            @if ($product->id_discount != null)
-                                                <span
-                                                    class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
+                                            <form action="{{ route('admin.discounts.toggle-status', $discount->id) }}" method="post">
+                                                @csrf
+                                                @method('PUT')
+                                                @if ($discount->active != 0)
+                                                <button type="submit" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</button>
                                             @else
-                                                <span
-                                                    class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Inactive</span>
+                                                <button type="submit" class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Inactive</button>
                                             @endif
+                                            </form>
                                         </td>
                                         <td
                                             class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">

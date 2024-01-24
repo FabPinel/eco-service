@@ -83,4 +83,16 @@ class discountController extends Controller
 
         return redirect()->route('admin.products.index')->with('success', 'La promotion a été mise à jour avec succès');
     }
+
+    public function toggleStatus($id)
+    {
+        $discount = Discount::findOrFail($id);
+
+        // Basculez le statut en utilisant la négation
+        $discount->update([
+            'active' => !$discount->active,
+        ]);
+
+        return redirect()->route('admin.products.index')->with('success', 'Le statut de la promo a été mis à jour avec succès');
+    }
 }
