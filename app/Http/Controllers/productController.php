@@ -12,9 +12,9 @@ class productController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        $categories = Category::all();
-        $discounts = Discount::all();
+        $products = Product::paginate(5);
+        $categories = Category::paginate(1);
+        $discounts = Discount::paginate(1);
         return view('admin.products.index', compact('products', 'categories', 'discounts'));
     }
 
@@ -89,15 +89,16 @@ class productController extends Controller
 
         $input = $request->all();
 
-        if ($product->media) {
-            Storage::delete('public/images/' . $product->media);
-        }
+
 
         if ($request->hasFile('media')) {
             $image = $request->file('media');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('public/images', $imageName);
-            $input['media'] = $imageName; // Ajoutez cette ligne pour mettre à jour le nom du fichier dans $input
+            $input['media'] = $imageName;
+            if ($product->media) {
+                Storage::delete('public/images/' . $product->media);
+            }
         }
         $product->update($input);
         //dd($product);
@@ -149,5 +150,16 @@ class productController extends Controller
         session()->flash('notif.success', 'Category deleted successfully!');
 
         return redirect()->route('admin.products.index');
+    }
+
+    public function toggleStatus($id)
+    {
+        $product = Product::findOrFail($id);
+
+        $product->update([
+            'active' => !$product->active,
+        ]);
+
+        return redirect()->route('admin.products.index')->with('success', 'Le statut de la promo a été mis à jour avec succès');
     }
 }

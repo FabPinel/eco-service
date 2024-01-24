@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\discountController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::get('/admin/products/{id}', [productController::class, 'show'])->name('ad
 Route::get('/admin/products/edit/{id}', [productController::class, 'edit'])->name('admin.products.edit');
 Route::put('/admin/products/{id}', [productController::class, 'update'])->name('admin.products.update');
 Route::delete('/admin/products/{id}', [productController::class, 'destroy'])->name('admin.products.destroy');
+Route::put('/admin/products/{id}/toggle-status', [ProductController::class, 'toggleStatus'])->name('admin.products.toggle-status');
 
 // Catégories
 Route::get('/admin/category/create', [productController::class, 'createCategory'])->name('admin.category.create');
