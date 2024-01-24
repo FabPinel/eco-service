@@ -77,17 +77,21 @@ class productController extends Controller
         return view(('admin.products.edit'), compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'media' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        $product = Product::find($id);
 
         $input = $request->all();
+
+        if ($product->media) {
+            Storage::delete('public/images/' . $product->media);
+        }
 
         if ($request->hasFile('media')) {
             $image = $request->file('media');
@@ -95,9 +99,8 @@ class productController extends Controller
             $image->storeAs('public/images', $imageName);
             $input['media'] = $imageName; // Ajoutez cette ligne pour mettre à jour le nom du fichier dans $input
         }
-
         $product->update($input);
-
+        //dd($product);
         return redirect()->route('admin.products.index')->with('success', 'Le produit a été mis à jour avec succès');
     }
 
