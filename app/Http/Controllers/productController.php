@@ -116,20 +116,20 @@ class productController extends Controller
         return redirect()->route('admin.products.index');
     }
 
-    public function editCategory(string $id)
+    public function editCategory(Category $category, $id)
     {
         $category = Category::find($id);
         return view(('admin.category.edit'), compact('category'));
     }
 
-    public function updateCategory(Request $request, Category $category)
+    public function updateCategory(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
             'description' => 'required'
         ]);
+        $category = Category::find($id);
         $category->update($request->all());
-
         return redirect()->route('admin.products.index')->with('success', 'La catégorie a été mise à jour avec succès');
     }
 

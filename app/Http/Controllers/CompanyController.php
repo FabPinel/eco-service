@@ -38,7 +38,7 @@ class CompanyController extends Controller
 
     public function edit(Company $company)
     {
-        dd($company);
+        //dd($company);
         return view('companies.edit', compact('company'));
     }
 
@@ -51,6 +51,7 @@ class CompanyController extends Controller
         ]);
 
         $company->fill($request->post())->save();
+        dd($company);
 
         return redirect()->route('companies.index')->with('success', 'Company Has Been updated successfully');
     }
