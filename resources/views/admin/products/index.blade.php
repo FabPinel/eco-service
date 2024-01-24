@@ -300,7 +300,7 @@
                                         </td>
                                         <td
                                             class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href="{{ route('admin.products.edit', $discount->id) }}"
+                                            <a href="{{ route('admin.discounts.edit', $discount->id) }}"
                                                 class="text-slate-400 hover:text-slate-900">
                                                 <span class="material-icons">
                                                     edit

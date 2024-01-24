@@ -51,3 +51,5 @@ Route::put('/admin/category/{id}', [productController::class, 'updateCategory'])
 Route::get('/admin/discounts/create', [discountController::class, 'create'])->name('admin.discounts.create');
 Route::post('/admin/discounts', [discountController::class, 'store'])->name('admin.discounts.store');
 Route::delete('/admin/discounts/{id}', [discountController::class, 'destroy'])->name('admin.discounts.destroy');
+Route::get('/admin/discounts/edit/{id}', [discountController::class, 'edit'])->name('admin.discounts.edit');
+Route::put('/admin/discounts/{id}', [discountController::class, 'update'])->name('admin.discounts.update');

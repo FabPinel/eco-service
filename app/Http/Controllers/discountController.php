@@ -25,12 +25,25 @@ class discountController extends Controller
             'name' => 'required',
             'description' => 'required',
         ]);
+
+        $discountPercentValue = $request->input('discount_percent');
+        $discountPercent = ($discountPercentValue === null) ? 0 : $discountPercentValue;
+
+        $discountAmountValue = $request->input('discount_amount');
+        $discountAmount = ($discountAmountValue === null) ? 0 : $discountAmountValue;
+
         // dd($request);
         // die;
-        Discount::create($request->post());
+        Discount::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'discount_percent' => $discountPercent,
+            'discount_amount' => $discountAmount,
+        ]);
 
         return redirect()->route('admin.products.index')->with('success', 'Discount has been created successfully.');
     }
+
 
     public function destroy(string $id)
     {
@@ -41,5 +54,33 @@ class discountController extends Controller
         session()->flash('notif.success', 'Discount deleted successfully!');
 
         return redirect()->route('admin.products.index');
+    }
+
+    public function edit(string $id)
+    {
+        $discounts = Discount::find($id);
+        return view(('admin.discounts.edit'), compact('discounts'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $discount = Discount::find($id);
+
+        $input = $request->all();
+
+        // Utilisation de l'opérateur ternaire pour définir la valeur de $input['discount_amount'] à 0 si elle est vide ou non définie
+        $input['discount_amount'] = ($input['discount_amount'] === null) ? 0 : $input['discount_amount'];
+
+        // Utilisation de l'opérateur ternaire pour définir la valeur de $input['discount_percent'] à 0 si elle est vide ou non définie
+        $input['discount_percent'] = ($input['discount_percent'] === null) ? 0 : $input['discount_percent'];
+
+        $discount->update($input);
+
+        return redirect()->route('admin.products.index')->with('success', 'La promotion a été mise à jour avec succès');
     }
 }
