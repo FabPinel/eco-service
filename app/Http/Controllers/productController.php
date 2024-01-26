@@ -12,9 +12,10 @@ class productController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(5);
-        $categories = Category::paginate(1);
-        $discounts = Discount::paginate(1);
+        $products = Product::paginate(10);
+        $categories = Category::paginate(10);
+        $discounts = Discount::paginate(10);
+
         return view('admin.products.index', compact('products', 'categories', 'discounts'));
     }
 
@@ -22,11 +23,6 @@ class productController extends Controller
     {
         $categories = Category::all();
         return view('admin.products.create', compact('categories'));
-    }
-
-    public function createCategory()
-    {
-        return view('admin.category.create');
     }
 
     public function store(Request $request)
@@ -54,23 +50,6 @@ class productController extends Controller
         return redirect()->route('admin.products.index')->with('success', 'Product has been created successfully.');
     }
 
-    public function storeCategory(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
-
-        Category::create($request->post());
-
-        return redirect()->route('admin.products.index')->with('success', 'Category has been created successfully.');
-    }
-
-    public function show(Product $product)
-    {
-        return view('shop.category', compact('product'));
-    }
-
     public function edit(string $id)
     {
         $product = Product::find($id);
@@ -88,8 +67,6 @@ class productController extends Controller
         $product = Product::find($id);
 
         $input = $request->all();
-
-
 
         if ($request->hasFile('media')) {
             $image = $request->file('media');
@@ -118,6 +95,28 @@ class productController extends Controller
         session()->flash('notif.success', 'Category deleted successfully!');
 
         return redirect()->route('admin.products.index');
+    }
+
+    public function createCategory()
+    {
+        return view('admin.category.create');
+    }
+
+    public function storeCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        Category::create($request->post());
+
+        return redirect()->route('admin.products.index')->with('success', 'Category has been created successfully.');
+    }
+
+    public function show(Product $product)
+    {
+        return view('shop.category', compact('product'));
     }
 
     public function editCategory(Category $category, $id)

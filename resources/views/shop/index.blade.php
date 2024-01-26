@@ -589,7 +589,7 @@
 
             <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-                    <h1 class="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900">Boutique</h1>
 
                     <div x-data="{ isOpen: false }" class="flex items-center">
                         <div class="relative inline-block text-left">
@@ -597,7 +597,7 @@
                                 <button @click="isOpen = !isOpen"
                                     class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                     id="menu-button" :aria-expanded="isOpen.toString()" aria-haspopup="true">
-                                    Sort
+                                    Trier
                                     <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                                         viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd"
@@ -612,15 +612,15 @@
                                 role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                 <div class="py-1" role="none">
                                     <a href="#" class="font-medium text-gray-900 block px-4 py-2 text-sm"
-                                        role="menuitem" tabindex="-1" id="menu-item-0">Most Popular</a>
+                                        role="menuitem" tabindex="-1" id="menu-item-0">Plus populaire</a>
                                     <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem"
-                                        tabindex="-1" id="menu-item-1">Best Rating</a>
+                                        tabindex="-1" id="menu-item-1">Meilleur note</a>
                                     <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem"
-                                        tabindex="-1" id="menu-item-2">Newest</a>
+                                        tabindex="-1" id="menu-item-2">Récent</a>
                                     <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem"
-                                        tabindex="-1" id="menu-item-3">Price: Low to High</a>
+                                        tabindex="-1" id="menu-item-3">Prix le plus bas</a>
                                     <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem"
-                                        tabindex="-1" id="menu-item-4">Price: High to Low</a>
+                                        tabindex="-1" id="menu-item-4">Prix le plus haut</a>
                                 </div>
                             </div>
                         </div>
@@ -650,13 +650,13 @@
                         <div>
                             <h3 class="sr-only">Categories</h3>
 
-                            <div x-data="{ isOpen: false }" class="border-b border-gray-200 py-6">
+                            <div x-data="{ isOpen: true }" class="border-b border-gray-200 py-6">
                                 <h3 class="-my-3 flow-root">
                                     <!-- Expand/collapse section button -->
                                     <button @click="isOpen = !isOpen"
                                         class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
                                         aria-controls="filter-section-0">
-                                        <span class="font-medium text-gray-900">Category</span>
+                                        <span class="font-medium text-gray-900">Nos categories</span>
                                         <span class="ml-6 flex items-center">
                                             <!-- Expand icon, show/hide based on section open state. -->
                                             <svg x-show="!isOpen" class="h-5 w-5" viewBox="0 0 20 20"
@@ -677,187 +677,36 @@
                                 <!-- Filter section, show/hide based on section state. -->
                                 <div x-show="isOpen" class="pt-6" id="filter-section-0">
                                     <div class="space-y-4">
-                                        <div class="flex items-center">
-                                            <input id="filter-category-0" name="category[]" type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-category-0" class="ml-3 text-sm text-gray-600">New
-                                                Arrivals</label>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <input id="filter-category-1" name="category[]" type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-category-1" class="ml-3 text-sm text-gray-600">Sale</label>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <input id="filter-category-2" name="category[]" type="checkbox" checked
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-category-2"
-                                                class="ml-3 text-sm text-gray-600">Travel</label>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <input id="filter-category-3" name="category[]" type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-category-3"
-                                                class="ml-3 text-sm text-gray-600">Organization</label>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <input id="filter-category-4" name="category[]" type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-category-4"
-                                                class="ml-3 text-sm text-gray-600">Accessories</label>
-                                        </div>
+                                        @foreach ($categories as $category)
+                                            <div class="flex items-center">
+                                                <input id="filter-category-0" name="category[]" type="checkbox"
+                                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                                <label for="filter-category-0" class="ml-3 text-sm text-gray-600">{{ $category->name }}</label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {{-- </form> --}}
-
                         <!-- Product grid -->
                         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-3 lg:gap-x-8">
-                            <a href="#" class="group text-sm">
-                                <div
-                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                    <img src="https://tailwindui.com/img/ecommerce-images/category-page-07-product-01.jpg"
-                                        alt="White fabric pouch with white zipper, black zipper pull, and black elastic loop."
-                                        class="h-full w-full object-cover object-center">
-                                </div>
-                                <h3 class="mt-4 font-medium text-gray-900">Nomad Pouch</h3>
-                                <p class="italic text-gray-500">White and Black</p>
-                                <p class="mt-2 font-medium text-gray-900">$50</p>
-                            </a>
-                            <a href="#" class="group text-sm">
-                                <div
-                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                    <img src="https://tailwindui.com/img/ecommerce-images/category-page-07-product-02.jpg"
-                                        alt="Front of tote bag with washed black canvas body, black straps, and tan leather handles and accents."
-                                        class="h-full w-full object-cover object-center">
-                                </div>
-                                <h3 class="mt-4 font-medium text-gray-900">Zip Tote Basket</h3>
-                                <p class="italic text-gray-500">Washed Black</p>
-                                <p class="mt-2 font-medium text-gray-900">$140</p>
-                            </a>
-
-                            <a href="#" class="group text-sm">
-                                <div
-                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                    <img src="https://tailwindui.com/img/ecommerce-images/category-page-07-product-01.jpg"
-                                        alt="White fabric pouch with white zipper, black zipper pull, and black elastic loop."
-                                        class="h-full w-full object-cover object-center">
-                                </div>
-                                <h3 class="mt-4 font-medium text-gray-900">Nomad Pouch</h3>
-                                <p class="italic text-gray-500">White and Black</p>
-                                <p class="mt-2 font-medium text-gray-900">$50</p>
-                            </a>
-                            <a href="#" class="group text-sm">
-                                <div
-                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                    <img src="https://tailwindui.com/img/ecommerce-images/category-page-07-product-02.jpg"
-                                        alt="Front of tote bag with washed black canvas body, black straps, and tan leather handles and accents."
-                                        class="h-full w-full object-cover object-center">
-                                </div>
-                                <h3 class="mt-4 font-medium text-gray-900">Zip Tote Basket</h3>
-                                <p class="italic text-gray-500">Washed Black</p>
-                                <p class="mt-2 font-medium text-gray-900">$140</p>
-                            </a>
-
+                            @foreach ($products as $product)
+                                <a href="#" class="group text-sm">
+                                    <div
+                                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
+                                        <img class="h-full w-full object-cover object-center"
+                                        src="{{ asset('storage/images/' . $product->media) }}"
+                                        alt="{{ $product->name }}"> 
+                                    </div>
+                                    <h3 class="mt-4 font-medium text-gray-900">{{ $product->name }}</h3>
+                                    <p class="mt-2 font-medium text-gray-900">{{ $product->price }}€</p>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </section>
             </main>
-
-            <footer aria-labelledby="footer-heading" class="bg-white">
-                <h2 id="footer-heading" class="sr-only">Footer</h2>
-                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div
-                        class="grid grid-cols-2 gap-8 border-t border-gray-200 py-20 sm:grid-cols-2 sm:gap-y-0 lg:grid-cols-4">
-                        <div class="grid grid-cols-1 gap-y-10 lg:col-span-2 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-0">
-                            <div>
-                                <h3 class="text-sm font-medium text-gray-900">Account</h3>
-                                <ul role="list" class="mt-6 space-y-6">
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Manage Account</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Saved Items</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Orders</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Redeem Gift card</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-medium text-gray-900">Service</h3>
-                                <ul role="list" class="mt-6 space-y-6">
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Shipping &amp;
-                                            Returns</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Warranty</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">FAQ</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Find a store</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Get in touch</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 gap-y-10 lg:col-span-2 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-0">
-                            <div>
-                                <h3 class="text-sm font-medium text-gray-900">Company</h3>
-                                <ul role="list" class="mt-6 space-y-6">
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Who we are</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Press</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Careers</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Terms &amp;
-                                            Conditions</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Privacy</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-medium text-gray-900">Connect</h3>
-                                <ul role="list" class="mt-6 space-y-6">
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Instagram</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Pinterest</a>
-                                    </li>
-                                    <li class="text-sm">
-                                        <a href="#" class="text-gray-500 hover:text-gray-600">Twitter</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="border-t border-gray-100 py-10 sm:flex sm:items-center sm:justify-between">
-                        <div class="flex items-center justify-center text-sm text-gray-500">
-                            <p>Shipping to Canada ($CAD)</p>
-                            <p class="ml-3 border-l border-gray-200 pl-3">English</p>
-                        </div>
-                        <p class="mt-6 text-center text-sm text-gray-500 sm:mt-0">&copy; 2021 Your Company, Inc.</p>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
 @endsection

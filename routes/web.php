@@ -1,10 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\discountController;
-use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,18 +19,14 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::resource('companies', CompanyController::class);
-
-Route::get('/category', function () {
-    return view('shop.category');
+Route::get('/boutique', function () {
+    return view('shop.index');
 });
-
 Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
 // Produits
-
 Route::get('/admin/index', [productController::class, 'index'])->name('admin.products.index');
 Route::get('/admin/products/create', [productController::class, 'create'])->name('admin.products.create');
 Route::post('/admin/products', [productController::class, 'store'])->name('admin.products.store');

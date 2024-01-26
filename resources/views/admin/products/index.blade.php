@@ -13,8 +13,7 @@
             </li>
             <li x-on:click="activeTab = 2; localStorage.setItem('activeTab', 2)"
                 :class="{
-                    'bg-[#D8A48F] text-white shadow-md cursor-pointer': activeTab ===
-                        2,
+                    'bg-[#D8A48F] text-white shadow-md cursor-pointer': activeTab === 2,
                     'bg-white text-black shadow-md cursor-pointer': activeTab !== 2
                 }"
                 class="hover:bg-[#E4C8AF] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center">
@@ -22,8 +21,7 @@
             </li>
             <li x-on:click="activeTab = 3; localStorage.setItem('activeTab', 3)"
                 :class="{
-                    'bg-[#D8A48F] text-white shadow-md cursor-pointer': activeTab ===
-                        3,
+                    'bg-[#D8A48F] text-white shadow-md cursor-pointer': activeTab === 3,
                     'bg-white text-black shadow-md cursor-pointer': activeTab !== 3
                 }"
                 class="hover:bg-[#E4C8AF] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center">
@@ -92,7 +90,7 @@
                                             </div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                            <div class="text-gray-900">{{ $product->name }}€</div>
+                                            <div class="text-gray-900">{{ $product->name }}</div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                                             <div class="text-gray-900">{{ $product->price }}€</div>
