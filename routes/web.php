@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\discountController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +23,20 @@ Route::get('/', function () {
 Route::get('/boutique', function () {
     return view('shop.index');
 });
+
+Route::get('/produit', function () {
+    return view('shop.products');
+});
+
 Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
+//Boutique
+// Fiche produit
+Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('shop.productName');
+
+// Admin
 // Produits
 Route::get('/admin/index', [productController::class, 'index'])->name('admin.products.index');
 Route::get('/admin/products/create', [productController::class, 'create'])->name('admin.products.create');

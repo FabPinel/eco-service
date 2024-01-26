@@ -692,7 +692,7 @@
                         <!-- Product grid -->
                         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-3 lg:gap-x-8">
                             @foreach ($products as $product)
-                                <a href="#" class="group text-sm">
+                                <a href="{{ route('shop.productName', $product->id) }}" class="group text-sm">
                                     <div
                                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                         <img class="h-full w-full object-cover object-center"
