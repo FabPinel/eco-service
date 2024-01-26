@@ -176,10 +176,10 @@
 
                     <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                         <div class="flow-root">
-                            <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Create an account</a>
+                            <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Créer un compte</a>
                         </div>
                         <div class="flow-root">
-                            <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Sign in</a>
+                            <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Se connecter</a>
                         </div>
                     </div>
 
@@ -218,27 +218,27 @@
         <header class="relative z-10" x-data="{ isSticky: false }" @scroll.window="isSticky = window.scrollY >= $refs.nav.offsetHeight">
             <nav aria-label="Top">
                 <!-- Top navigation -->
-                <div class="bg-gray-900" x-ref="nav">
+                <div class="bg-[#1c3242]" x-ref="nav">
                     <div class="ml-auto flex h-10 w-full items-center justify-end px-4 sm:px-6 lg:px-8">
                         <div class="flex items-center space-x-6">
-                            <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Sign in</a>
-                            <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Create an account</a>
+                            <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Se connecter</a>
+                            <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Créer un compte</a>
                         </div>
                     </div>
                 </div>
                 
 
                 <!-- Secondary navigation -->
-                <div :class="{ 'fixed top-0 w-full': isSticky }" class="bg-black bg-opacity-50 backdrop-blur-md backdrop-filter">
+                <div :class="{ 'fixed top-0 w-full': isSticky }" class="bg-[#e88229] bg-opacity-50 backdrop-blur-md backdrop-filter">
                     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div>
                             <div class="flex h-16 items-center justify-between">
                                 <!-- Logo (lg+) -->
                                 <div class="hidden lg:flex lg:flex-1 lg:items-center">
-                                    <a href="#">
+                                    <a href="/">
                                         <span class="sr-only">Your Company</span>
-                                        <img class="h-8 w-auto"
-                                            src="https://tailwindui.com/img/logos/mark.svg?color=white"
+                                        <img class="h-20 w-auto"
+                                            src="https://image.noelshack.com/fichiers/2024/04/5/1706279129-logo-eco-service.png"
                                             alt="">
                                     </a>
                                 </div>
@@ -250,13 +250,12 @@
                                             <div class="flex">
                                                 <div class="relative flex">
                                                     <button type="button"
+                                                        onclick="window.location.href='{{ url('/boutique') }}'"
                                                         class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
                                                         aria-expanded="false">
-                                                        Boutique
-                                                        <!-- Open: "bg-white", Closed: "" -->
-                                                        <span
-                                                            class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out"
-                                                            aria-hidden="true"></span>
+                                                            Boutique
+                                                            <!-- Open: "bg-white", Closed: "" -->
+                                                        <span class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out" aria-hidden="true"></span>
                                                     </button>
                                                 </div>
 
@@ -281,13 +280,12 @@
                                             <div class="flex">
                                                 <div class="relative flex">
                                                     <button type="button"
-                                                        class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
-                                                        aria-expanded="false">
-                                                        Zéro déchet
+                                                    onclick="window.location.href='{{ url('/zero-dechet') }}'"
+                                                    class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
+                                                    aria-expanded="false">
+                                                        Zéro dechet
                                                         <!-- Open: "bg-white", Closed: "" -->
-                                                        <span
-                                                            class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out"
-                                                            aria-hidden="true"></span>
+                                                    <span class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out" aria-hidden="true"></span>
                                                     </button>
                                                 </div>
 
@@ -304,7 +302,14 @@
 
                                             </div>
 
-                                            <a href="#" class="flex items-center text-sm font-medium text-white">DIY</a>
+                                            <button type="button"
+                                            onclick="window.location.href='{{ url('/DIY') }}'"
+                                            class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
+                                            aria-expanded="false">
+                                                DIY
+                                                <!-- Open: "bg-white", Closed: "" -->
+                                            <span class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out" aria-hidden="true"></span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

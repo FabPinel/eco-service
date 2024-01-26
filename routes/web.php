@@ -32,6 +32,14 @@ Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
+Route::get('/DIY', function () {
+    return view('diy.index');
+});
+
+Route::get('/zero-dechet', function () {
+    return view('zeroWaste.index');
+});
+
 //Boutique
 // Fiche produit
 Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('shop.productName');
