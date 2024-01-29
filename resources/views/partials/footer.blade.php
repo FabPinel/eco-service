@@ -1,4 +1,4 @@
-<footer aria-labelledby="footer-heading" class="bg-gray-900">
+<footer aria-labelledby="footer-heading" class="bg-gray-900 mt-36">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="py-20 xl:grid xl:grid-cols-3 xl:gap-8">
