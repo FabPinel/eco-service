@@ -69,3 +69,8 @@ Route::delete('/admin/discounts/{id}', [discountController::class, 'destroy'])->
 Route::get('/admin/discounts/edit/{id}', [discountController::class, 'edit'])->name('admin.discounts.edit');
 Route::put('/admin/discounts/{id}', [discountController::class, 'update'])->name('admin.discounts.update');
 Route::put('/admin/discounts/{id}/toggle-status', [discountController::class, 'toggleStatus'])->name('admin.discounts.toggle-status');
+
+//Panier
+Route::get('/panier', function () {
+    return view('shop.panier');
+});
