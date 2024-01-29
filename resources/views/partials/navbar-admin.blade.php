@@ -218,18 +218,18 @@
      <header class="relative z-10" x-data="{ isSticky: true }" @scroll.window="isSticky = window.scrollY >= $refs.nav.offsetHeight">
          <nav aria-label="Top">
              <!-- Secondary navigation -->
-             <div :class="{ 'fixed top-0 w-full': isSticky }" class="bg-black bg-opacity-50 backdrop-blur-md backdrop-filter">
+             <div :class="{ 'fixed top-0 w-full': isSticky }" class="bg-[#e88229] bg-opacity-50 backdrop-blur-md backdrop-filter">
                  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                      <div>
                          <div class="flex h-16 items-center justify-between">
                              <!-- Logo (lg+) -->
                              <div class="hidden lg:flex lg:flex-1 lg:items-center">
-                                 <a href="#">
-                                     <span class="sr-only">Your Company</span>
-                                     <img class="h-8 w-auto"
-                                         src="https://tailwindui.com/img/logos/mark.svg?color=white"
-                                         alt="">
-                                 </a>
+                                <a href="/">
+                                    <span class="sr-only">Your Company</span>
+                                    <img class="h-20 w-auto"
+                                        src="https://image.noelshack.com/fichiers/2024/04/5/1706279129-logo-eco-service.png"
+                                        alt="">
+                                </a>
                              </div>
 
                              <div class="hidden h-full lg:flex">
@@ -256,15 +256,14 @@
                                         </div>
                                          <div class="flex">
                                              <div class="relative flex">
-                                                 <button type="button"
-                                                     class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
-                                                     aria-expanded="false">
-                                                     Produits
-                                                     <!-- Open: "bg-white", Closed: "" -->
-                                                     <span
-                                                         class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out"
-                                                         aria-hidden="true"></span>
-                                                 </button>
+                                                <button type="button"
+                                                    onclick="window.location.href='{{ url('/admin/index') }}'"
+                                                    class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
+                                                    aria-expanded="false">
+                                                        Produits
+                                                        <!-- Open: "bg-white", Closed: "" -->
+                                                    <span class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out" aria-hidden="true"></span>
+                                                </button>
                                              </div>
                                              <div class="absolute inset-x-0 top-full text-sm text-gray-500">
                                                  <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
@@ -286,7 +285,14 @@
                                          </div>
                                          <a href="#" class="flex items-center text-sm font-medium text-white">DIY</a>
                                          <a href="#" class="flex items-center text-sm font-medium text-white">Messages</a>
-                                         <a href="#" class="flex items-center text-sm font-medium text-white">Accueil</a>
+                                         <button type="button"
+                                         onclick="window.location.href='{{ url('/') }}'"
+                                         class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
+                                         aria-expanded="false">
+                                             Accueil
+                                             <!-- Open: "bg-white", Closed: "" -->
+                                         <span class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out" aria-hidden="true"></span>
+                                     </button>
                                      </div>
                                  </div>
                              </div>

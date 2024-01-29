@@ -310,6 +310,15 @@
                                                 <!-- Open: "bg-white", Closed: "" -->
                                             <span class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out" aria-hidden="true"></span>
                                             </button>
+
+                                            <button type="button"
+                                            onclick="window.location.href='{{ url('/admin/index') }}'"
+                                            class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
+                                            aria-expanded="false">
+                                                Admin
+                                                <!-- Open: "bg-white", Closed: "" -->
+                                            <span class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out" aria-hidden="true"></span>
+                                        </button>
                                         </div>
                                     </div>
                                 </div>
