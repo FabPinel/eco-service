@@ -30,10 +30,10 @@ class productController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required|float',
+            'price' => 'required|numeric',
             'id_category' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'media' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'media' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
         ]);
 
         $data = $request->except('media');
