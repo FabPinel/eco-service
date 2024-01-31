@@ -31,7 +31,7 @@ Route::get('/produit', function () {
     return view('shop.products');
 });
 
-Route::get('dashboard', function () {
+Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
 
@@ -61,7 +61,7 @@ Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('s
 
 // Admin
 // Produits
-Route::get('/admin/index', [productController::class, 'index'])->name('admin.products.index');
+Route::get('/admin/produits', [productController::class, 'index'])->name('admin.products.index');
 Route::get('/admin/products/create', [productController::class, 'create'])->name('admin.products.create');
 Route::post('/admin/products', [productController::class, 'store'])->name('admin.products.store');
 Route::get('/admin/products/{id}', [productController::class, 'show'])->name('admin.products.show');
