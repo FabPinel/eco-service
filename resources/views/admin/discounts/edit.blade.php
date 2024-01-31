@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Edit Category</h2>
+                <h2>Edit Discount</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('admin.products.index') }}" enctype="multipart/form-data">
@@ -17,7 +17,7 @@
             {{ session('status') }}
         </div>
     @endif
-    <form action="{{ route('admin.category.update', $category->id) }}" enctype="multipart/form-data"
+    <form action="{{ route('admin.discounts.update', $discounts->id) }}" enctype="multipart/form-data"
         class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" method="POST">
         @csrf
         @method('PUT')
@@ -29,7 +29,7 @@
                     <div class="mt-2">
                         <div
                             class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                            <input type="text" name="name" id="name" value="{{ $category->name }}"
+                            <input type="text" name="name" id="name" value="{{ $discounts->name }}"
                                 class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
                         </div>
                     </div>
@@ -39,12 +39,27 @@
                     <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
                     <div class="mt-2">
                         <textarea id="description" name="description" rows="3"
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $category->description }}</textarea>
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $discounts->description }}</textarea>
 
                     </div>
                     <p class="mt-3 text-sm leading-6 text-gray-600">Ecrivez la description de la catégorie.</p>
                 </div>
 
+                <div class="col-span-full">
+                    <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Pourcentage</label>
+                    <div class="mt-2">
+                        <input id="discount_percent" name="discount_percent" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{ $discounts->discount_percent }}">
+                    </div>
+                    <p class="mt-3 text-sm leading-6 text-gray-600">Ecrivez la promotion.</p>
+                </div>
+
+                <div class="col-span-full">
+                    <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Montant</label>
+                    <div class="mt-2">
+                        <input id="discount_amount" name="discount_amount" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{ $discounts->discount_amount }}">
+                    </div>
+                    <p class="mt-3 text-sm leading-6 text-gray-600">Ecrivez le montant.</p>
+                </div>
             </div>
         </div>
         <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
