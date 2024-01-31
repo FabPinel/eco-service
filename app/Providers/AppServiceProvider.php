@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Discount;
+use App\Models\DIY;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -26,9 +27,13 @@ class AppServiceProvider extends ServiceProvider
         $products = Product::all();
         $categories = Category::all();
         $discounts = Discount::all();
+        $diy = DIY::all();
         $productsHome = Product::paginate(5);
+        $diyHome = DIY::paginate(3);
         View::share('products', $products);
         View::share('categories', $categories);
         View::share('productsHome', $productsHome);
+        View::share('diy', $diy);
+        View::share('diyHome', $diyHome);
     }
 }

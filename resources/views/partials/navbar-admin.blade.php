@@ -170,7 +170,7 @@
 
                  <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                      <div class="flow-root">
-                         <a href="#" class="-m-2 block p-2 font-medium text-gray-900">DIY</a>
+                         <a href="/admin/diy" class="-m-2 block p-2 font-medium text-gray-900">DIY</a>
                      </div>
                  </div>
 
@@ -283,7 +283,7 @@
                                                  </button>
                                              </div>
                                          </div>
-                                         <a href="#" class="flex items-center text-sm font-medium text-white">DIY</a>
+                                         <a href="/admin/diy" class="flex items-center text-sm font-medium text-white">DIY</a>
                                          <a href="#" class="flex items-center text-sm font-medium text-white">Messages</a>
                                          <button type="button"
                                          onclick="window.location.href='{{ url('/') }}'"

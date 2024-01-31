@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\discountController;
+use App\Http\Controllers\diyController;
 use App\Http\Controllers\ShopController;
 
 /*
@@ -69,6 +70,15 @@ Route::delete('/admin/discounts/{id}', [discountController::class, 'destroy'])->
 Route::get('/admin/discounts/edit/{id}', [discountController::class, 'edit'])->name('admin.discounts.edit');
 Route::put('/admin/discounts/{id}', [discountController::class, 'update'])->name('admin.discounts.update');
 Route::put('/admin/discounts/{id}/toggle-status', [discountController::class, 'toggleStatus'])->name('admin.discounts.toggle-status');
+
+//DIY
+Route::get('admin/diy', function () {
+    return view('admin.diy.index');
+});
+Route::get('/admin/diy/index', [diyController::class, 'index'])->name('admin.diy.index');
+Route::get('/admin/diy/create', [diyController::class, 'create'])->name('admin.diy.create');
+Route::post('/admin/diy', [diyController::class, 'store'])->name('admin.diy.store');
+Route::delete('/admin/diy/{id}', [diyController::class, 'destroy'])->name('admin.diy.destroy');
 
 //Panier
 Route::get('/panier', function () {
