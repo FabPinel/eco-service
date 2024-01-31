@@ -27,10 +27,7 @@ class diyController extends Controller
             'title' => 'required',
             'description' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
-            'video' => 'string',
             'text' => 'required',
-            'recipe' => 'required',
-            'ustensils' => 'string',
         ]);
 
         $data = $request->except('image ');
