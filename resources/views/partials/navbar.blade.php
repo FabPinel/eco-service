@@ -176,7 +176,7 @@
 
                     <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                         <div class="flow-root">
-                            <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Créer un compte</a>
+                            <a href="/register" class="-m-2 block p-2 font-medium text-gray-900">Créer un compte</a>
                         </div>
                         <div class="flow-root">
                             <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Se connecter</a>
@@ -222,7 +222,7 @@
                     <div class="ml-auto flex h-10 w-full items-center justify-end px-4 sm:px-6 lg:px-8">
                         <div class="flex items-center space-x-6">
                             <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Se connecter</a>
-                            <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Créer un compte</a>
+                            <a href="/register" class="text-sm font-medium text-white hover:text-gray-100">Créer un compte</a>
                         </div>
                     </div>
                 </div>
