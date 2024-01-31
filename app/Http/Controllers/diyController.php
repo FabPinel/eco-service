@@ -45,34 +45,34 @@ class diyController extends Controller
 
     public function edit(string $id)
     {
-        $product = DIY::find($id);
-        return view(('admin.products.edit'), compact('product'));
+        $diy = DIY::find($id);
+        return view(('admin.diy.edit'), compact('diy'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'description' => 'required',
-            'price' => 'required|numeric',
-            'quantity' => 'required|numeric',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
+            'text' => 'required',
         ]);
         $product = DIY::find($id);
 
         $input = $request->all();
 
-        if ($request->hasFile('media')) {
-            $image = $request->file('media');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('public/images', $imageName);
-            $input['media'] = $imageName;
-            if ($product->media) {
-                Storage::delete('public/images/' . $product->media);
+            $input['image'] = $imageName;
+            if ($product->image) {
+                Storage::delete('public/images/' . $product->image);
             }
         }
         $product->update($input);
         //dd($product);
-        return redirect()->route('admin.products.index')->with('success', 'Le produit a été mis à jour avec succès');
+        return redirect()->route('admin.diy.index')->with('success', 'Le DIY a été mis à jour avec succès');
     }
 
     public function destroy(string $id)

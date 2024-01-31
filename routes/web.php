@@ -93,6 +93,8 @@ Route::get('/admin/diy/index', [diyController::class, 'index'])->name('admin.diy
 Route::get('/admin/diy/create', [diyController::class, 'create'])->name('admin.diy.create');
 Route::post('/admin/diy', [diyController::class, 'store'])->name('admin.diy.store');
 Route::delete('/admin/diy/{id}', [diyController::class, 'destroy'])->name('admin.diy.destroy');
+Route::get('/admin/diy/edit/{id}', [diyController::class, 'edit'])->name('admin.diy.edit');
+Route::put('/admin/diy/{id}', [diyController::class, 'update'])->name('admin.diy.update');
 
 //Panier
 Route::get('/panier', function () {

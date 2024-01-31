@@ -52,10 +52,8 @@
                                     <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                                         <div class="text-gray-900">{{ $d->description }}</div>
                                     </td>
-                                    <td
-                                        class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                        <a {{--href="{{ route('admin.diy.edit', $d->id) }}"--}}
-                                            class="text-slate-400 hover:text-slate-900">
+                                    <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                        <a href="{{ route('admin.diy.edit', $d->id) }}" class="text-slate-400 hover:text-slate-900">
                                             <span class="material-icons">
                                                 edit
                                             </span>
