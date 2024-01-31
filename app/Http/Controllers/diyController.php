@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\DIY;
+use App\Models\DiyProduct;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class diyController extends Controller
@@ -28,9 +29,19 @@ class diyController extends Controller
             'description' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
             'text' => 'required',
+            //'id_product' => 'required|array',
         ]);
 
         $data = $request->except('image ');
+
+
+        dd($request);
+        foreach ($request->id_product as $productIds) {
+            $products = new DiyProduct();
+            $products->id_DIY = $request->id;
+            $products->id_product = $productIds;
+            $products->save();
+        }
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

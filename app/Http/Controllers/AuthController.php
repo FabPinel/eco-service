@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Mail\RegisterMail;
+use App\Models\DiyProduct;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +30,8 @@ class AuthController extends Controller
                 'password.confirmed' => 'Les mots de passe ne correspondent pas.',
             ]
         );
+
+
         $save = new User;
         $save->username = trim($request->username);
         $save->first_name = trim($request->first_name);
