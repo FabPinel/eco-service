@@ -18,4 +18,9 @@ class DIY extends Model
     protected $primaryKey = 'id';
 
     public $timestamps = true;
+
+    public function diyProducts()
+    {
+        return $this->hasMany(DiyProduct::class, 'id_DIY');
+    }
 }

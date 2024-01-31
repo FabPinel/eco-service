@@ -29,19 +29,11 @@ class diyController extends Controller
             'description' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
             'text' => 'required',
-            //'id_product' => 'required|array',
         ]);
 
         $data = $request->except('image ');
 
 
-        dd($request);
-        foreach ($request->id_product as $productIds) {
-            $products = new DiyProduct();
-            $products->id_DIY = $request->id;
-            $products->id_product = $productIds;
-            $products->save();
-        }
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -49,7 +41,17 @@ class diyController extends Controller
             $image->storeAs('public/images', $imageName);
             $data['image'] = $imageName;
         }
-        DIY::create($data);
+        $diy = DIY::create($data);
+
+        $selectedProducts = json_decode($request->input('selectedProducts'), true);
+
+        foreach ($selectedProducts as $productId) {
+            $product = new DiyProduct();
+            $product->id_DIY = $diy->id;
+            $product->id_product = $productId;
+            $product->save();
+        }
+
 
         return redirect()->route('admin.diy.index')->with('success', ' Votre DIY a été créé avec succes.');
     }
@@ -93,6 +95,7 @@ class diyController extends Controller
         if (!is_null($diy->featured_image)) {
             Storage::disk('public')->delete($diy->featured_image);
         }
+        $diy->diyProducts()->delete(); // Cela supprimera tous les enregistrements liés dans DIYproducts
 
         $diy->delete();
 
