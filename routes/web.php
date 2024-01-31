@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\productController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\discountController;
 use App\Http\Controllers\diyController;
+use App\Http\Controllers\productController;
 use App\Http\Controllers\ShopController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,18 @@ Route::get('/DIY', function () {
 Route::get('/zero-dechet', function () {
     return view('zeroWaste.index');
 });
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+
+Route::get('/register', function () {
+    return view('auth.register');
+});
+Route::post('register', [AuthController::class, 'store'])->name('register.store');
+
+Route::get('verify/{token}', [AuthController::class, 'verify']);
 
 //Boutique
 // Fiche produit
