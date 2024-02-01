@@ -34,7 +34,17 @@
                 
                         // Mettez à jour la valeur du champ caché
                         document.getElementById('selectedProducts').value = JSON.stringify(this.selectedProducts);
-                    }
+                    },
+                    deselectProduct(productId) {
+                        const numericId = parseInt(productId);
+                        this.selectedProducts = this.selectedProducts.filter(id => id !== numericId);
+                        // Mettez à jour la valeur du champ caché si nécessaire
+                        document.getElementById('selectedProducts').value = JSON.stringify(this.selectedProducts);
+                    },
+                    getSelectedProductInfo(productId) {
+                        const product = this.products.find(p => p.id === productId);
+                        return product ? { name: product.name, media: product.media } : null;
+                    },
                 }">
                 @csrf
 
@@ -134,41 +144,69 @@
                     </div>
                 </div>
 
+                <h2>Associer des produits au diy :</h2>
+
                 <div class="py-6">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div class="p-4 bg-white border-b border-gray-200">
-                                <input x-model="search" class="mb-2 p-1 border border-gray-400 rounded-md"
-                                    placeholder="Search...">
-
+                                <div class='max-w-md mx-auto'>
+                                    <div
+                                        class="relative flex items-center w-full h-12 shadow-sm rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+                                        <div class="grid place-items-center h-full w-12 text-gray-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                            </svg>
+                                        </div>
+                                        <input x-model="search"
+                                            class="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
+                                            placeholder="Search...">
+                                    </div>
+                                </div>
 
                                 <template x-if="search !== '' && filteredProducts.length > 0">
-                                    <table class="shadow-lg">
-                                        <thead>
-                                            <tr class="bg-gray-400 text-white font-extrabold">
-                                                <td class="px-4 py-1 text-center">ID</td>
-                                                <td class="px-4 py-1">Name</td>
-                                                <td class="px-4 py-1">Email</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <template x-for="product in filteredProducts" :key="product.id">
-                                                <tr x-bind:class="{ 'bg-blue-200': isSelected(product.id) }">
-                                                    <td class="border px-4 py-1" x-on:click="toggleSelected(product.id)">
-                                                    </td>
-                                                    <td x-text="product.name" class="border px-4 py-1"
-                                                        x-on:click="toggleSelected(product.id)"></td>
-                                                    <td x-text="product.price" class="border px-4 py-1"
-                                                        x-on:click="toggleSelected(product.id)"></td>
-                                                    <td class="border px-4 py-1">
-                                                        <img :src=`http://127.0.0.1:8000/storage/images/${product.media}`
-                                                            alt="Product Image" class="w-16 h-16">
-                                                    </td>
-                                                </tr>
+                                    <div class="shadow-lg mx-auto flex">
+                                        <template x-for="product in filteredProducts" :key="product.id">
+                                            <template x-if="!isSelected(product.id)">
+                                                <div class="w-32 m-2 bg-slate-50 overflow-hidden rounded-lg group-hover:opacity-75"
+                                                    x-bind:class="{
+                                                        'bg-blue-200': isSelected(product.id),
+                                                        'selected': isSelected(product.id)
+                                                    }"
+                                                    x-on:click="toggleSelected(product.id)">
+                                                    <img class="w-16 h-16 object-cover object-center"
+                                                        :src=`http://127.0.0.1:8000/storage/images/${product.media}`
+                                                        alt="product.name">
+
+                                                    <h3 x-text="product.name" class="mt-4 font-medium text-gray-900"
+                                                        x-on:click="toggleSelected(product.id)"></h3>
+                                                    <p class="mt-2 font-medium text-gray-900" x-text="product.price + '€'"
+                                                        x-on:click="toggleSelected(product.id)"></p>
+                                                </div>
+
                                             </template>
-                                        </tbody>
-                                    </table>
+                                        </template>
+                                    </div>
                                 </template>
+                                <div x-show="selectedProducts.length > 0">
+                                    <p>Produits sélectionnés :</p>
+                                    <div class="flex">
+                                        <template x-for="productId in selectedProducts" :key="productId">
+                                            <div class="flex flex-col">
+                                                <img x-bind:src="`http://127.0.0.1:8000/storage/images/${getSelectedProductInfo(productId).media}`"
+                                                    alt="Product Image" class="w-16 h-16">
+                                                <span x-text="getSelectedProductInfo(productId).name"></span>
+
+                                                <button
+                                                    class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                                                    x-on:click.prevent="deselectProduct(productId)">Désélectionner</button>
+                                            </div>
+                                        </template>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -183,13 +221,14 @@
                     </button>
                 </div>
             </form>
-            <script>
+            {{-- <script>
                 methods: {
                     updateSelectedProducts() {
                         document.getElementById('selectedProducts').value = JSON.stringify(this.selectedProducts);
                     }
+
                 }
-            </script>
+            </script> --}}
         </div>
     </div>
 @endsection
