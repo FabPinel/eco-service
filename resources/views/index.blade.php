@@ -100,7 +100,7 @@
                     🌱🛠️</p>
                 <div class="mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
                     @foreach ($diyHome as $diy)
-                        <a href="#" class="group block">
+                        <a href="{{ route('diy.diyName', $diy->id) }}" class="group block">
                             <div aria-hidden="true"
                                 class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75">
                                 <img src="{{ asset('storage/images/' . $diy->image) }}"

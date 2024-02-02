@@ -34,6 +34,7 @@ Route::get('/admin/dashboard', function () {
 Route::get('/DIY', function () {
     return view('diy.index');
 });
+Route::get('/diy/{id}', [diyController::class, 'getDiyById'])->name('diy.diyName');
 Route::get('/zero-dechet', function () {
     return view('zeroWaste.index');
 });

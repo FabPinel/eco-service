@@ -104,4 +104,11 @@ class diyController extends Controller
 
         return redirect()->route('admin.diy.index');
     }
+
+    public function getDiyById($id)
+    {
+        $diy = Diy::with('diyProducts.product')->find($id);
+
+        return view('diy.diy', compact('diy'));
+    }
 }

@@ -18,9 +18,4 @@ class DiyProduct extends Model
     {
         return $this->belongsTo(Product::class, 'id_product');
     }
-
-    public function diy()
-    {
-        return $this->belongsTo(DIY::class, 'id_DIY');
-    }
 }
