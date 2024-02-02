@@ -8,8 +8,6 @@
             </div>
 
             <form action="{{ route('admin.diy.store') }}" enctype="multipart/form-data"
-                class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" method="POST"<form
-                action="{{ route('admin.diy.store') }}" enctype="multipart/form-data"
                 class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" method="POST"
                 x-data="{
                     search: '',

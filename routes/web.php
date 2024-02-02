@@ -82,7 +82,7 @@ Route::prefix('/admin/discounts')->group(function () {
 
 // Admin - DIY
 Route::prefix('/admin/diy')->group(function () {
-    Route::get('/index', [diyController::class, 'index'])->name('admin.diy.index');
+    Route::get('/', [diyController::class, 'index'])->name('admin.diy.index');
     Route::get('/create', [diyController::class, 'create'])->name('admin.diy.create');
     Route::post('/', [diyController::class, 'store'])->name('admin.diy.store');
     Route::get('/edit/{id}', [diyController::class, 'edit'])->name('admin.diy.edit');

@@ -44,7 +44,8 @@
                 </div>
                 <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                     <div class="flow-root">
-                        <a href="/admin/produits" class="-m-2 block p-2 font-medium text-gray-900">Produits</a>
+                        <a href="{{ route('admin.products.index') }}"
+                            class="-m-2 block p-2 font-medium text-gray-900">Produits</a>
                     </div>
                 </div>
                 <div class="space-y-6 border-t border-gray-200 px-4 py-6">
@@ -154,7 +155,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <a href="/admin/diy"
+                                        <a href="{{ route('admin.diy.index') }}"
                                             class="flex items-center text-sm font-medium text-white">DIY</a>
                                         <a href="#"
                                             class="flex items-center text-sm font-medium text-white">Messages</a>
