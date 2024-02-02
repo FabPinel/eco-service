@@ -30,7 +30,8 @@ Route::get('/produit', function () {
 });
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
-});
+})->middleware(['auth', 'role:0']);
+
 Route::get('/DIY', function () {
     return view('diy.index');
 });
@@ -50,7 +51,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('shop.productName');
 
 // Admin - Produits
-Route::prefix('/admin/products')->group(function () {
+Route::prefix('/admin/products')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [productController::class, 'index'])->name('admin.products.index');
     Route::get('/create', [productController::class, 'create'])->name('admin.products.create');
     Route::post('/', [productController::class, 'store'])->name('admin.products.store');
@@ -59,7 +60,7 @@ Route::prefix('/admin/products')->group(function () {
     Route::put('/{id}', [productController::class, 'update'])->name('admin.products.update');
     Route::delete('/{id}', [productController::class, 'destroy'])->name('admin.products.destroy');
     Route::put('/{id}/toggle-status', [ProductController::class, 'toggleStatus'])->name('admin.products.toggle-status');
-})->middleware('auth');
+});
 
 // Admin - Catégories
 Route::prefix('/admin/category')->group(function () {
