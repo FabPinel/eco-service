@@ -45,13 +45,14 @@ class diyController extends Controller
 
         $selectedProducts = json_decode($request->input('selectedProducts'), true);
 
-        foreach ($selectedProducts as $productId) {
-            $product = new DiyProduct();
-            $product->id_DIY = $diy->id;
-            $product->id_product = $productId;
-            $product->save();
+        if ($selectedProducts) {
+            foreach ($selectedProducts as $productId) {
+                $product = new DiyProduct();
+                $product->id_DIY = $diy->id;
+                $product->id_product = $productId;
+                $product->save();
+            }
         }
-
 
         return redirect()->route('admin.diy.index')->with('success', ' Votre DIY a été créé avec succes.');
     }

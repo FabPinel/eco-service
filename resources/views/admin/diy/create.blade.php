@@ -107,6 +107,14 @@
                         </div>
 
                         <div class="col-span-full">
+                            <span class="block text-sm font-medium leading-6 text-gray-900">Etapes</span>
+                            <div class="mt-2">
+                                <textarea id="step" name="step" rows="3"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-span-full">
                             <span class="block text-sm font-medium leading-6 text-gray-900">Image</span>
                             <div class="mt-2 flex items-center gap-x-3">
                                 <input type="file"
@@ -148,9 +156,8 @@
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div class="p-4 bg-white border-b border-gray-200">
-                                <div class='max-w-md mx-auto'>
-                                    <div
-                                        class="relative flex items-center w-full h-12 shadow-sm rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+                                <div class='w-full mx-auto'>
+                                    <div class="relative flex items-center w-full h-12 shadow-sm rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
                                         <div class="grid place-items-center h-full w-12 text-gray-300">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -160,7 +167,7 @@
                                         </div>
                                         <input x-model="search"
                                             class="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
-                                            placeholder="Search...">
+                                            placeholder="Rechercher un produit...">
                                     </div>
                                 </div>
 
@@ -214,7 +221,7 @@
 
                 <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                     <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Annuler</button>
-                    <button type="submit" @click="updateSelectedProducts" ...>
+                    <button type="submit" class="rounded-md bg-[#1c3242] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600  @click="updateSelectedProducts" ...>
                         Sauvegarder
                     </button>
                 </div>
