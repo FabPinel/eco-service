@@ -52,10 +52,10 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-4 md:mt-8 xl:mt-0">
+            <div class="">
                 <a href="/">
                     <span class="sr-only">Eco-Service</span>
-                    <img class="w-auto h-3/6"src="https://image.noelshack.com/fichiers/2024/04/5/1706279129-logo-eco-service.png" alt="">
+                    <img class="w-32"src="https://image.noelshack.com/fichiers/2024/06/7/1707663571-logo-eco-service2.png" alt="">
                 </a>
             </div>
         </div>
