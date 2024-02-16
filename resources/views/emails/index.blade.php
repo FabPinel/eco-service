@@ -1,5 +1,5 @@
 @component('mail::message')
-    <p>Hello {{ $user->name }}</p>
+    <p>Hello {{ $user->username }}</p>
 
     @component('mail::button', ['url' => url('/verify' . $user->remember_token)])
         Vérifier

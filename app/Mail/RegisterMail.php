@@ -37,7 +37,7 @@ class RegisterMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.index',
+            markdown: 'emails.index',
         );
     }
 
