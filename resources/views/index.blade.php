@@ -39,8 +39,7 @@
                 <div class="mt-4 flow-root">
                     <div class="-my-2">
                         <div class="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible">
-                            <div
-                                class="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
+                            <div class="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
                                 @foreach ($productsHome as $product)
                                     <a href="{{ route('shop.productName', $product->id) }}"
                                         class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto">
@@ -49,10 +48,8 @@
                                                 src="{{ asset('storage/images/' . $product->media) }}"
                                                 alt="{{ $product->name }}">
                                         </span>
-                                        <span aria-hidden="true"
-                                            class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"></span>
-                                        <span
-                                            class="relative mt-auto text-center text-xl font-bold text-white">{{ $product->name }}</span>
+                                        <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"></span>
+                                        <span class="relative mt-auto text-center text-xl font-bold text-white">{{ $product->name }}</span>
                                     </a>
                                 @endforeach
                             </div>
