@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\discountController;
 use App\Http\Controllers\diyController;
 use App\Http\Controllers\productController;
@@ -96,3 +97,10 @@ Route::prefix('/admin/diy')->group(function () {
 Route::get('/panier', function () {
     return view('shop.panier');
 });
+
+//Contact
+Route::get('/contact', function () {
+    return view('shop.contact');
+});
+
+Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.store');
