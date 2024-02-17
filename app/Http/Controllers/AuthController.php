@@ -103,4 +103,13 @@ class AuthController extends Controller
         return redirect()->route('login')
             ->withSuccess('You have logged out successfully!');;
     }
+
+    public static function getUserId()
+    {
+        if (Auth::check()) {
+            return Auth::id();
+        } else {
+            return null;
+        }
+    }
 }

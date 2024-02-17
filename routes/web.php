@@ -7,6 +7,7 @@ use App\Http\Controllers\diyController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\cartController;
 
 
 /*
@@ -93,6 +94,6 @@ Route::prefix('/admin/diy')->group(function () {
 });
 
 // Panier
-Route::get('/panier', function () {
-    return view('shop.panier');
-});
+Route::get('/panier', [cartController::class, 'panier'])->name('panier');
+
+Route::post('/ajouter-au-panier/{productId}', [CartController::class, 'addToCart'])->name('addToCart');

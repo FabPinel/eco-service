@@ -1,6 +1,16 @@
 @extends('layout')
 @section('content')
 <div class="bg-white">
+    @if (session()->has('success'))
+      <div id="successMessage" class="fixed bottom-0 right-0 bg-green-500 text-white p-4 mb-4 mr-4 rounded shadow">
+         {{ session()->get('success') }}
+      </div>
+    @endif
+    <script>
+        setTimeout(function() {
+            document.getElementById('successMessage').remove();
+        }, 5000); // La popup disparaîtra après 5 secondes (5000 millisecondes)
+    </script>
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       <div class="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
         <!-- Image gallery -->
@@ -31,11 +41,20 @@
             </div>
           </div>
 
-          <form class="mt-6">
+          <form action="{{ route('addToCart', ['productId' => $product->id]) }}" method="POST" class="mt-6">
+            @csrf
             <div class="mt-10 flex">
-              <button type="submit" class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-[#1c3242] px-8 py-3 text-base font-medium text-white hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">Ajouter au pannier</button>
+                <button type="submit" class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-[#1c3242] px-8 py-3 text-base font-medium text-white hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">Ajouter au panier</button>
             </div>
-          </form>
+          </form> 
+          
+          
+          {{-- <form action="{{ route('remove', ['productId' => $product->id]) }}" method="POST" class="mt-6">
+            @csrf
+            <div class="mt-10 flex">
+                <button type="submit" class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-[#1c3242] px-8 py-3 text-base font-medium text-white hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">Ajouter au panier</button>
+            </div>
+          </form>       --}}
 
           <div class="mt-8 border-t border-gray-200 pt-8">
             <h2 class="text-sm font-medium text-gray-900">Composition &amp; Fabrication</h2>
