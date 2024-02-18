@@ -27,7 +27,7 @@
                                                 name="quantity-{{ $productId }}" 
                                                 type="number"
                                                 value="{{ $item['quantity'] }}" 
-                                                class="w-10 rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                                                class="w-10 rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-[#1c3242] focus:outline-none focus:ring-1 focus:ring-[#1c3242] sm:text-sm"
                                                 min="1"  
                                                 max="100"  
                                                 step="1"  

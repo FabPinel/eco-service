@@ -29,19 +29,21 @@ class cartController extends Controller
 
         $cart = session()->get('cart', []);
 
+        $quantity = $request->input('quantity', 1);
+
         if (isset($cart[$productId])) {
-            $cart[$productId]['quantity'] += 1;
+            $cart[$productId]['quantity'] += $quantity;
         } else {
             $cart[$productId] = [
                 'product_id' => $productId,
-                'quantity' => 1,
+                'quantity' => $quantity,
                 'name' => $product->name,
                 'price' => $product->price,
             ];
         }
 
         session()->put('cart', $cart);
-        // dd(session('cart'));
+
         return redirect()->back()->with('success', 'Article ajouté au panier.');
     }
 
