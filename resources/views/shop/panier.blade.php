@@ -23,31 +23,32 @@
                 
                                     <div class="mt-4 sm:mt-0 sm:pr-9">
                                         <label for="quantity-{{ $productId }}" class="sr-only">Quantity, {{ $item['name'] }}</label>
-                                        <input id="quantity-{{ $productId }}" name="quantity-{{ $productId }}" value="{{ $item['quantity'] }}"
-                                            class="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
-                
-                                        <div class="absolute right-0 top-0">
-                                            <button type="button"
-                                                class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
+                                        <input  id="quantity-{{ $productId }}" 
+                                                name="quantity-{{ $productId }}" 
+                                                type="number"
+                                                value="{{ $item['quantity'] }}" 
+                                                class="w-10 rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                                                min="1"  
+                                                max="100"  
+                                                step="1"  
+                                                inputmode="numeric"  
+                                                data-product-id="{{ $item['product_id'] }}">
+                                        <div data-id="{{ $item['product_id'] }}" class="absolute right-0 top-0">
+                                            <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500 remove-from-cart">
                                                 <span class="sr-only">Remove</span>
-                                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-                                                    aria-hidden="true">
-                                                    <path
-                                                        d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
                                                 </svg>
                                             </button>
-                                        </div>
+                                        </div>                                               
                                     </div>
                                 </div>
                 
                                 <p class="mt-4 flex space-x-2 text-sm text-gray-700">
-                                    <svg class="h-5 w-5 flex-shrink-0 text-green-500" viewBox="0 0 20 20"
-                                        fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                            clip-rule="evenodd" />
+                                    <svg class="h-5 w-5 flex-shrink-0 text-green-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
                                     </svg>
-                                    <span>In stock</span>
+                                    <span>En stock</span>
                                 </p>
                             </div>
                         </li>
@@ -57,54 +58,88 @@
 
                 <!-- Order summary -->
                 <section aria-labelledby="summary-heading"
-                    class="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
-                    <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Order summary</h2>
-
-                    <dl class="mt-6 space-y-4">
-                        <div class="flex items-center justify-between">
-                            <dt class="text-sm text-gray-600">Subtotal</dt>
-                            <dd class="text-sm font-medium text-gray-900">$99.00</dd>
-                        </div>
-                        <div class="flex items-center justify-between border-t border-gray-200 pt-4">
-                            <dt class="flex items-center text-sm text-gray-600">
-                                <span>Shipping estimate</span>
-                                <a href="#" class="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
-                                    <span class="sr-only">Learn more about how shipping is calculated</span>
-                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </dt>
-                            <dd class="text-sm font-medium text-gray-900">$5.00</dd>
-                        </div>
-                        <div class="flex items-center justify-between border-t border-gray-200 pt-4">
-                            <dt class="flex text-sm text-gray-600">
-                                <span>Tax estimate</span>
-                                <a href="#" class="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
-                                    <span class="sr-only">Learn more about how tax is calculated</span>
-                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </dt>
-                            <dd class="text-sm font-medium text-gray-900">$8.32</dd>
-                        </div>
-                        <div class="flex items-center justify-between border-t border-gray-200 pt-4">
-                            <dt class="text-base font-medium text-gray-900">Order total</dt>
-                            <dd class="text-base font-medium text-gray-900">$112.32</dd>
-                        </div>
-                    </dl>
-
-                    <div class="mt-6">
-                        <button type="submit"
-                            class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Checkout</button>
+                class="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
+                <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Récapitulatif de votre commande</h2>
+            
+                <dl class="mt-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <dt class="text-sm text-gray-600">Sous-total</dt>
+                        <dd class="text-sm font-medium text-gray-900">{{ number_format($subtotal, 2) }}€</dd>
                     </div>
-                </section>
+                    @if ($subtotal > 0)
+                    <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                        <dt class="flex items-center text-sm text-gray-600">
+                            <span>Frais de livraison</span>
+                        </dt>
+                        <dd class="text-sm font-medium text-gray-900">4.99€</dd>
+                    </div>
+                    @endif
+                    <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                        <dt class="text-base font-medium text-gray-900">Total de votre commande</dt>
+                        @if ($subtotal > 0)
+                        <dd class="text-base font-medium text-gray-900">{{ number_format($total, 2) }}€</dd>
+                        @else
+                        <dd class="text-base font-medium text-gray-900">0.00€</dd>
+                        @endif
+                    </div>
+                </dl>
+            
+                <div class="mt-6">
+                    <button type="submit"
+                        class="w-full rounded-md border border-transparent bg-[#1c3242] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Commander</button>
+                </div>
+            </section>            
             </form>
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".remove-from-cart").on("click", function(e) {
+                e.preventDefault();
+
+                var productId = $(this).closest("div").data("id");
+
+                if(confirm("Etes-vous sûr de vouloir supprimer votre article ?")) {
+                    $.ajax({
+                        url: '{{ route('removeFromCart') }}',
+                        method: "DELETE",
+                        data: {
+                            _token: '{{ csrf_token() }}', 
+                            product_id: productId
+                        },
+                        success: function (response) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("input[type='number']").on("change", function() {
+                var productId = $(this).data("product-id");
+                var quantity = $(this).val();
+    
+                $.ajax({
+                    url: '{{ route('updateCart') }}',
+                    method: "POST",
+                    data: {
+                        _token: '{{ csrf_token() }}', 
+                        _method: 'PUT',
+                        product_id: productId,
+                        quantity: quantity
+                    },
+                    success: function (response) {
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+    </script>      
+@endsection
+

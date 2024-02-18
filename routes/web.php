@@ -96,8 +96,9 @@ Route::prefix('/admin/diy')->group(function () {
 
 // Panier
 Route::get('/panier', [cartController::class, 'panier'])->name('panier');
-
-Route::post('/ajouter-au-panier/{productId}', [CartController::class, 'addToCart'])->name('addToCart');
+Route::post('/ajouter-au-panier/{productId}', [cartController::class, 'addToCart'])->name('addToCart');
+Route::delete('/remove-from-cart', [cartController::class, 'removeFromCart'])->name('removeFromCart');
+Route::put('/update-cart', [cartController::class, 'updateCart'])->name('updateCart');
 
 
 //Contact

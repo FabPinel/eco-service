@@ -11,7 +11,12 @@ class cartController extends Controller
 {
     public function panier()
     {
-        return view('shop.panier');
+        $summaryData = $this->summary();
+
+        return view('shop.panier', [
+            'subtotal' => $summaryData['subtotal'],
+            'total' => $summaryData['total'],
+        ]);
     }
 
     public function addToCart(Request $request, $productId)
@@ -24,12 +29,9 @@ class cartController extends Controller
 
         $cart = session()->get('cart', []);
 
-        // Vérifier si l'article est déjà dans le panier
         if (isset($cart[$productId])) {
-            // Si oui, augmenter la quantité de l'article
             $cart[$productId]['quantity'] += 1;
         } else {
-            // Sinon, ajouter un nouvel élément au panier
             $cart[$productId] = [
                 'product_id' => $productId,
                 'quantity' => 1,
@@ -43,15 +45,57 @@ class cartController extends Controller
         return redirect()->back()->with('success', 'Article ajouté au panier.');
     }
 
-    public function remove(Request $request)
+    public function removeFromCart(Request $request)
     {
-        if ($request->id) {
+        if ($request->product_id) {
             $cart = session()->get('cart');
-            if (isset($cart[$request->id])) {
-                unset($cart[$request->id]);
+            if (isset($cart[$request->product_id])) {
+                unset($cart[$request->product_id]);
                 session()->put('cart', $cart);
             }
             session()->flash('success', 'Product removed successfully');
         }
+
+        return $this->panier();
+    }
+
+    public function updateCart(Request $request)
+    {
+        if ($request->isMethod('put')) {
+            $productId = $request->input('product_id');
+            $quantity = $request->input('quantity');
+            $cart = session()->get('cart', []);
+
+            if (isset($cart[$productId])) {
+                $cart[$productId]['quantity'] = $quantity;
+                session()->put('cart', $cart);
+                return response()->json(['success' => true]);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Product not found in cart.']);
+            }
+        } else {
+            return response()->json(['success' => false, 'message' => 'Method not allowed.'], 405);
+        }
+    }
+
+
+    public function summary()
+    {
+        $cart = session('cart', []);
+        $subtotal = 0;
+
+        foreach ($cart as $item) {
+            $product = Product::find($item['product_id']);
+            if ($product) {
+                $subtotal += $product->price * $item['quantity'];
+            }
+        }
+
+        $total = $subtotal + 4.99;
+
+        return [
+            'subtotal' => $subtotal,
+            'total' => $total,
+        ];
     }
 }
