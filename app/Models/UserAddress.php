@@ -11,7 +11,7 @@ class UserAddress extends Model
 
     protected $table = 'users_address';
 
-    protected $fillable = ['address_line', 'city', 'postalCode', 'country', 'phone', 'created_at', 'updated_at', 'id_users'];
+    protected $fillable = ['address_line', 'city', 'postalCode', 'country', 'phone', 'default', 'created_at', 'updated_at', 'id_user'];
 
     protected $dates = ['created_at', 'updated_at'];
 
@@ -21,6 +21,6 @@ class UserAddress extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_users');
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

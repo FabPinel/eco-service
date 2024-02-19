@@ -6,6 +6,7 @@ use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\shopController;
 use App\Models\Product;
+use App\Models\UserAddress;
 
 class cartController extends Controller
 {
@@ -16,6 +17,26 @@ class cartController extends Controller
         return view('shop.panier', [
             'subtotal' => $summaryData['subtotal'],
             'total' => $summaryData['total'],
+        ]);
+    }
+
+    public function checkout()
+    {
+        $summaryData = $this->summary();
+
+        $user = auth()->user();
+
+        $userAddress = null;
+        if ($user) {
+            $userAddress = UserAddress::where('id_user', $user->id)
+                ->where('default', 1)
+                ->first();
+        }
+
+        return view('shop.checkout', [
+            'subtotal' => $summaryData['subtotal'],
+            'total' => $summaryData['total'],
+            'userAddress' => $userAddress,
         ]);
     }
 
@@ -39,6 +60,7 @@ class cartController extends Controller
                 'quantity' => $quantity,
                 'name' => $product->name,
                 'price' => $product->price,
+                'image_url' => asset('storage/images/' . $product->media),
             ];
         }
 
