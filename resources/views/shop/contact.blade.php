@@ -20,18 +20,15 @@
                     },
                     selectProduct(productId) {
                         if (this.isSelected(productId)) {
-                          // Désélectionnez le produit s'il est déjà sélectionné
                           this.id_product = null;
                         } else {
                           // Sélectionnez le produit sinon
                           this.id_product = productId;
                         }
-                        // Mettez à jour la valeur du champ caché
                         document.getElementById('id_product').value = this.id_product;
                       },
                       deselectProduct() {
                         this.id_product = null;
-                        // Mettez à jour la valeur du champ caché
                         document.getElementById('id_product').value = this.id_product;
                       },
                       getSelectedProductInfo(productId) {

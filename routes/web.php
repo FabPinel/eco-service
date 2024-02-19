@@ -42,14 +42,13 @@ Route::get('/zero-dechet', function () {
     return view('zeroWaste.index');
 });
 //Auth
-Route::post('register', [AuthController::class, 'store'])->name('register.store');
-Route::get('verify/{token}', [AuthController::class, 'verify']);
-Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
-
+Route::post('register', [AuthController::class, 'store'])->name('register.store');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('login.authenticate');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify'); 
 // Boutique
 Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('shop.productName');
 

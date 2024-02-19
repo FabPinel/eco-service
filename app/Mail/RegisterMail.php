@@ -27,7 +27,7 @@ class RegisterMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'email Validation',
+            subject: "Validation d'inscription",
         );
     }
 
@@ -37,7 +37,7 @@ class RegisterMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.index',
+            markdown: 'emails.register',
         );
     }
 
