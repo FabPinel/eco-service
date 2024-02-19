@@ -13,7 +13,7 @@ class Cart extends Model
     protected $table = 'cart_item';
 
     // Liste des champs pouvant être remplis massivement
-    protected $fillable = ['quantity', 'created_at', 'updated_at', 'id_user'];
+    protected $fillable = ['quantity', 'created_at', 'updated_at', 'id_user', 'id_product'];
 
     // Colonnes que Laravel convertira automatiquement en objets Carbon (dates)
     protected $dates = ['created_at', 'updated_at'];

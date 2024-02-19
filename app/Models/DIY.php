@@ -11,11 +11,16 @@ class DIY extends Model
 
     protected $table = 'DIY';
 
-    protected $fillable = ['title', 'description', 'image', 'video', 'text', 'recipe', 'ustensils'];
+    protected $fillable = ['title', 'description', 'image', 'video', 'text', 'recipe', 'ustensils', 'step'];
 
     protected $dates = ['created_at', 'updated_at'];
 
     protected $primaryKey = 'id';
 
     public $timestamps = true;
+
+    public function diyProducts()
+    {
+        return $this->hasMany(DiyProduct::class, 'id_DIY');
+    }
 }

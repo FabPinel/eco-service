@@ -9,16 +9,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class RegisterMail extends Mailable
+class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user;
+
+    public $mailData;
+    public $formData;
     /**
      * Create a new message instance.
      */
-    public function __construct($user)
+    public function __construct($mailData, $formData)
     {
-        $this->user = $user;
+        $this->mailData = $mailData;
+        $this->formData = $formData;
     }
 
     /**
@@ -27,7 +30,7 @@ class RegisterMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'email Validation',
+            subject: $this->formData['subject'],
         );
     }
 
@@ -37,7 +40,7 @@ class RegisterMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.index',
+            view: 'emails.index',
         );
     }
 
