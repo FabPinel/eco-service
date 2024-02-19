@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
@@ -32,7 +33,7 @@ Route::get('/produit', function () {
 });
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth', 'role:0']);
+})->middleware(['auth', 'role:0'])->name('admin.dashboard');
 
 Route::get('/DIY', function () {
     return view('diy.index');
@@ -98,6 +99,16 @@ Route::get('/panier', [cartController::class, 'panier'])->name('panier');
 Route::post('/ajouter-au-panier/{productId}', [cartController::class, 'addToCart'])->name('addToCart');
 Route::delete('/remove-from-cart', [cartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::put('/update-cart', [cartController::class, 'updateCart'])->name('updateCart');
+
+// Orders
+Route::prefix('/admin/orders')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
+});
+
+// Messages 
+Route::prefix('/admin/messages')->group(function () {
+    Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
+});
 
 // Checkout
 Route::get('/commande', [cartController::class, 'checkout'])->name('commande');

@@ -20,8 +20,7 @@ class AuthController extends Controller
         $this->middleware('guest')->except([
             'logout', 'index'
         ]);
-        $this->middleware('auth')->only('logout', 'index');
-        $this->middleware('verified')->only('index');
+
     }
 
     public function register()
@@ -86,10 +85,17 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('index')->with('success', 'You have successfully logged in!');
+
+            $user = Auth::user();
+
+            if($user->role == 0) {
+                return redirect()->route('admin.dashboard')->with('success', 'You have successfully logged in as an admin!');
+            } else {
+                return redirect()->route('index')->with('success', 'You have successfully logged in!');
+            }
+
         }
 
         return back()->withErrors([

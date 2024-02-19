@@ -12,6 +12,10 @@ use App\Mail\SendMailToSender;
 class ContactController extends Controller
 {
 
+    public function index() {
+        $messages = Contact::all();
+        return view('admin.message.index', compact('messages'));
+    }
     public function productsContact() {
         $products = Product::all();
     return view('shop.contact', compact('products'));
