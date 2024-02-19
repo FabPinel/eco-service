@@ -38,7 +38,7 @@
               <div class="sm:col-span-2">
                 <label for="address" class="block text-sm font-medium text-gray-700">Adresse</label>
                 <div class="mt-1">
-                    <input type="text" name="address" id="address" autocomplete="street-address" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="{{ $userAddress->address_line }}">
+                    <input type="text" name="address" id="address" autocomplete="street-address" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="{{ optional($userAddress)->address_line }}">
                 </div>
               </div>
             
@@ -46,7 +46,7 @@
               <div>
                 <label for="city" class="block text-sm font-medium text-gray-700">Ville</label>
                 <div class="mt-1">
-                  <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  value="{{ $userAddress->city }}">
+                  <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  value="{{ optional($userAddress)->city }}">
                 </div>
               </div>
 
@@ -54,7 +54,7 @@
                 <label for="country" class="block text-sm font-medium text-gray-700">Pays</label>
                 <div class="mt-1">
                   <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                    <option>{{ $userAddress->country }}</option>
+                    <option>{{ optional($userAddress)->country }}</option>
                   </select>
                 </div>
               </div>
@@ -62,7 +62,7 @@
               <div>
                 <label for="postal-code" class="block text-sm font-medium text-gray-700">Code postal</label>
                 <div class="mt-1">
-                  <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  value="{{ $userAddress->postalCode}}">
+                  <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  value="{{ optional($userAddress)->postalCode}}">
                 </div>
               </div>
 
