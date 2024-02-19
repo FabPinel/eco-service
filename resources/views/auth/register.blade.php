@@ -86,7 +86,7 @@
                 </div>
 
             </div>
-
+            
             <div class="flex items-start ml-5 mt-4">
                 <div class="flex items-center h-5">
                   <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded-md bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
@@ -104,10 +104,8 @@
             <p class="text-sm font-light text-gray-800 text-center">
                 Vous avez déjà un compte ? 
                 <a href="/login" class="text-blue-700 font-medium hover:underline">Connectez-vous ici</a>
-
             </p>
 
-            
         </form>
     </div>
 @endsection

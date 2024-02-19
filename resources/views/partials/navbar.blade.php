@@ -52,12 +52,15 @@
                         <a href="/DIY" class="-m-2 block p-2 font-medium text-gray-900">DIY</a>
                     </div>
                 </div>
+                @auth
+                @if(Auth::user()->role == 0)
                 <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                     <div class="flow-root">
-                        <a href="/admin/dashboard" class="-m-2 block p-2 font-medium text-gray-900">Admin</a>
+                        <a href="{{ route('admin.products.index')}}" class="-m-2 block p-2 font-medium text-gray-900">Admin</a>
                     </div>
                 </div>
-
+                @endif
+                @endauth
                 <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                     <div class="flow-root">
                         <a href="/register" class="-m-2 block p-2 font-medium text-gray-900">Créer un compte</a>
@@ -191,16 +194,13 @@
                                                 aria-hidden="true"></span>
                                         </button>
 
-                                        <button type="button"
-                                            onclick="window.location.href='{{ url('/admin/dashboard') }}'"
-                                            class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
-                                            aria-expanded="false">
-                                            Admin
-                                            <!-- Open: "bg-white", Closed: "" -->
-                                            <span
-                                                class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out"
-                                                aria-hidden="true"></span>
-                                        </button>
+                                      
+                                        @auth
+                                        @if(Auth::user()->role == 0)
+                                                <a href="{{ route('admin.products.index')}}" class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
+                                                aria-expanded="false">Admin</a>
+                                        @endif
+                                        @endauth
                                     </div>
                                 </div>
                             </div>

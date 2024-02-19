@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
@@ -10,6 +11,11 @@ use App\Mail\SendMailToSender;
 
 class ContactController extends Controller
 {
+
+    public function productsContact() {
+        $products = Product::all();
+    return view('shop.contact', compact('products'));
+    }
     public function sendMail(Request $request)
     {
         $contactFormData = $request->validate([

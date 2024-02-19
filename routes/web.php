@@ -100,6 +100,8 @@ Route::post('/ajouter-au-panier/{productId}', [cartController::class, 'addToCart
 Route::delete('/remove-from-cart', [cartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::put('/update-cart', [cartController::class, 'updateCart'])->name('updateCart');
 
+// Checkout
+Route::get('/commande', [cartController::class, 'checkout'])->name('commande');
 
 //Contact
 Route::get('/contact', function () {
