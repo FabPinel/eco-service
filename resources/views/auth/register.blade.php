@@ -77,20 +77,37 @@
                 </div>
 
                 <div class="px-5">
-                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Confirm password</label>
+                    <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900">Confirm password</label>
                     <div class="mt-2">
-                        <input id="password" type="password"
+                        <input id="password_confirmation" type="password"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('password') is-invalid @enderror"
                             name="password_confirmation" required autocomplete="current-password">
                     </div>
                 </div>
 
             </div>
+
+            <div class="flex items-start ml-5 mt-4">
+                <div class="flex items-center h-5">
+                  <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded-md bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
+                </div>
+                <div class="ml-3 text-sm text-center">
+                  <label for="terms" class="font-light">J'accepte <a class="font-medium text-blue-700 hover:underline dark:text-primary-500" href="#">les conditions</a></label>
+                </div>
+            </div>
+
             <div class="flex items-center justify-center gap-x-6 px-4 py-4 sm:px-8">
                 <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Annuler</button>
                 <button type="submit"
                     class="rounded-md bg-[#1c3242] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sauvegarder</button>
             </div>
+            <p class="text-sm font-light text-gray-800 text-center">
+                Vous avez déjà un compte ? 
+                <a href="/login" class="text-blue-700 font-medium hover:underline">Connectez-vous ici</a>
+
+            </p>
+
+            
         </form>
     </div>
 @endsection
