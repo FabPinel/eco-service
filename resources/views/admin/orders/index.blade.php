@@ -37,7 +37,7 @@
                 <tbody>
                     
                         @foreach ($orders as $o)
-                        <tr class="bg-white border-b h-28 dark:border-gray-700">
+                        <tr class="bg-white border-b h-28 dark:border-gray-700 cursor-pointer hover:bg-slate-50" onclick="window.location='{{ route('admin.orders.orderDetails', $o->id) }}';">>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             <p class="text-lg font-bold">{{ $o->id }}</p>
                         </td>
