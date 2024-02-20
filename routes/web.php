@@ -103,6 +103,7 @@ Route::put('/update-cart', [cartController::class, 'updateCart'])->name('updateC
 // Orders
 Route::prefix('/admin/orders')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
+    Route::post('/orders/toggle-status/{id}', [OrderController::class, 'toggleStatus'])->name('admin.orders.toggle-status');
 });
 
 // Messages 
