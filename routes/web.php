@@ -10,6 +10,7 @@ use App\Http\Controllers\productController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\cartController;
+use App\Http\Controllers\StripeController;
 
 
 /*
@@ -49,7 +50,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('login.authenticate');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify'); 
+Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
 // Boutique
 Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('shop.productName');
 
@@ -120,3 +121,10 @@ Route::get('/contact', function () {
 });
 
 Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.store');
+
+// Stripe
+Route::post('/session', [cartController::class, 'session'])->name('session');
+Route::get('/success', [cartController::class, 'success'])->name('success');
+Route::get('/votre-commande', function () {
+    return view('shop.order');
+});

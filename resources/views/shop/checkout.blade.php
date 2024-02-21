@@ -4,7 +4,7 @@
     <div class="mx-auto max-w-2xl lg:max-w-none">
       <h1 class="sr-only">Checkout</h1>
 
-      <form class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+      <form action="/session" method="post" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
         <div>
           <div>
             <h2 class="text-lg font-medium text-gray-900">Vos informations</h2>
@@ -106,12 +106,6 @@
               </div>
             </fieldset>
           </div>
-
-          <!-- Payment -->
-          <div class="mt-10 border-t border-gray-200 pt-10">
-            <h2 class="text-lg font-medium text-gray-900">Paiement</h2>
-
-          </div>
         </div>
 
         <!-- Order summary -->
@@ -150,7 +144,7 @@
             <dl class="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
               <div class="flex items-center justify-between">
                 <dt class="text-sm">Sous-total</dt>
-                <dd class="text-sm font-medium text-gray-900">{{ number_format($subtotal, 2) }}€</dd>
+                <dd class="text-sm font-medium text-gray-900" name="subtotal">{{ number_format($subtotal, 2) }}€</dd>
               </div>
               <div class="flex items-center justify-between">
                 <dt class="text-sm">Frais de livraison</dt>
@@ -158,12 +152,13 @@
               </div>
               <div class="flex items-center justify-between border-t border-gray-200 pt-6">
                 <dt class="text-base font-medium">Total</dt>
-                <dd class="text-base font-medium text-gray-900">{{ number_format($total, 2) }}€</dd>
+                <dd class="text-base font-medium text-gray-900" name="total" >{{ number_format($total, 2) }}€</dd>
               </div>
             </dl>
 
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-              <button type="submit" class="w-full rounded-md border border-transparent bg-[#1c3242] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirmer la commande</button>
+              <button type="submit" class="w-full rounded-md border border-transparent bg-[#1c3242] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Payer avec Stripe</button>
             </div>
           </div>
         </div>
