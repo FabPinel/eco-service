@@ -24,4 +24,13 @@ class OrderController extends Controller
         $order->update(['id_status' => $request->id_status]);
         return redirect()->route('admin.orders.index')->with('success', 'Le statut de la commande a été mis à jour avec succès');
     }
+
+    public function orderDetails($id) {
+        $order = Order::with('status', 'user', 'orderItems.product')->findOrFail($id);
+        $orderItems = OrderItem::where('id_order', $order->id)->get(); //Parcours la liste des orderItems qui on pour id_order = $id
+        $user = $order->user;
+        $totalUserOrders = Order::where('id_user', $user->id)->count();
+        $totalItemOrder = OrderItem::where('id_order', $order->id)->count();
+    return view('admin.orders.orderDetails', compact('order', 'orderItems', 'totalUserOrders', 'totalItemOrder'));
+    }
 }
