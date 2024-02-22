@@ -235,6 +235,8 @@ class cartController extends Controller
             'total' => $total,
         ];
 
+        session()->forget('cart');
+
         return view('shop.order', compact('orderDetails'));
     }
 }
