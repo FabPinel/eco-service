@@ -2,7 +2,7 @@
 @section('title', 'Admin - Orders')
 @section('admin-content')
 <div class="mt-10">
-    <div class="px-4 sm:px-6 lg:px-8 mt-20" x-show="activeTab === 1">
+    <div class="px-4 sm:px-6 lg:px-8 mt-20">
         <div class="sm:items-center">
             <div class="sm:flex">
                 <h1 class="text-base font-semibold leading-6 text-gray-900">Commandes</h1>
@@ -37,7 +37,8 @@
                 <tbody>
                     
                         @foreach ($orders as $o)
-                        <tr class="bg-white border-b h-28 dark:border-gray-700 cursor-pointer hover:bg-slate-50" onclick="window.location='{{ route('admin.orders.orderDetails', $o->id) }}';">>
+                        <tr class="bg-white border-b h-12 dark:border-gray-700 cursor-pointer hover:bg-slate-50" onclick="window.location='{{ route('admin.orders.orderDetails', $o->id) }}';">
+
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             <p class="text-lg font-bold">{{ $o->id }}</p>
                         </td>
@@ -51,11 +52,11 @@
                             @csrf
                             <input type="hidden" name="id_status" id="selectedStatusId_{{ $o->id }}" value="{{ $o->status->id }}">
                             <td x-data="{ open: false, selected: ''}" class="px-6 py-4" @click.away="open = false">
-                                <p @click="open = !open"
+                                <p @click="open = !open; $event.stopPropagation()"
                                     class="w-fit px-4 py-2 flex items-center justify-between rounded-md text-base font-medium ring-1 ring-inset cursor-pointer"
                                     :class="{
                                         'bg-cyan-50 text-cyan-500 ring-cyan-600/20': '{{ $o->status->id }}' === '1',
-                                        'bg-emerald-50 text-emerald-500 ring-emerald-600/20': '{{ $o->status->id }}' === '2',
+                                        'bg-rose-50 text-rose-500 ring-rose-600/20': '{{ $o->status->id }}' === '2',
                                         'bg-green-50 text-green-500 ring-green-600/20': '{{ $o->status->id }}' === '3', 
                                         'bg-red-50 text-red-500 ring-red-600/20': '{{ $o->status->id }}' === '4',
                                         'bg-fuchsia-50 text-fuchsia-500 ring-fuchsia-600/20': '{{ $o->status->id }}' === '5',
@@ -63,11 +64,11 @@
                                     }">
                                     <span class="max-w-[120px] overflow-hidden" x-text="selected === '' ? '{{ $o->status->status }}' : selected"></span>
                                 </p>
-                                <div x-show="open" class="absolute mt-2 w-full z-10" x-cloak>
-                                    <ul>
+                                <div x-show="open" class="absolute w-full z-10" x-cloak>
+                                    <ul class="w-fit border border-slate-400">
                                         @foreach ($status as $s)
                                             <li @click="selected = '{{ $s->status }}'; document.getElementById('selectedStatusId_{{ $o->id }}').value = '{{ $s->id }}'; document.getElementById('statusForm_{{ $o->id }}').submit();"
-                                                class="cursor-pointer py-1 text-base list-none">
+                                                class="cursor-pointer w-full text-base px-4 py-1 bg-slate-100 text-black list-none hover:bg-white">
                                                 {{ $s->status }}
                                             </li>
                                         @endforeach
@@ -93,6 +94,9 @@
                 </tbody>
             </table>
         </div>
+        {!! $orders->links() !!}
+
+    </div>
 </div>
 @endsection
 

@@ -123,7 +123,7 @@
             @else
                 {{ $paginator->count() }}
             @endif
-            {!! __('sure') !!}
+            {!! __('sur') !!}
             <span class="font-medium">{{ $paginator->total() }}</span>
             {!! __('résultats') !!}
         </p>

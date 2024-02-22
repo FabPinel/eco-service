@@ -67,7 +67,7 @@ Route::prefix('/admin/products')->middleware(['auth', 'role:0'])->group(function
 });
 
 // Admin - Catégories
-Route::prefix('/admin/category')->group(function () {
+Route::prefix('/admin/category')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/create', [productController::class, 'createCategory'])->name('admin.category.create');
     Route::post('/', [productController::class, 'storeCategory'])->name('admin.category.store');
     Route::get('/edit/{id}', [productController::class, 'editCategory'])->name('admin.category.edit');
@@ -76,7 +76,7 @@ Route::prefix('/admin/category')->group(function () {
 });
 
 // Admin - Promo
-Route::prefix('/admin/discounts')->group(function () {
+Route::prefix('/admin/discounts')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/create', [discountController::class, 'create'])->name('admin.discounts.create');
     Route::post('/', [discountController::class, 'store'])->name('admin.discounts.store');
     Route::get('/edit/{id}', [discountController::class, 'edit'])->name('admin.discounts.edit');
@@ -86,7 +86,7 @@ Route::prefix('/admin/discounts')->group(function () {
 });
 
 // Admin - DIY
-Route::prefix('/admin/diy')->group(function () {
+Route::prefix('/admin/diy')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [diyController::class, 'index'])->name('admin.diy.index');
     Route::get('/create', [diyController::class, 'create'])->name('admin.diy.create');
     Route::post('/', [diyController::class, 'store'])->name('admin.diy.store');
@@ -102,14 +102,14 @@ Route::delete('/remove-from-cart', [cartController::class, 'removeFromCart'])->n
 Route::put('/update-cart', [cartController::class, 'updateCart'])->name('updateCart');
 
 // Orders
-Route::prefix('/admin/orders')->group(function () {
+Route::prefix('/admin/orders')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
     Route::get('/orderDetails/{id}', [OrderController::class, 'orderDetails'])->name('admin.orders.orderDetails');
     Route::post('/orders/toggle-status/{id}', [OrderController::class, 'toggleStatus'])->name('admin.orders.toggle-status');
 });
 
 // Messages 
-Route::prefix('/admin/messages')->group(function () {
+Route::prefix('/admin/messages')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
 });
 

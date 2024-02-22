@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body class="antialiased">
+<body class="antialiased bg-slate-100">
     @include('partials.navbar-admin')
-    <div class="content">
+    <div class="content sm:px-4 md:px-4 lg:px-6 xl-px:10 2xl:px-14">
         @yield('admin-content')
     </div>
 </body>

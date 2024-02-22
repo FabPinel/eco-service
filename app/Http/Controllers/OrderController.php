@@ -10,7 +10,7 @@ use App\Models\OrderStatus;
 class OrderController extends Controller
 {
     public function index() {
-        $orders = Order::with('status', 'user')->get();
+        $orders = Order::with('status', 'user')->paginate(10);
         $status = OrderStatus::all();
         $totalOrders = Order::count();
         return view('admin.orders.index', compact('orders', 'status', 'totalOrders'));
