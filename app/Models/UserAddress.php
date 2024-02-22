@@ -11,7 +11,7 @@ class UserAddress extends Model
 
     protected $table = 'users_address';
 
-    protected $fillable = ['address_line', 'city', 'postalCode', 'country', 'phone', 'default', 'created_at', 'updated_at', 'id_user'];
+    protected $fillable = ['first_name', 'last_name', 'address_line', 'city', 'postalCode', 'country', 'phone', 'default', 'created_at', 'updated_at', 'id_user'];
 
     protected $dates = ['created_at', 'updated_at'];
 

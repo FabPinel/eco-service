@@ -5,7 +5,7 @@
       <div class="max-w-xl">
         <h1 class="text-base font-medium text-[#e88229]">Merci!</h1>
         <p class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Votre commande est en chemin !</p>
-        <p class="mt-2 text-base text-gray-500">Votre commande #14034056 sera bientôt avec vous.</p>
+        <p class="mt-2 text-base text-gray-500">Votre commande #{{ $orderDetails['order']->id }} sera bientôt avec vous.</p>
       </div>
   
       <div class="mt-10 border-t border-gray-200">
@@ -46,6 +46,7 @@
               <dt class="font-medium text-gray-900">Adresse de livraison</dt>
               <dd class="mt-2 text-gray-700">
                 <address class="not-italic">
+                  <span class="block">{{ $orderDetails['orderAddress']->first_name }} {{ $orderDetails['orderAddress']->last_name }}</span>
                     <span class="block">{{ $orderDetails['orderAddress']->address }}</span>
                     <span class="block">{{ $orderDetails['orderAddress']->postal_code }}, {{ $orderDetails['orderAddress']->city }}</span>
                     <span class="block">{{ $orderDetails['orderAddress']->country }}</span>
@@ -75,7 +76,7 @@
             </div>
             <div class="flex justify-between">
                 <dt class="font-medium text-gray-900">Total</dt>
-                <dd class="text-gray-900">{{ $orderDetails['total'] }}€</dd>
+                <dd class="text-gray-900">{{ $orderDetails['order']->total }}€</dd>
             </div>
           </dl>
         </div>

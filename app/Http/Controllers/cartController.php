@@ -188,8 +188,9 @@ class cartController extends Controller
         $user = Auth::user();
         $cart = session('cart', []);
 
-        $subtotal = session('subtotal', 0);
-        $total = session('total', 0);
+        $summaryData = $this->summary();
+        $subtotal = $summaryData['subtotal'];
+        $total = $summaryData['total'];
 
         $order = Order::create([
             'total' => $total,
