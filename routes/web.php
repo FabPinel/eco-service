@@ -110,7 +110,7 @@ Route::prefix('/admin/orders')->middleware(['auth', 'role:0'])->group(function (
 
 // Messages 
 Route::prefix('/admin/messages')->middleware(['auth', 'role:0'])->group(function () {
-    Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
+    Route::get('/', [ContactController::class, 'index'])->name('admin.messages.index');
 });
 
 // Checkout

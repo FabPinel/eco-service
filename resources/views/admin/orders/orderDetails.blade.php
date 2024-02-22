@@ -1,113 +1,175 @@
 @extends('layout-admin')
 @section('title', 'Admin - Orders')
 @section('admin-content')
-<div class="mt-24 mx-4">
-    <h2 class="text-xl">Commande <span class="font-bold">#{{ $order->id}}</span> de {{ $order->user->first_name}} {{ $order->user->last_name }} 
-        <span class="text-base font-medium text-gray-50 bg-gray-500 ring-1 ring-inset ring-gray-600/20 rounded-lg p-1">{{ $order->total }}€</span> 
-        le {{ $order->created_at->format('d/m/Y') }}</h2>
-    <div class="flex w-full mt-4">
-        <div class="w-1/3 mx-2 border border-purple-500 rounded-lg">
-            <div class="w-full border-slate-200 bg-gray-100 rounded-lg">
-                <p class="text-xl border-b border-gray-300 py-2 pl-1 font-semibold">Client</p>
+
+<div class="mt-24 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div class="p-4 sm:p-6 xl:p-9">
+      <div class="flex flex-wrap justify-between gap-5">
+        <div>
+          <p class="mb-1.5 font-medium text-black">
+            Client :
+          </p>
+          <h4 class="mb-3 text-xl font-bold text-black">
+            {{ $order->user->first_name}} {{ $order->user->last_name }}
+          </h4>
+          <div class="grid grid-cols-6 gap-8">
+            <span class="block col-span-2"><span class="font-medium text-black">Email:</span>
+            {{ $order->user->email }}</span>
+            <span class="block col-span-2"><span class="font-medium text-black">Téléphone :</span>
+            {{ $order->user->phone }}</span>
+         </div>
+            <span class="block mt-2"><span class="font-medium text-black">Addresse :</span>
+            2972 Westheimer Rd. Santa Ana.</span>
+            <span class="block mt-2"><span class="font-medium text-black">Compte créé le :</span>
+            {{ $order->user->created_at }}</span>
+            <span class="block mt-2"><span class="font-medium text-black">Nombre de commandes :</span>
+            {{ $totalUserOrders }}</span>
+        </div>
+      </div>
+
+      <div class="my-7 grid grid-cols-1 border border-stroke dark:border-strokedark xsm:grid-cols-2 sm:grid-cols-4">
+        <div class="border-b border-r border-stroke px-5 py-4 last:border-r-0 dark:border-strokedark sm:border-b-0">
+          <h5 class="mb-1.5 font-bold text-black">
+            ID commande :
+          </h5>
+          <span class="text-sm font-medium"> #{{ $order->id}} </span>
+        </div>
+
+        <div class="border-b border-stroke px-5 py-4 last:border-r-0 dark:border-strokedark sm:border-b-0 sm:border-r">
+          <h5 class="mb-1.5 font-bold text-black">
+            Date commande :
+          </h5>
+          <span class="text-sm font-medium"> {{ $order->created_at->format('d/m/Y') }} </span>
+        </div>
+
+        <div class="border-b border-stroke px-5 py-4 last:border-r-0 dark:border-strokedark sm:border-b-0 sm:border-r">
+          <h5 class="mb-1.5 font-bold text-black">
+            Statut :
+          </h5>
+          <span class="text-sm font-medium"> {{ $order->status->status }} </span>
+        </div>
+
+        <div class="border-r border-stroke px-5 py-4 last:border-r-0 dark:border-strokedark">
+          <h5 class="mb-1.5 font-bold text-black">
+            Total commande :
+          </h5>
+          <span class="text-sm font-medium"> {{ $order->total + 4.99 - 10}}€ </span>
+        </div>
+      </div>
+
+      <div class="border border-stroke dark:border-strokedark">
+        <div class="max-w-full overflow-x-auto">
+          <div class="min-w-[670px]">
+            <!-- table header start -->
+            <div class="grid grid-cols-12 border-b border-stroke py-3.5 pl-5 pr-6 uppercase bg-slate-100 dark:border-strokedark">
+              <div class="col-span-4">
+                <h5 class="font-medium text-black">
+                    Nombre produits ({{ $totalItemOrder }})
+                </h5>
+              </div>
+
+              <div class="col-span-2">
+                <h5 class="font-medium text-black">
+                    Prix unitaire
+                </h5>
+              </div>
+
+              <div class="col-span-1">
+                <h5 class="font-medium text-black">
+                    Quantité
+                </h5>
+              </div>
+
+              <div class="col-span-1">
+                <h5 class="font-medium text-black">
+                    Stock
+                </h5>
+              </div>
+
+              <div class="col-span-2">
+                <h5 class="text-right font-medium text-black">
+                  Total
+                </h5>
+              </div>
+              <div class="col-span-2">
+                <h5 class="text-right font-medium text-black">
+                  Date
+                </h5>
+              </div>
             </div>
-            <div class="font-medium">
-                <div class="flex">
-                    <p class="text-lg px-2">{{ $order->user->first_name }}  {{ $order->user->last_name }} </p>
-                    <p>#{{ $order->id }}</p>
-                </div>
-                <div class="flex">
-                    <p>{{ $order->user->email }}</p>
-                    <p>{{ $order->user->phone }}</p>
-                </div>
-                <div class="flex">
-                    <p>Compte créé le : {{ $order->user->created_at }}</p>
-                    <p>Nombre de commandes : {{ $totalUserOrders }}</p>
-                </div>
-               <div>
-                <p>Adresse de livraison</p>
-                <p>Rue...</p>
-                <div class="flex">
-                    <p>Code postal</p>
-                    <p>Ville</p>
-                </div>
-                <p>France</p>
-               </div>
+            <!-- table header end -->
+
+            <!-- product item -->
+            @foreach ($order->orderItems as $orderItem)
+            <div class="grid grid-cols-12 border-b border-stroke py-3.5 pl-5 pr-6 dark:border-strokedark text-slate-500">
+              <div class="col-span-4">
+                <a href="{{ route('shop.productName', $orderItem->product->id)}}" class="font-semibold underline hover:text-slate-700">{{ $orderItem->product->name }}</a>
+              </div>
+
+              <div class="col-span-2">
+                <p class="font-medium">{{ $orderItem->product->price }}€</p>
+              </div>
+
+              <div class="col-span-1">
+                <p class="font-medium">{{ $orderItem->quantity }}</p>
+              </div>
+
+              <div class="col-span-1">
+                <p class="font-medium">{{ $orderItem->product->quantity }}</p>
+              </div>
+
+              <div class="col-span-2">
+                <p class="text-right font-medium">{{ $orderItem->quantity * $orderItem->product->price }}€</p>
+              </div>
+
+              <div class="col-span-2">
+                <p class="text-right font-medium">{{ $orderItem->created_at }}</p>
+              </div>
+            </div>
+            @endforeach
+          </div>
+        </div>
+
+        <!-- total price start -->
+        <div class="flex p-6">
+            <div class="w-full max-w-65">
+                    <p class="w-72 flex justify-between font-medium py-2 text-black">
+                        <span> Total produit </span>
+                        <span> {{ $order->total }}€ </span>
+                    </p>
+        
+                    <p class="w-72 flex justify-between font-medium py-2 text-black">
+                        <span class="align-left"> Coûts de livraison </span>
+                        <span> 4.99€</span>
+                    </p>
+        
+                    <p class="w-72 flex justify-between font-medium py-2 text-black">
+                        <span class="align-left">
+                            Coupon Discount
+                            <span class="text-emerald-500 text-right">(-10€)</span>
+                        </span>
+                        <span> 10€ </span>
+                    </p>
+        
+                    <p class="w-72 flex justify-between font-medium py-2 text-black">
+                        <span class="align-left"> TVA <span class="text-red-500">(20%)</span> </span>
+                        <span>  {{ $order->total * 0.20 }}€</span>
+                    </p>
+        
+                <p class="w-72 flex justify-between mt-4 py-2 border-t border-stroke pt-5 dark:border-strokedark">
+                    <span class="font-medium text-black">
+                        Total TTC
+                    </span>
+                    <span class="font-bold text-meta-3 text-right"> {{ $order->total + 4.99 - 10}}€ </span>
+                </p>
             </div>
         </div>
-        <div class="w-2/3 border border-slate-200 rounded-sm mx-2">
-            <div class="w-full border-slate-200 bg-gray-100">
-                <p class="text-xl border-b border-gray-300 py-2 pl-1 font-semibold">Nombre produits ({{ $totalItemOrder }})</p>
-            </div>
-            <div>
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Produit
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Prix unitaire
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Quantité
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Stock
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Total
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Date
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($order->orderItems as $orderItem)
-
-                            <tr class="bg-white border-b h-14 dark:border-gray-700">
-                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    <p class="text-lg font-bold">{{ $orderItem->product->name }}</p>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <p class="text-lg font-bold">{{ $orderItem->product->price }}€</p>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <p class="w-fit px-2 py-1 text-lg font-semibold rounded-md bg-amber-50 text-amber-500 ring-1 ring-inset ring-amber-600/20">{{ $orderItem->quantity }}</p>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <p class="text-lg font-bold">{{ $orderItem->product->quantity }}</p>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ $orderItem->quantity * $orderItem->product->price }}€</a>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ $orderItem->created_at }}</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                            
-                    </tbody>
-                </table>
-            </div>
-            <div class="flex justify-evenly">
-                <div>
-                    <p>Produits :</p>
-                    <p>{{ $order->total }}€</p>
-                </div>
-                <div>
-                    <p>Réductions :</p>
-                    <p>-10€</p>
-
-                </div>
-                <div>
-                    <p>Total : </p>
-                    <p>{{ $order->total - 10}}€</p>
-                </div>
-            </div>
-        </div>
+        
+        
+        
+        <!-- total price end -->
+      </div>
     </div>
-    
-</div>
+  </div>
 
 @endsection

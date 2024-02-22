@@ -150,8 +150,12 @@
                 <dt class="text-sm">Frais de livraison</dt>
                 <dd class="text-sm font-medium text-gray-900">4.99€</dd>
               </div>
+              <div class="flex items-center justify-between">
+                <dt class="text-sm">TVA (20%)</dt>
+                <dd class="text-sm font-medium text-gray-900">{{ number_format($subtotal * 0.20, 2) }}€</dd>
+              </div>
               <div class="flex items-center justify-between border-t border-gray-200 pt-6">
-                <dt class="text-base font-medium">Total</dt>
+                <dt class="text-base font-medium">Total (TTC)</dt>
                 <dd class="text-base font-medium text-gray-900" name="total" >{{ number_format($total, 2) }}€</dd>
               </div>
             </dl>

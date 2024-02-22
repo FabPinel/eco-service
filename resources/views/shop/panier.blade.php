@@ -73,9 +73,15 @@
                         </dt>
                         <dd class="text-sm font-medium text-gray-900">4.99€</dd>
                     </div>
+                    <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                        <dt class="flex items-center text-sm text-gray-600">
+                            <span>TVA (20%)</span>
+                        </dt>
+                        <dd class="text-sm font-medium text-gray-900">{{ number_format($subtotal * 0.20, 2) }}€</dd>
+                    </div>
                     @endif
                     <div class="flex items-center justify-between border-t border-gray-200 pt-4">
-                        <dt class="text-base font-medium text-gray-900">Total de votre commande</dt>
+                        <dt class="text-base font-medium text-gray-900">Total de votre commande (TTC)</dt>
                         @if ($subtotal > 0)
                         <dd class="text-base font-medium text-gray-900">{{ number_format($total, 2) }}€</dd>
                         @else
