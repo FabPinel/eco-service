@@ -1,78 +1,89 @@
 @extends('layout')
 @section('content')
 <main class="mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:max-w-none">
+  <div class="mx-auto max-w-2xl lg:max-w-none">
       <h1 class="sr-only">Checkout</h1>
 
       <form action="/session" method="post" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
-        <div>
+          <!-- Informations de livraison à gauche -->
           <div>
-            <h2 class="text-lg font-medium text-gray-900">Vos informations</h2>
-
-            <div class="mt-4">
-              <label for="email-address" class="block text-sm font-medium text-gray-700">Adresse email</label>
-              <div class="mt-1">
-                  <input type="email" id="email-address" name="email-address" autocomplete="email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" @auth value="{{ auth()->user()->email }}" @endauth>
-              </div>
-            </div>    
-          </div>
-
-          <div class="mt-10 border-t border-gray-200 pt-10">
-            <h2 class="text-lg font-medium text-gray-900">Informations de livraison</h2>
-
-            <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
               <div>
-                <label for="first-name" class="block text-sm font-medium text-gray-700">Prénom</label>
-                <div class="mt-1">
-                  <input type="text" id="first-name" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" @auth value="{{ auth()->user()->first_name }}" @endauth>
-                </div>
+                  <h2 class="text-lg font-medium text-gray-900">Vos informations</h2>
+
+                  <div class="mt-4">
+                      <label for="email-address" class="block text-sm font-medium text-gray-700">Adresse email</label>
+                      <div class="mt-1">
+                          <input type="email" id="email-address" name="email-address" autocomplete="email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" @auth value="{{ auth()->user()->email }}" @endauth>
+                      </div>
+                  </div>
               </div>
 
-              <div>
-                <label for="last-name" class="block text-sm font-medium text-gray-700">Nom</label>
-                <div class="mt-1">
-                  <input type="text" id="last-name" name="last-name" autocomplete="family-name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" @auth value="{{ auth()->user()->last_name }}" @endauth>
-                </div>
-              </div>
+              <div x-data="{ selectedAddress: {{ $userAddress && $userAddress->default == 1 ? $userAddress->toJson() : '{}' }} }">
+                  <div class="mt-10 border-t border-gray-200 pt-10">
+                      <h2 class="text-lg font-medium text-gray-900">Informations de livraison</h2>
+                      <label for="user-address" class="block text-sm font-medium text-gray-700">Adresse de livraison</label>
+                      <p class="mt-1" >Toute nouvelle adresse est enregistrée sur votre compte.</p>
+                      <div class="mt-1" x-show="{{ $userAddress ? 'true' : 'false' }}">
+                          <select id="user-address" name="user-address" autocomplete="address-line" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" x-on:change="selectedAddress = JSON.parse($event.target.value)">
+                              @foreach($allUserAddresses as $address)
+                              <option value="{{ $address->toJson() }}" @if($userAddress && $userAddress->id == $address->id) selected @elseif($address->default == 1) selected @endif>
+                                  {{ $address->address_line }}, {{ $address->city }}, {{ $address->postalCode }}, {{ $address->country }}
+                                  @if($address->default == 1) (Par défaut) @endif
+                              </option>
+                              @endforeach
+                          </select>
+                      </div>
+                      <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                          <div>
+                              <label for="first-name" class="block text-sm font-medium text-gray-700">Prénom</label>
+                              <div class="mt-1">
+                                  <input type="text" id="first-name" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" x-model="selectedAddress.first_name">
+                              </div>
+                          </div>
 
-              <div class="sm:col-span-2">
-                <label for="address" class="block text-sm font-medium text-gray-700">Adresse</label>
-                <div class="mt-1">
-                    <input type="text" name="address" id="address" autocomplete="street-address" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="{{ optional($userAddress)->address_line }}">
-                </div>
-              </div>
-            
-            
-              <div>
-                <label for="city" class="block text-sm font-medium text-gray-700">Ville</label>
-                <div class="mt-1">
-                  <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  value="{{ optional($userAddress)->city }}">
-                </div>
-              </div>
+                          <div>
+                            <label for="last-name" class="block text-sm font-medium text-gray-700">Nom</label>
+                            <div class="mt-1">
+                              <input type="text" id="last-name" name="last-name" autocomplete="family-name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" x-model="selectedAddress.last_name">
+                            </div>
+                          </div>
 
-              <div>
-                <label for="country" class="block text-sm font-medium text-gray-700">Pays</label>
-                <div class="mt-1">
-                  <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                    <option>{{ optional($userAddress)->country }}</option>
-                  </select>
-                </div>
-              </div>
+                          <div class="sm:col-span-2">
+                            <label for="address" class="block text-sm font-medium text-gray-700">Adresse</label>
+                            <div class="mt-1">
+                                <input type="text" name="address" id="address" autocomplete="street-address" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" x-model="selectedAddress.address_line">
+                            </div>
+                          </div>
+                        
+                          <div>
+                            <label for="city" class="block text-sm font-medium text-gray-700">Ville</label>
+                            <div class="mt-1">
+                              <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  x-model="selectedAddress.city">
+                            </div>
+                          </div>
 
-              <div>
-                <label for="postal-code" class="block text-sm font-medium text-gray-700">Code postal</label>
-                <div class="mt-1">
-                  <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  value="{{ optional($userAddress)->postalCode}}">
-                </div>
-              </div>
+                          <div>
+                            <label for="country" class="block text-sm font-medium text-gray-700">Pays</label>
+                            <div class="mt-1">
+                              <input id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" x-model="selectedAddress.country">
+                            </div>
+                          </div>
 
-              <div class="sm:col-span-2">
-                <label for="phone" class="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
-                <div class="mt-1">
-                  <input type="text" name="phone" id="phone" autocomplete="tel" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" @auth value="{{ auth()->user()->phone }}" @endauth>
+                          <div>
+                            <label for="postal-code" class="block text-sm font-medium text-gray-700">Code postal</label>
+                            <div class="mt-1">
+                              <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  x-model="selectedAddress.postalCode">
+                            </div>
+                          </div>
+
+                          <div class="sm:col-span-2">
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
+                            <div class="mt-1">
+                              <input type="text" name="phone" id="phone" autocomplete="tel" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" x-model="selectedAddress.phone">
+                            </div>
+                          </div>
                 </div>
               </div>
-            </div>
           </div>
 
           <div class="mt-10 border-t border-gray-200 pt-10">

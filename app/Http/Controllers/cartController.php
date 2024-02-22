@@ -37,10 +37,13 @@ class cartController extends Controller
                 ->first();
         }
 
+        $allUserAddresses = UserAddress::where('id_user', $user->id)->get();
+
         return view('shop.checkout', [
             'subtotal' => $summaryData['subtotal'],
             'total' => $summaryData['total'],
             'userAddress' => $userAddress,
+            'allUserAddresses' => $allUserAddresses,
         ]);
     }
 
@@ -131,6 +134,47 @@ class cartController extends Controller
 
     public function session(Request $request)
     {
+        $user = auth()->user();
+
+
+        $existingAddresses = UserAddress::where('id_user', $user->id)->get();
+
+        $existingAddress = $existingAddresses->first(function ($address) use ($request) {
+            return $address->address_line === $request->input('address');
+        });
+
+        if ($existingAddresses === null || $existingAddresses->isEmpty()) {
+            $newAddress = UserAddress::create([
+                'first_name' => $request->input('first-name'),
+                'last_name' => $request->input('last-name'),
+                'address_line' => $request->input('address'),
+                'city' => $request->input('city'),
+                'country' => $request->input('country'),
+                'postalCode' => $request->input('postal-code'),
+                'phone' => $request->input('phone'),
+                'default' => 1,
+                'id_user' => $user->id,
+            ]);
+        } else {
+            $existingAddress = $existingAddresses->first(function ($address) use ($request) {
+                return $address->address_line === $request->input('address');
+            });
+
+            if ($existingAddress === null) {
+                $newAddress = UserAddress::create([
+                    'first_name' => $request->input('first-name'),
+                    'last_name' => $request->input('last-name'),
+                    'address_line' => $request->input('address'),
+                    'city' => $request->input('city'),
+                    'country' => $request->input('country'),
+                    'postalCode' => $request->input('postal-code'),
+                    'phone' => $request->input('phone'),
+                    'default' => 0,
+                    'id_user' => $user->id,
+                ]);
+            }
+        }
+
         session()->put('order_address', [
             'first_name' => $request->input('first-name'),
             'last_name' => $request->input('last-name'),
