@@ -1,6 +1,5 @@
 @extends('layout-admin')
 @section('admin-content')
-@include('partials.errors')
     <div class="space-y-10 divide-y divide-gray-900/10 mt-20">
         <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
             <div class="px-4 sm:px-0">
@@ -86,7 +85,8 @@
                         </div>
 
                         <div class="col-span-full">
-                            <span class="block text-sm font-medium leading-6 text-gray-900">Informations complémentaires</span>
+                            <span class="block text-sm font-medium leading-6 text-gray-900">Informations
+                                complémentaires</span>
                             <div class="mt-2">
                                 <textarea id="information" name="information" rows="3"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
@@ -105,7 +105,8 @@
                 </div>
                 <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                     <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Annuler</button>
-                    <button type="submit" class="rounded-md bg-[#1c3242] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sauvegarder</button>
+                    <button type="submit"
+                        class="rounded-md bg-[#1c3242] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sauvegarder</button>
                 </div>
             </form>
         </div>

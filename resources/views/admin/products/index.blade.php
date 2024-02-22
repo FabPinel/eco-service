@@ -36,7 +36,8 @@
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                     <a href="{{ route('admin.products.create') }}"
-                        class="block rounded-md bg-[#1c3242] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter un produit</a>
+                        class="block rounded-md bg-[#1c3242] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter
+                        un produit</a>
                 </div>
             </div>
             <div class="mt-8 flow-root">
@@ -251,7 +252,8 @@
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                     <a href="{{ route('admin.discounts.create') }}"
-                        class="block rounded-md bg-[#1c3242] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter une promotion</a>
+                        class="block rounded-md bg-[#1c3242] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter
+                        une promotion</a>
                 </div>
             </div>
             <div class="mt-8 flow-root">
@@ -361,26 +363,24 @@
     </div>
 
     @if ($message = Session::get('success'))
-           
-    <div id="successMessage" class="fixed bottom-4 right-4 w-1/3 flex border-l-8  border-[#34D399] bg-[#34D399] bg-opacity-[15%] px-7 py-8 shadow-md md:p-9">
-        <div class="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
-              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z" fill="white" stroke="white"></path>
-              </svg>
+        <div id="successMessage"
+            class="fixed bottom-4 right-4 w-1/3 flex border-l-8  border-[#34D399] bg-[#34D399] bg-opacity-[15%] px-7 py-8 shadow-md md:p-9">
+            <div class="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
+                        fill="white" stroke="white"></path>
+                </svg>
             </div>
             <div class="w-full">
-              <h5 class="mb-3 text-lg font-bold text-black dark:text-[#34D399]">
-                Déconnexion réussie
-              </h5>
-              <p class="text-base leading-relaxed text-body">
-                {{ $message }}
-              </p>
+                <h5 class="mb-3 text-lg font-bold text-black dark:text-[#34D399]">
+                    Nouveau produit
+                </h5>
+                <p class="text-base leading-relaxed text-body">
+                    {{ $message }}
+                </p>
             </div>
-          </div>
+        </div>
     @endif
-    <script>
-        setTimeout(function() {
-            document.getElementById('successMessage').remove();
-        }, 5000); // La popup disparaîtra après 5 secondes (5000 millisecondes)
-    </script>
 @endsection

@@ -12,6 +12,7 @@
 
 <body class="antialiased bg-slate-100">
     @include('partials.navbar-admin')
+    @include('partials.errors')
     <div class="content sm:px-4 md:px-4 lg:px-6 xl-px:10 2xl:px-14">
         @yield('admin-content')
     </div>
