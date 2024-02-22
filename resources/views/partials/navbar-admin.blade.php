@@ -127,7 +127,7 @@
                                         <div class="flex">
                                             <div class="relative flex">
                                                 <button type="button"
-                                                    onclick="window.location.href='{{ url('/admin/produits') }}'"
+                                                    onclick="window.location.href='{{ url('/admin/products') }}'"
                                                     class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
                                                     aria-expanded="false">
                                                     Produits

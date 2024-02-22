@@ -29,9 +29,7 @@ Route::get('/', [Controller::class, 'index'])->name('index');
 Route::get('/boutique', function () {
     return view('shop.index');
 });
-Route::get('/produit', function () {
-    return view('shop.products');
-});
+
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'role:0'])->name('admin.dashboard');

@@ -1,5 +1,6 @@
 @extends('layout-admin')
 @section('admin-content')
+@include('partials.errors')
     <div class="space-y-10 divide-y divide-gray-900/10 mt-20">
         <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
             <div class="px-4 sm:px-0">

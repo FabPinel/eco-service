@@ -24,6 +24,9 @@ class discountController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+        ], [
+            'name.required' => 'Le nom est requis',
+            'description.required' => 'La description est requise',
         ]);
 
         $discountPercentValue = $request->input('discount_percent');

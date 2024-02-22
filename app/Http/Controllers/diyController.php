@@ -29,6 +29,11 @@ class diyController extends Controller
             'description' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
             'text' => 'required',
+        ],[
+            'title.required' => 'Le titre est requis',
+            'description.required' => 'La description est requise',
+            'image.required' => "une image est requise pour créer le DIY",
+            'text.required' => "Il faut entrer du contenu",
         ]);
 
         $data = $request->except('image ');

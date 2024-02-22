@@ -33,7 +33,17 @@ class productController extends Controller
             'price' => 'required',
             'id_category' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'media' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
+            'media' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
+        ], [
+            'name.required' => 'Le nom est requis',
+            'description.required' => 'La description est requise',
+            'price.required' => 'Veuillez renseigner un prix',
+            'id_category.required' => 'Vous devez associer une catégorie',
+            'quantity.required' => 'Il faut renseigner la quantité',
+            'media.required' => "Il faut ajouter une image au produit",
+            'media.mimes' => "Votre image n'a pas le bon format, formats autorisés : jpeg,jpg,gif,svg,webp",
+            'media.max' => "Votre image est trop lourde. max : 10 mo",
+            'media.image' => "Votre image est trop lourde. max : 10 mo",
         ]);
 
         $data = $request->except('media');
@@ -107,6 +117,9 @@ class productController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+        ], [
+            'name.required' => 'Le nom est requis',
+            'description.required' => 'La description est requise',
         ]);
 
         Category::create($request->post());

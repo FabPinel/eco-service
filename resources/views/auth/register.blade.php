@@ -1,6 +1,7 @@
 @extends('layout-admin')
 @section('admin-content')
-    <div class="mt-20 mx-auto max-w-4xl flex">
+@include('partials.errors')
+<div class="mt-20 mx-auto max-w-4xl flex">
         <div class="w-2/4">
             <img src="https://images.unsplash.com/photo-1582803824122-f25becf36ad8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="">
@@ -40,10 +41,6 @@
                     <div class="mt-2">
                         <input id="email" name="email" type="email" autocomplete="email"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-
-                        @error('email')
-                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
                     </div>
                 </div>
 
@@ -55,24 +52,12 @@
                     </div>
                 </div>
 
-                {{-- <div class="px-5">
-                    <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">
-                        address</label>
-                    <div class="mt-2">
-                        <input type="text" name="street-address" id="street-address" autocomplete="street-address"
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    </div>
-                </div> --}}
-
                 <div class="px-5">
                     <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                     <div class="mt-2">
                         <input type="password" name="password" id="password"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-
-                        @error('password')
-                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
+                            
                     </div>
                 </div>
 
@@ -108,4 +93,5 @@
 
         </form>
     </div>
+    
 @endsection
