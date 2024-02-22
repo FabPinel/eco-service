@@ -92,12 +92,21 @@
             
                 <div class="mt-6">
                     @guest
+                        <!-- Bouton désactivé pour les utilisateurs invités -->
                         <button type="button" class="w-full rounded-md border border-transparent bg-gray-300 px-4 py-3 text-base font-medium text-gray-700 shadow-sm cursor-not-allowed" disabled>Commander</button>
                         <p class="text-sm text-gray-500 mb-2">Vous devez être connecté pour passer commande, connectez-vous <a href="{{ route('login') }}" class="text-[#e88229]">ici</a>.</p>
                     @else
-                        <a href="{{ route('commande') }}" class="w-full rounded-md border border-transparent bg-[#1c3242] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 block text-center">Commander</a>
+                        <!-- Bouton avec désactivation conditionnelle -->
+                        <a href="{{ route('commande') }}" 
+                           class="w-full rounded-md border border-transparent bg-[#1c3242] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 block text-center"
+                           @if ($subtotal == 0) 
+                               onclick="return false;" 
+                               style="pointer-events: none; opacity: 0.5;" 
+                           @endif>
+                            Commander
+                        </a>
                     @endguest
-                </div>                             
+                </div>                                           
             </section>            
             </form>
         </div>
