@@ -9,6 +9,9 @@
                 
                     <ul role="list" class="divide-y divide-gray-200 border-b border-t border-gray-200">
                         @foreach(session('cart', []) as $productId => $item)
+                        @php
+                            $product = App\Models\Product::find($productId);
+                        @endphp
                         <li class="flex py-6 sm:py-10">
                             <div class="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
                                 <div class="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
@@ -29,10 +32,10 @@
                                                 value="{{ $item['quantity'] }}" 
                                                 class="w-10 rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-[#1c3242] focus:outline-none focus:ring-1 focus:ring-[#1c3242] sm:text-sm"
                                                 min="1"  
-                                                max="100"  
+                                                max="{{ $product->quantity }}"  
                                                 step="1"  
                                                 inputmode="numeric"  
-                                                data-product-id="{{ $item['product_id'] }}">
+                                                data-product-id="{{ $item['product_id'] }}" onkeydown="return false;">
                                         <div data-id="{{ $item['product_id'] }}" class="absolute right-0 top-0">
                                             <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500 remove-from-cart">
                                                 <span class="sr-only">Remove</span>
