@@ -120,6 +120,7 @@ Route::get('/contact', function () {
 });
 
 Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.store');
+Route::post('/response-message', [ContactController::class, 'sendMailResponse'])->name('mailResponse');
 
 // Stripe
 Route::post('/session', [cartController::class, 'session'])->name('session');

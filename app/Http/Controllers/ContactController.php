@@ -8,13 +8,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use App\Mail\SendMailToSender;
+use App\Mail\SendResponseMail;
 
 class ContactController extends Controller
 {
 
     public function index() {
-        $messages = Contact::all();
-        return view('admin.messages.index', compact('messages'));
+        $messages = Contact::with('product')->orderBy('created_at', 'desc')->paginate(10);
+        $totalMessages = Contact::count();
+        return view('admin.messages.index', compact('messages', 'totalMessages'));
     }
     public function productsContact() {
         $products = Product::all();
@@ -61,5 +63,23 @@ class ContactController extends Controller
         Mail::to('gayraud854@gmail.com')->send(new SendMail($mailData, $contactFormData));
         Mail::to($email)->send(new SendMailToSender($mailData, $contactFormData));
         return "L'email à bien été envoyé";
+    }
+
+    public function sendMailResponse(Request $request)
+    {
+       $responseFormData = $request->validate([
+            'emailFrom' => 'required',
+            'emailTo' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+        dd($responseFormData);
+        $email = $request->emailTo;
+        $responseMailData = [
+            'title' => $responseFormData['subject'],
+            'body' => $responseFormData['message'],
+        ];
+        Mail::to($email)->send(new SendResponseMail($responseFormData, $responseMailData));
+        return redirect()->back()->with('success', "L'email a bien été envoyé");
     }
 }

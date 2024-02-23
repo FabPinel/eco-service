@@ -153,7 +153,7 @@
                                         </div>
                                         <a href="{{ route('admin.diy.index') }}"
                                             class="flex items-center text-sm font-medium text-white">DIY</a>
-                                        <a href="#"
+                                        <a href="{{ route('admin.messages.index') }}"
                                             class="flex items-center text-sm font-medium text-white">Messages</a>
                                         <button type="button" onclick="window.location.href='{{ url('/') }}'"
                                             class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"

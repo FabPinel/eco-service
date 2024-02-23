@@ -229,14 +229,6 @@
                     </button>
                 </div>
             </form>
-            {{-- <script>
-                methods: {
-                    updateSelectedProducts() {
-                        document.getElementById('selectedProducts').value = JSON.stringify(this.selectedProducts);
-                    }
-
-                }
-            </script> --}}
         </div>
     </div>
 @endsection
