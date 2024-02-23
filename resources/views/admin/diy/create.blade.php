@@ -1,6 +1,5 @@
 @extends('layout-admin')
 @section('admin-content')
-@include('partials.errors')
     <div class="space-y-10 divide-y divide-gray-900/10 mt-20">
         <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
             <div class="px-4 sm:px-0">
@@ -158,7 +157,8 @@
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div class="p-4 bg-white border-b border-gray-200">
                                 <div class='w-full mx-auto'>
-                                    <div class="relative flex items-center w-full h-12 shadow-sm rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+                                    <div
+                                        class="relative flex items-center w-full h-12 shadow-sm rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
                                         <div class="grid place-items-center h-full w-12 text-gray-300">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -222,7 +222,9 @@
 
                 <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                     <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Annuler</button>
-                    <button type="submit" class="rounded-md bg-[#1c3242] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600  @click="updateSelectedProducts" ...>
+                    <button type="submit"
+                        class="rounded-md bg-[#1c3242] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600  @click="updateSelectedProducts"
+                        ...>
                         Sauvegarder
                     </button>
                 </div>

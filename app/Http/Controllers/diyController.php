@@ -29,7 +29,7 @@ class diyController extends Controller
             'description' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
             'text' => 'required',
-        ],[
+        ], [
             'title.required' => 'Le titre est requis',
             'description.required' => 'La description est requise',
             'image.required' => "une image est requise pour créer le DIY",
@@ -73,7 +73,7 @@ class diyController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
+            'image' => 'image|mimes:jpeg,png,jpg,svg,webp|max:10000',
             'text' => 'required',
         ]);
         $product = DIY::find($id);

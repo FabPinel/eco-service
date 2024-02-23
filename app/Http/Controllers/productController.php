@@ -30,13 +30,15 @@ class productController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+            'information' => 'required',
             'price' => 'required',
             'id_category' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'media' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
+            'media' => 'required|mimes:jpeg,jpg,png,svg,webp|max:10000',
         ], [
             'name.required' => 'Le nom est requis',
             'description.required' => 'La description est requise',
+            'information.required' => 'Il faut entrer les informations du produit',
             'price.required' => 'Veuillez renseigner un prix',
             'id_category.required' => 'Vous devez associer une catégorie',
             'quantity.required' => 'Il faut renseigner la quantité',
@@ -57,7 +59,7 @@ class productController extends Controller
         }
         Product::create($data);
 
-        return redirect()->route('admin.products.index')->with('success', 'Product has been created successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Le produit a bien été créé');
     }
 
     public function edit(string $id)
