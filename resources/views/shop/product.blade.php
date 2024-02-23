@@ -44,10 +44,21 @@
           <form action="{{ route('addToCart', ['productId' => $product->id]) }}" method="POST" class="mt-6">
             @csrf
             <div class="mt-10 flex">
-                <button type="submit" class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-[#1c3242] px-8 py-3 text-base font-medium text-white hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full mr-6">Ajouter au panier</button>
-                <input type="number" name="quantity" value="1" min="1" class="w-10 rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-[#1c3242] focus:outline-none focus:ring-1 focus:ring-[#1c3242] sm:text-sm mr-4">
+                <button type="submit" class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-[#1c3242] px-8 py-3 text-base font-medium text-white hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full mr-6" @if($product->quantity == 0) disabled @endif>
+                    Ajouter au panier
+                </button>
+                <input type="number" name="quantity" value="1" min="1" max="{{ $product->quantity }}" class="w-10 rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-[#1c3242] focus:outline-none focus:ring-1 focus:ring-[#1c3242] sm:text-sm mr-4" onkeydown="return false;">
             </div>
-          </form>        
+        </form>
+        @if ($product->quantity == 0)
+        <div class="prose prose-sm mt-4 text-gray-500">
+            <p>En rupture de stock !</p>
+        </div>
+        @else
+        <div class="prose prose-sm mt-4 text-gray-500">
+            <p>Il en reste {{ $product->quantity }} en stock !</p>
+        </div>
+        @endif        
 
           {{-- <form action="{{ route('remove', ['productId' => $product->id]) }}" method="POST" class="mt-6">
             @csrf
