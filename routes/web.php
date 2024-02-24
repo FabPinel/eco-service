@@ -106,9 +106,10 @@ Route::prefix('/admin/orders')->middleware(['auth', 'role:0'])->group(function (
     Route::post('/orders/toggle-status/{id}', [OrderController::class, 'toggleStatus'])->name('admin.orders.toggle-status');
 });
 
-// Messages 
+// Messages
 Route::prefix('/admin/messages')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [ContactController::class, 'index'])->name('admin.messages.index');
+    Route::post('/', [ContactController::class, 'sendMailResponse'])->name('message.response');
 });
 
 // Checkout
@@ -120,7 +121,6 @@ Route::get('/contact', function () {
 });
 
 Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.store');
-Route::post('/response-message', [ContactController::class, 'sendMailResponse'])->name('mailResponse');
 
 // Stripe
 Route::post('/session', [cartController::class, 'session'])->name('session');

@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use Illuminate\Http\Request;
-use App\Http\Controllers\shopController;
-use App\Models\Product;
-use App\Models\UserAddress;
+use App\Models\User;
 use App\Models\Order;
+use App\Models\Product;
+use App\Mail\CommandMail;
 use App\Models\OrderItem;
+use App\Models\UserAddress;
 use App\Models\OrderAddress;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\shopController;
+use Stripe\Checkout\Session;
 
 class cartController extends Controller
 {
@@ -130,7 +134,7 @@ class cartController extends Controller
         ];
     }
 
-    // Stripe 
+    // Stripe
 
     public function session(Request $request)
     {
@@ -231,7 +235,6 @@ class cartController extends Controller
     {
         $user = Auth::user();
         $cart = session('cart', []);
-
         $summaryData = $this->summary();
         $subtotal = $summaryData['subtotal'];
         $total = $summaryData['total'];
@@ -278,6 +281,11 @@ class cartController extends Controller
             'subtotal' => $subtotal,
             'total' => $total,
         ];
+        $email = $user->email;
+        $userId = $orderDetails['order']->id_user;
+        $user = User::find($userId);
+        $userName = $user->first_name . ' ' . $user->last_name;
+        Mail::to($email)->send(new CommandMail($orderDetails, $userName));
 
         session()->forget('cart');
 

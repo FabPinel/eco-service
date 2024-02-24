@@ -13,14 +13,16 @@ use App\Mail\SendResponseMail;
 class ContactController extends Controller
 {
 
-    public function index() {
+    public function index()
+    {
         $messages = Contact::with('product')->orderBy('created_at', 'desc')->paginate(10);
         $totalMessages = Contact::count();
         return view('admin.messages.index', compact('messages', 'totalMessages'));
     }
-    public function productsContact() {
+    public function productsContact()
+    {
         $products = Product::all();
-    return view('shop.contact', compact('products'));
+        return view('shop.contact', compact('products'));
     }
     public function sendMail(Request $request)
     {
@@ -67,18 +69,18 @@ class ContactController extends Controller
 
     public function sendMailResponse(Request $request)
     {
-       $responseFormData = $request->validate([
+        $responseFormData = $request->validate([
             'emailFrom' => 'required',
             'emailTo' => 'required',
             'subject' => 'required',
             'message' => 'required',
         ]);
-        dd($responseFormData);
+
         $email = $request->emailTo;
-        $responseMailData = [
-            'title' => $responseFormData['subject'],
-            'body' => $responseFormData['message'],
-        ];
+
+        $responseMailData['message'] = $responseFormData['message'];
+        $responseMailData['subject'] = $responseFormData['subject'];
+
         Mail::to($email)->send(new SendResponseMail($responseFormData, $responseMailData));
         return redirect()->back()->with('success', "L'email a bien été envoyé");
     }

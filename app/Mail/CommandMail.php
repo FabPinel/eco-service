@@ -9,18 +9,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendResponseMail extends Mailable
+class CommandMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $responseFormData;
-    public $responseMailData;
+
+    public $orderDetails;
+    public $userName;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($responseFormData, $responseMailData)
+    public function __construct($orderDetails, $userName)
     {
-        $this->responseFormData = $responseFormData;
-        $this->responseMailData = $responseMailData;
+        $this->orderDetails = $orderDetails;
+        $this->userName = $userName;
     }
 
     /**
@@ -29,7 +31,7 @@ class SendResponseMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Re : " . $this->responseFormData['subject'],
+            subject: 'Commande #' . $this->orderDetails['order']->id . " envoyée",
         );
     }
 
@@ -39,7 +41,7 @@ class SendResponseMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.ResponseMail',
+            view: 'emails.commandEmail',
         );
     }
 
