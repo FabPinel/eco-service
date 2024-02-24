@@ -77,7 +77,7 @@ class cartController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect()->back()->with('success', 'Article ajouté au panier.');
+        return redirect()->back()->with('success', "L'article a bien été ajouté au panier.");
     }
 
     public function removeFromCart(Request $request)
@@ -252,7 +252,8 @@ class cartController extends Controller
                 'id_order' => $order->id,
             ]);
 
-            $orderItems[] = $orderItem;
+            $order = Order::with('status', 'user', 'orderItems.product')->findOrFail($order->id);
+            $orderItems = OrderItem::where('id_order', $order->id)->get(); //Parcours la liste des orderItems qui on pour id_order = $id
 
             $product = Product::find($item['product_id']);
             if ($product) {
@@ -274,12 +275,15 @@ class cartController extends Controller
             'id_order' => $order->id,
         ]);
 
+        $totalItemOrder = OrderItem::where('id_order', $order->id)->count();
+
         $orderDetails = [
             'order' => $order,
             'orderItems' => $orderItems,
             'orderAddress' => $orderAddress,
             'subtotal' => $subtotal,
             'total' => $total,
+            'totalItemOrder' => $totalItemOrder,
         ];
         $email = $user->email;
         $userId = $orderDetails['order']->id_user;
