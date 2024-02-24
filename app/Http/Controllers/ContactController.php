@@ -64,7 +64,7 @@ class ContactController extends Controller
 
         Mail::to('gayraud854@gmail.com')->send(new SendMail($mailData, $contactFormData));
         Mail::to($email)->send(new SendMailToSender($mailData, $contactFormData));
-        return "L'email à bien été envoyé";
+        return view('shop.contactConfirmation', compact('contactFormData'));
     }
 
     public function sendMailResponse(Request $request)

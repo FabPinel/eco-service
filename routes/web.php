@@ -119,6 +119,10 @@ Route::get('/commande', [cartController::class, 'checkout'])->name('commande');
 Route::get('/contact', function () {
     return view('shop.contact');
 });
+Route::get('/contactConfirmation', function () {
+    return view('shop.contactConfirmation');
+});
+
 
 Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.store');
 

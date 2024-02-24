@@ -52,14 +52,20 @@
                         <a href="/DIY" class="-m-2 block p-2 font-medium text-gray-900">DIY</a>
                     </div>
                 </div>
-                @auth
-                @if(Auth::user()->role == 0)
                 <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                     <div class="flow-root">
-                        <a href="{{ route('admin.products.index')}}" class="-m-2 block p-2 font-medium text-gray-900">Admin</a>
+                        <a href="/contact" class="-m-2 block p-2 font-medium text-gray-900">Contact</a>
                     </div>
                 </div>
-                @endif
+                @auth
+                    @if (Auth::user()->role == 0)
+                        <div class="space-y-6 border-t border-gray-200 px-4 py-6">
+                            <div class="flow-root">
+                                <a href="{{ route('admin.products.index') }}"
+                                    class="-m-2 block p-2 font-medium text-gray-900">Admin</a>
+                            </div>
+                        </div>
+                    @endif
                 @endauth
                 <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                     <div class="flow-root">
@@ -193,13 +199,23 @@
                                                 class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out"
                                                 aria-hidden="true"></span>
                                         </button>
+                                        <button type="button" onclick="window.location.href='{{ url('/contact') }}'"
+                                            class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
+                                            aria-expanded="false">
+                                            Contact
+                                            <!-- Open: "bg-white", Closed: "" -->
+                                            <span
+                                                class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out"
+                                                aria-hidden="true"></span>
+                                        </button>
 
-                                      
+
                                         @auth
-                                        @if(Auth::user()->role == 0)
-                                                <a href="{{ route('admin.products.index')}}" class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
-                                                aria-expanded="false">Admin</a>
-                                        @endif
+                                            @if (Auth::user()->role == 0)
+                                                <a href="{{ route('admin.products.index') }}"
+                                                    class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
+                                                    aria-expanded="false">Admin</a>
+                                            @endif
                                         @endauth
                                     </div>
                                 </div>
@@ -252,15 +268,20 @@
                                     <a href="#" class="hidden text-sm font-medium text-white lg:block">Aide</a>
 
                                     <!-- Cart -->
-                                    <div x-data="{ totalQuantity: 0 }" x-init="totalQuantity = Object.values(JSON.parse('{{ json_encode(session('cart', [])) }}')).reduce((acc, curr) => acc + parseInt(curr.quantity), 0)" class="ml-4 flow-root lg:ml-8">
+                                    <div x-data="{ totalQuantity: 0 }" x-init="totalQuantity = Object.values(JSON.parse('{{ json_encode(session('cart', [])) }}')).reduce((acc, curr) => acc + parseInt(curr.quantity), 0)"
+                                        class="ml-4 flow-root lg:ml-8">
                                         <a href="{{ route('panier') }}" class="group -m-2 flex items-center p-2">
-                                            <svg class="h-6 w-6 flex-shrink-0 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                            <svg class="h-6 w-6 flex-shrink-0 text-white" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                             </svg>
-                                            <span class="ml-2 text-sm font-medium text-white" x-text="totalQuantity"></span>
+                                            <span class="ml-2 text-sm font-medium text-white"
+                                                x-text="totalQuantity"></span>
                                             <span class="sr-only">items in cart, view bag</span>
                                         </a>
-                                    </div>                                                                                                                                       
+                                    </div>
                                 </div>
                             </div>
                         </div>
