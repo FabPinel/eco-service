@@ -788,7 +788,7 @@
                                                                             </td>
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">
-                                                                                40.00€</td>
+                                                                                {{ $orderDetails['subtotal'] }}</td>
                                                                         </tr>
                                                                         <tr style="border-collapse:collapse">
                                                                             <td
