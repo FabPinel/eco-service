@@ -232,16 +232,6 @@
                                             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                                     </svg>
                                 </button>
-
-                                <!-- Search -->
-                                <a href="#" class="ml-2 p-2 text-white">
-                                    <span class="sr-only">Recherche</span>
-                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                                    </svg>
-                                </a>
                             </div>
 
                             <!-- Logo (lg-) -->
@@ -252,21 +242,7 @@
                             </a>
 
                             <div class="flex flex-1 items-center justify-end">
-                                <a href="#"
-                                    class="hidden text-sm font-medium text-white lg:block">Rechercher</a>
-
                                 <div class="flex items-center lg:ml-8">
-                                    <!-- Help -->
-                                    <a href="#" class="p-2 text-white lg:hidden">
-                                        <span class="sr-only">Aide</span>
-                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="hidden text-sm font-medium text-white lg:block">Aide</a>
-
                                     <!-- Cart -->
                                     <div x-data="{ totalQuantity: 0 }" x-init="totalQuantity = Object.values(JSON.parse('{{ json_encode(session('cart', [])) }}')).reduce((acc, curr) => acc + parseInt(curr.quantity), 0)"
                                         class="ml-4 flow-root lg:ml-8">
