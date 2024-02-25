@@ -94,7 +94,7 @@
                                 compte</a>
                         </div>
                     @elseif(Auth::user()->role == 0)
-                        <p class="text-white">Bienvenue administrateur {{ Auth::user()->username }}</p>
+                        <a class="text-white" href="/mon-compte">Bienvenue administrateur {{ Auth::user()->username }}</a>
                         <a class="text-rose-700" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout</a>

@@ -143,10 +143,6 @@ class cartController extends Controller
 
         $existingAddresses = UserAddress::where('id_user', $user->id)->get();
 
-        $existingAddress = $existingAddresses->first(function ($address) use ($request) {
-            return $address->address_line === $request->input('address');
-        });
-
         if ($existingAddresses === null || $existingAddresses->isEmpty()) {
             $newAddress = UserAddress::create([
                 'first_name' => $request->input('first-name'),

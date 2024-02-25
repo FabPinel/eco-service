@@ -11,6 +11,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\cartController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\profileController;
 
 
 /*
@@ -131,4 +132,11 @@ Route::post('/session', [cartController::class, 'session'])->name('session');
 Route::get('/success', [cartController::class, 'success'])->name('success');
 Route::get('/votre-commande', function () {
     return view('shop.order');
+});
+
+// Profil
+Route::prefix('/mon-compte')->middleware(['auth', 'role:0'])->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+    Route::match(['put', 'post', 'get'], '/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::match(['put', 'post', 'get'], '/address', [ProfileController::class, 'address'])->name('profile.address');
 });
