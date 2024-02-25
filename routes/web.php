@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\cartController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -31,9 +32,14 @@ Route::get('/boutique', function () {
     return view('shop.index');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'role:0'])->name('admin.dashboard');
+//Dashboard
+
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'role:0'])
+    ->name('admin.dashboard');
+Route::get('/admin/dashboard/last-7-days', [DashboardController::class, 'getDataForLast7Days']);
+Route::get('/admin/dashboard/last-30-days', [DashboardController::class, 'getDataForLast30Days']);
+Route::get('/admin/dashboard/overall', [DashboardController::class, 'getDataForOverall']);
 
 Route::get('/DIY', function () {
     return view('diy.index');
