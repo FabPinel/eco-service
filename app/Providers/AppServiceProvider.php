@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $products = Product::all();
         $categories = Category::all();
         $discounts = Discount::all();
-        $diy = DIY::paginate(2);
+        $diy = DIY::paginate(8);
         $productsHome = Product::paginate(5);
         $diyHome = DIY::paginate(3);
         View::share('products', $products);
