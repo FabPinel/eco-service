@@ -1,4 +1,5 @@
 @extends('layout-admin')
+@section('pageTitle', "Admin - produit")
 @section('admin-content')
     <div x-data="{ activeTab: parseInt(localStorage.getItem('activeTab')) || 1 }" class="md:ml-28 md:mr-8">
         <ul class="flex justify-center space-x-4 mt-20">

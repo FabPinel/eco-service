@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Accueil')
+@section('pageTitle', 'Eco-Service')
 @section('content')
 
     <div class="bg-white">

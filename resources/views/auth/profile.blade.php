@@ -1,4 +1,5 @@
 @extends('layout')
+@section('pageTitle', 'Mon compte')
 @section('content')
     @if (session()->has('success'))
     <div id="successMessage" class="fixed bottom-0 right-0 bg-green-500 text-white p-4 mb-4 mr-4 rounded shadow">

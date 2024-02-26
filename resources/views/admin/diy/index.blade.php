@@ -1,5 +1,5 @@
 @extends('layout-admin')
-@section('title', 'Admin - DIY')
+@section('pageTitle', 'Admin - DIY')
 @section('admin-content')
     <div class="md:ml-28 md:mr-8">
         <div class="px-4 sm:px-6 lg:px-8 mt-20" x-show="activeTab === 3">

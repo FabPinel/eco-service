@@ -1,4 +1,5 @@
 @extends('layout')
+@section('pageTitle', "Message envoyé ! ")
 @section('content')
     <div class="bg-white">
         <svg class="block mx-auto" width="220" height="220" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

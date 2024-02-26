@@ -1,4 +1,5 @@
 @extends('layout')
+@section('pageTitle', "Contactez-nous !")
 @section('content')
     <div x-data="{ userType: '' }" class="font-[sans-serif]">
         <div class="bg-gradient-to-r from-blue-700 to-blue-300 w-full h-28"></div>

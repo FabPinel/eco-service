@@ -1,4 +1,5 @@
 @extends('layout')
+@section('pageTitle', "S'inscrire")
 @section('content')
     <div class="mt-20 mx-auto max-w-4xl flex">
         <div class="w-2/4">

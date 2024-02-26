@@ -1,4 +1,5 @@
 @extends('layout')
+@section('pageTitle', $diy->title )
 @section('content')
 <!-- component -->
 <html>

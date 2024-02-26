@@ -1,4 +1,5 @@
 @extends('layout-admin')
+@section('pageTitle', 'Admin - Messages')
 @section('admin-content')
     <div class="flex h-full mt-24 bg-white p-4 flex-col border-x border-stroke dark:border-strokedark">
         <div class="sm:flex">

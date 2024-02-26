@@ -1,4 +1,5 @@
 @extends('layout')
+@section('pageTitle', "Boutique")
 @section('content')
     <div class="bg-white">
         <div>

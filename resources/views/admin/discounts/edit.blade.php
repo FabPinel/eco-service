@@ -1,4 +1,5 @@
 @extends('layout-admin')
+@section('pageTitle', "Edition d'un code promo")
 
 <div class="container mt-2">
     <div class="row">

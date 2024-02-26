@@ -1,5 +1,5 @@
 @extends('layout-admin')
-@section('title', 'Admin - Orders')
+@section('pageTitle', 'Admin - Commande #'.$order->id)
 @section('admin-content')
 
 <div class="mt-24 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">

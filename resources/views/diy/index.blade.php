@@ -1,4 +1,5 @@
 @extends('layout')
+@section('pageTitle', "DIY")
 @section('content')
     <h2 id="collection-heading" class="text-2xl font-bold tracking-tight text-gray-900 mt-5 text-center">Nos articles DIY</h2>
     <p class="mt-4 text-base text-gray-500 text-center">Explorez l'art du DIY écologique avec nos articles pour créer des solutions durables à la maison. Faites place à la créativité et à la responsabilité environnementale ! 🌱🛠️</p>

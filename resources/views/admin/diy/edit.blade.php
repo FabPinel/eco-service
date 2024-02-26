@@ -1,4 +1,5 @@
 @extends('layout-admin')
+@section('pageTitle', "Edition d'un DIY")
 
 <div class="container mx-auto w-2/4">
     <div class="row">

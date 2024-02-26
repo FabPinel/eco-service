@@ -1,5 +1,5 @@
 @extends('layout-admin')
-@section('title', 'Accueil')
+@section('pageTitle', 'Admin - Dashboard')
 @section('admin-content')
     <main>
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8" x-data="{ activeTab: parseInt(localStorage.getItem('activeTab')) || 1 }">

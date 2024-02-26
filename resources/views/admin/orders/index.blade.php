@@ -1,5 +1,5 @@
 @extends('layout-admin')
-@section('title', 'Admin - Orders')
+@section('pageTitle', 'Admin - Commandes')
 @section('admin-content')
     <div class="mt-10 rounded-sm border border-stroke bg-white shadow-default">
         <div class="px-4 sm:px-6 lg:px-8 mt-20">

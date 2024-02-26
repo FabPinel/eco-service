@@ -1,4 +1,5 @@
 @extends('layout-admin')
+@section('pageTitle', "Création d'un code promo")
 @section('admin-content')
     <div class="space-y-10 divide-y divide-gray-900/10 mt-20">
         <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
