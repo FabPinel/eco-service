@@ -11,7 +11,7 @@
             <div>
 
                 <div class="px-5">
-                    <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                    <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Pseudo</label>
                     <div class="mt-2">
                         <input type="text" name="username" id="username" autocomplete="given-name"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="px-5">
-                    <label for="first_name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                    <label for="first_name" class="block text-sm font-medium leading-6 text-gray-900">Prénom</label>
                     <div class="mt-2">
                         <input type="text" name="first_name" id="first_name" autocomplete="given-name"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="px-5">
-                    <label for="last_name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                    <label for="last_name" class="block text-sm font-medium leading-6 text-gray-900">Nom</label>
                     <div class="mt-2">
                         <input type="text" name="last_name" id="last_name" autocomplete="family-name"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -35,8 +35,7 @@
                 </div>
 
                 <div class="px-5">
-                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
-                        address</label>
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Adresse email</label>
                     <div class="mt-2">
                         <input id="email" name="email" type="email" autocomplete="email"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -44,7 +43,7 @@
                 </div>
 
                 <div class="px-5">
-                    <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">phone</label>
+                    <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Téléphone</label>
                     <div class="mt-2">
                         <input id="phone" name="phone" type="phone" autocomplete="phone"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -52,7 +51,7 @@
                 </div>
 
                 <div class="px-5">
-                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Mot de passe</label>
                     <div class="mt-2">
                         <input type="password" name="password" id="password"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -61,8 +60,7 @@
                 </div>
 
                 <div class="px-5">
-                    <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900">Confirm
-                        password</label>
+                    <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900">Confirmer le mot de passe</label>
                     <div class="mt-2">
                         <input id="password_confirmation" type="password"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('password') is-invalid @enderror"
@@ -80,7 +78,7 @@
                 </div>
                 <div class="ml-3 text-sm text-center">
                     <label for="terms" class="font-light">J'accepte <a
-                            class="font-medium text-blue-700 hover:underline dark:text-primary-500" href="#">les
+                            class="font-medium text-blue-700 hover:underline dark:text-[#e88229]" href="#">les
                             conditions</a></label>
                 </div>
             </div>
@@ -92,7 +90,7 @@
             </div>
             <p class="text-sm font-light text-gray-800 text-center">
                 Vous avez déjà un compte ?
-                <a href="/login" class="text-blue-700 font-medium hover:underline">Connectez-vous ici</a>
+                <a href="/login" class="text-[#e88229] font-medium hover:underline">Connectez-vous ici</a>
             </p>
 
         </form>
