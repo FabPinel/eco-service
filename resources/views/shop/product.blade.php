@@ -47,7 +47,7 @@
                     </form>
                     @if ($product->quantity == 0)
                         <div class="prose prose-sm mt-4 text-gray-500">
-                            <p>En rupture de stock !</p>
+                            <p class="text-red-800">En rupture de stock !</p>
                         </div>
                     @else
                         <div class="prose prose-sm mt-4 text-gray-500">
