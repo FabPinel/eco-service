@@ -8,7 +8,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\OrderStatus;
 
-class OrderController extends Controller
+class orderController extends Controller
 {
     public function index()
     {

@@ -47,7 +47,8 @@
                                     onclick="window.location='{{ route('admin.orders.orderDetails', $o->id) }}';">
                                     <p class="text-base font-bold">{{ $o->user->username }}</p>
                                 </td>
-                                <td class="border-b border-stroke py-3.5 pl-5 pr-6">
+                                <td class="border-b border-stroke py-3.5 pl-5 pr-6"
+                                    onclick="window.location='{{ route('admin.orders.orderDetails', $o->id) }}';">
                                     <p
                                         class="w-fit px-2 py-1 text-base font-semibold rounded-md bg-amber-50 text-amber-500 ring-1 ring-inset ring-amber-600/20">
                                         {{ $o->total }}€</p>
@@ -93,8 +94,12 @@
                                     <p class="text-base font-bold">{{ $o->created_at->format('d/m/Y') }}</p>
                                 </td>
                                 <td class="border-b border-stroke py-3.5 pl-5 pr-6">
-                                    <a href="#"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Voir</a>
+                                    <button onclick="window.location='{{ route('admin.orders.orderDetails', $o->id) }}';">
+                                        <svg class="w-8 h-8 text-[#1c3242] hover:text-slate-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4 6-9 6s-9-4.8-9-6c0-1.2 4-6 9-6s9 4.8 9 6Z"/>
+                                            <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                        </svg>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -111,20 +116,39 @@
     </div>
     @if ($message = Session::get('success'))
         <div id="successMessage"
-            class="fixed top-20 right-4 w-1/3 flex border-l-8  border-[#34D399] bg-[#34D399] bg-opacity-40 px-7 py-8 shadow-md md:p-9">
-            <div class="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
+            class="hidden md:flex fixed top-28 right-4 w-1/3 border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-7 py-8 shadow-md">
+            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#34D399]">
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
                         fill="white" stroke="white"></path>
                 </svg>
             </div>
-            <div class="w-full">
-                <h5 class="mb-3 text-lg font-bold text-black dark:text-[#34D399]">
-                    Connexion réussie
+            <div class="mt-4 text-center">
+                <h5 class="mb-2 text-lg font-bold text-[#34D399]">
+                   Connexion réussie
                 </h5>
-                <p class="text-base leading-relaxed text-body">
-                    {{ $message }}
+                <p class="text-sm leading-relaxed text-white">
+                   {{ $message }}
+                </p>
+            </div>
+        </div>
+        <div id="successMessage"
+            class="flex md:hidden fixed top-28 ml-2 mr-2 w-full border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-2 py-3 shadow-md">
+            <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#34D399]">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
+                        fill="white" stroke="white"></path>
+                </svg>
+            </div>
+            <div class="w-full">
+                <h5 class="mb-2 text-lg font-bold text-[#34D399]">
+                   Connexion réussie
+                </h5>
+                <p class="text-sm leading-relaxed text-body">
+                   {{ $message }}
                 </p>
             </div>
         </div>

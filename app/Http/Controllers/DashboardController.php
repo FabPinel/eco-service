@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Carbon\Carbon;
 
-class DashboardController extends Controller
+class dashboardController extends Controller
 {
     public function index()
     {
