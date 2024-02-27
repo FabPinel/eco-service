@@ -56,14 +56,14 @@
                             <div class="sm:col-span-3">
                                 <label for="first-name" class="block text-sm font-medium leading-6 text-black">Prénom</label>
                                 <div class="mt-2">
-                                <input type="text" name="first_name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 bg-grey/5 py-1.5 text-black shadow-sm ring-1 ring-inset ring-black/20 focus:ring-2 focus:ring-inset focus:ring-[# 1c3242] sm:text-sm sm:leading-6" value="{{ auth()->user()->first_name }}">
+                                <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 bg-grey/5 py-1.5 text-black shadow-sm ring-1 ring-inset ring-black/20 focus:ring-2 focus:ring-inset focus:ring-[# 1c3242] sm:text-sm sm:leading-6" value="{{ auth()->user()->first_name }}">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-3">
                                 <label for="last-name" class="block text-sm font-medium leading-6 text-black">Nom</label>
                                 <div class="mt-2">
-                                <input type="text" name="last_name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 bg-grey/5 py-1.5 text-black shadow-sm ring-1 ring-inset ring-black/20 focus:ring-2 focus:ring-inset focus:ring-[# 1c3242] sm:text-sm sm:leading-6" value="{{ auth()->user()->last_name }}">
+                                <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 bg-grey/5 py-1.5 text-black shadow-sm ring-1 ring-inset ring-black/20 focus:ring-2 focus:ring-inset focus:ring-[# 1c3242] sm:text-sm sm:leading-6" value="{{ auth()->user()->last_name }}">
                                 </div>
                             </div>
 
