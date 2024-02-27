@@ -22,7 +22,7 @@
                         <h3 class="text-sm font-medium text-white">Zéro-déchet</h3>
                         <ul role="list" class="mt-6 space-y-6">
                             <li class="text-sm">
-                                <a href="#" class="text-gray-300 hover:text-white">Je découvre !</a>
+                                <a href="/zero-dechet" class="text-gray-300 hover:text-white">Je découvre !</a>
                             </li>
                         </ul>
                     </div>
@@ -31,22 +31,28 @@
                     <div>
                         <h3 class="text-sm font-medium text-white">Mon compte</h3>
                         <ul role="list" class="mt-6 space-y-6">
-                            <li class="text-sm">
-                                <a href="#" class="text-gray-300 hover:text-white">Paramètre</a>
-                            </li>
+                            @auth
+                                <li class="text-sm">
+                                    <a href="/mon-compte" class="text-gray-300 hover:text-white">Paramètres</a>
+                                </li>
+                            @else
+                                <li class="text-sm">
+                                    <a href="/login" class="text-gray-300 hover:text-white">Se connecter</a>
+                                </li>
+                            @endauth
                         </ul>
-                    </div>
+                    </div>                    
                     <div>
                         <h3 class="text-sm font-medium text-white">Connectons-nous !</h3>
                         <ul role="list" class="mt-6 space-y-6">
                             <li class="text-sm">
-                                <a href="#" class="text-gray-300 hover:text-white">Nous contacter</a>
+                                <a href="/contact" class="text-gray-300 hover:text-white">Nous contacter</a>
                             </li>
                             <li class="text-sm">
-                                <a href="#" class="text-gray-300 hover:text-white">Instagram</a>
+                                <a href="https://www.institut-g4.fr/" class="text-gray-300 hover:text-white">Instagram</a>
                             </li>
                             <li class="text-sm">
-                                <a href="#" class="text-gray-300 hover:text-white">LinkedIn</a>
+                                <a href="https://www.institut-g4.fr/" class="text-gray-300 hover:text-white">LinkedIn</a>
                             </li>
                         </ul>
                     </div>

@@ -58,8 +58,8 @@
                 </div>
 
                 <div class="mt-6 px-4 sm:hidden">
-                    <a href="#" class="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
-                        Browse all categories
+                    <a href="/boutique" class="block text-sm font-semibold text-[#1c3242] hover:text-[#374a56]">
+                        Voir tous les produits
                         <span aria-hidden="true"> &rarr;</span>
                     </a>
                 </div>
@@ -80,8 +80,7 @@
                             <p class="mt-3 text-xl text-white"> Choisissez une vie sans gaspillage, privilégiez le
                                 réutilisable au jetable, et faites un impact positif sur la planète. Rejoignez-nous pour un
                                 avenir plus vert et responsable. #ZéroDéchet 🌿♻️</p>
-                            <a href="#"
-                                class="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto">Je
+                            <a href="/zero-dechet" class="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto">Je
                                 découvre !</a>
                         </div>
                     </div>
