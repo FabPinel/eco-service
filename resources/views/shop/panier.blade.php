@@ -1,5 +1,5 @@
 @extends('layout')
-@section('pageTitle', "Mon panier")
+@section('pageTitle', 'Mon panier')
 @section('content')
     <div class="bg-white">
         <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -106,12 +106,18 @@
                     <div class="mt-6">
                         @guest
                             <!-- Bouton désactivé pour les utilisateurs invités -->
-                            <button type="button"
-                                class="w-full rounded-md border border-transparent bg-gray-300 px-4 py-3 text-base font-medium text-gray-700 shadow-sm cursor-not-allowed"
-                                disabled>Commander</button>
-                            <p class="text-sm text-gray-500 mb-2">Vous devez être connecté pour passer commande, connectez-vous
-                                <a href="{{ route('login') }}" class="text-[#e88229]">ici</a>.
-                            </p>
+                            <form method="POST" action="{{ route('login.authenticate') }}">
+                                @csrf
+                                <input type="hidden" name="intended" value="{{ url()->current() }}">
+                                <button type="submit"
+                                    class="w-full rounded-md border border-transparent bg-gray-300 px-4 py-3 text-base font-medium text-gray-700 shadow-sm cursor-not-allowed"
+                                    disabled>Commander</button>
+                                <p class="text-sm text-gray-500 mb-2">Vous devez être connecté pour passer commande,
+                                    connectez-vous
+                                    <a href="{{ route('login', ['intended' => url()->current()]) }}"
+                                        class="text-[#e88229]">ici</a>.
+                                </p>
+                            </form>
                         @else
                             <!-- Bouton avec désactivation conditionnelle -->
                             <a href="{{ route('commande') }}"

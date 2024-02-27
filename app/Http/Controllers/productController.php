@@ -126,7 +126,7 @@ class productController extends Controller
 
         Category::create($request->post());
 
-        return redirect()->route('admin.products.index')->with('success', 'Category has been created successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'La catégorie à bien été créée');
     }
 
     public function show(Product $product)

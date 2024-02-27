@@ -88,7 +88,7 @@ class cartController extends Controller
                 unset($cart[$request->product_id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Product removed successfully');
+            session()->flash('success', "L'article a bien été supprimé du panier.");
         }
 
         return $this->panier();

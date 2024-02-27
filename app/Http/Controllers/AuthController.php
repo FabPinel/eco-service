@@ -20,7 +20,6 @@ class AuthController extends Controller
         $this->middleware('guest')->except([
             'logout', 'index'
         ]);
-
     }
 
     public function register()
@@ -65,19 +64,19 @@ class AuthController extends Controller
 
         $idUser = $save->id;
         $token = Str::random(64);
- 
+
         UserVerify::create([
-            'user_id' => $idUser, 
+            'user_id' => $idUser,
             'token' => $token
-          ]);
-    
-          Mail::send('emails.register', ['token' => $token], function($message) use($request){
+        ]);
+
+        Mail::send('emails.register', ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Email register verification');
         });
-       
-      return redirect()->route('index')->withSuccess('Great! You have Successfully logged in');
-        }
+
+        return redirect()->route('index')->withSuccess('Great! You have Successfully logged in');
+    }
 
     public function authenticate(Request $request)
     {
@@ -85,17 +84,20 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             $user = Auth::user();
 
-            if($user->role == 0) {
-                return redirect()->route('admin.dashboard')->with('success', 'You have successfully logged in as an admin!');
+            if ($user->role == 0) {
+                // Si l'utilisateur est un administrateur
+                return redirect()->route('admin.dashboard')->with('success', "Bienvenue administrateur {$user->first_name} {$user->last_name} !");
             } else {
-                return redirect()->route('index')->with('success', 'You have successfully logged in!');
+                // Si l'utilisateur est un utilisateur normal
+                $intended = $request->input('intended'); // Utilisez url('/') comme valeur par défaut
+                return redirect()->to($intended);
             }
-
         }
 
         return back()->withErrors([
@@ -109,7 +111,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('login')
-            ->withSuccess('You have logged out successfully!');;
+            ->withSuccess('Vous êtes bien déconnecté !');;
     }
 
     public static function getUserId()
@@ -124,13 +126,13 @@ class AuthController extends Controller
     public function verifyAccount($token)
     {
         $verifyUser = UserVerify::where('token', $token)->first();
-  
+
         $message = 'Sorry your email cannot be identified.';
-  
-        if(!is_null($verifyUser) ){
+
+        if (!is_null($verifyUser)) {
             $user = $verifyUser->user;
-              
-            if(!$user->is_email_verified) {
+
+            if (!$user->is_email_verified) {
                 $verifyUser->user->is_email_verified = 1;
                 $verifyUser->user->save();
                 $message = "Your e-mail is verified. You can now login.";
@@ -138,7 +140,7 @@ class AuthController extends Controller
                 $message = "Your e-mail is already verified. You can now login.";
             }
         }
-  
-      return redirect()->route('login')->with('message', $message);
+
+        return redirect()->route('login')->with('message', $message);
     }
 }

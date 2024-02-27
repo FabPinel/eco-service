@@ -44,7 +44,7 @@ class discountController extends Controller
             'discount_amount' => $discountAmount,
         ]);
 
-        return redirect()->route('admin.products.index')->with('success', 'Discount has been created successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Le code promo à bien été créé');
     }
 
 

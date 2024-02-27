@@ -105,7 +105,7 @@ class diyController extends Controller
 
         $diy->delete();
 
-        session()->flash('notif.success', 'Category deleted successfully!');
+        session()->flash('notif.success', 'La catégorie à bien été supprimée');
 
         return redirect()->route('admin.diy.index');
     }
