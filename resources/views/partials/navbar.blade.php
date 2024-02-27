@@ -243,7 +243,7 @@
                             </div>
 
                             <!-- Logo (lg-) -->
-                            <a href="#" class="lg:hidden">
+                            <a href="/" class="lg:hidden">
                                 <span class="sr-only">Eco-Service</span>
                                 <img src="https://image.noelshack.com/fichiers/2024/04/5/1706279129-logo-eco-service.png"
                                     alt="" class="h-16 w-auto">
