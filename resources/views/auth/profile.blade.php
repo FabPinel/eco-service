@@ -87,15 +87,13 @@
                         <h2 class="text-base font-semibold leading-7 text-black">Vos adresses</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-400">Mettre à jour vos adresses associé à votre compte.</p>
                     </div>
-
-                    <form action="{{ route('profile.address') }}" method="POST" class="md:col-span-2" x-data="{ selectedAddress: {{ $userAddress && $userAddress->default == 1 ? $userAddress->toJson() : '{}' }} }">
-                        @csrf
-                        <input type="hidden" name="user-address" x-model="selectedAddress.id">
+                    <form action="{{ route('profile.address') }}" method="POST" class="md:col-span-2" x-data="{ selectedAddress: {{ $userAddress && $userAddress->default == 1 ? $userAddress->toJson() : '{}' }} }">                        @csrf
                         <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
+                            <input type="hidden" name="selectedAddressId" x-model="selectedAddress.id">
                             <div class="col-span-full">
                                 <label for="current-password" class="block text-sm font-medium leading-6 text-black">Existantes</label>
                                 <div class="mt-2">
-                                    <select id="user-address" name="user-address" autocomplete="address-line" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" x-on:change="selectedAddress = JSON.parse($event.target.value)">
+                                    <select id="userAddress" name="userAddress" autocomplete="address-line" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" x-on:change="selectedAddress = JSON.parse($event.target.value)">
                                         @foreach($allUserAddresses as $address)
                                         <option value="{{ $address->toJson() }}" @if($userAddress && $userAddress->id == $address->id) selected @elseif($address->default == 1) selected @endif>
                                             {{ $address->address_line }}, {{ $address->city }}, {{ $address->postalCode }}, {{ $address->country }}

@@ -61,8 +61,12 @@ class profileController extends Controller
 
     public function address(Request $request)
     {
-        $selectedAddressId = $request->input('user-address');
-        $address = UserAddress::where('id', $selectedAddressId)->first();
+
+        $request->validate([
+            'selectedAddressId' => 'required',
+        ]);
+        $selectedAddressId = $request->selectedAddressId;
+        $address = UserAddress::findOrFail($selectedAddressId);
 
         if ($request->filled('first-name')) {
             $address->first_name = $request->input('first-name');
