@@ -60,7 +60,7 @@ Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->
 Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('shop.productName');
 
 // Admin - Produits
-Route::prefix('/admin/products')->middleware(['auth', 'role:0'])->group(function () {
+Route::prefix('/admin/produits')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [productController::class, 'index'])->name('admin.products.index');
     Route::get('/create', [productController::class, 'create'])->name('admin.products.create');
     Route::post('/', [productController::class, 'store'])->name('admin.products.store');
@@ -141,7 +141,7 @@ Route::get('/votre-commande', function () {
 });
 
 // Profil
-Route::prefix('/mon-compte')->middleware(['auth', 'role:0'])->group(function () {
+Route::prefix('/mon-compte')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
     Route::match(['put', 'post', 'get'], '/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::match(['put', 'post', 'get'], '/address', [ProfileController::class, 'address'])->name('profile.address');

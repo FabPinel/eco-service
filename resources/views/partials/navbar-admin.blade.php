@@ -127,7 +127,7 @@
                                         <div class="flex">
                                             <div class="relative flex">
                                                 <button type="button"
-                                                    onclick="window.location.href='{{ url('/admin/products') }}'"
+                                                    onclick="window.location.href='{{ route('admin.products.index') }}'"
                                                     class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
                                                     aria-expanded="false">
                                                     Produits
@@ -145,10 +145,10 @@
                                         </div>
                                         <div class="flex">
                                             <div class="relative flex">
-                                               
-                                                
+
+
                                                         <a href="{{ route('admin.orders.index') }}" class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">Commandes</a>
-                                                    
+
                                             </div>
                                         </div>
                                         <a href="{{ route('admin.diy.index') }}"
