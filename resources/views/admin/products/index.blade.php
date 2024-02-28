@@ -124,7 +124,7 @@
                                         </td>
                                         <td
                                             class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><span
+                                            <a href="{{ route('shop.productName', $product->id) }}" class="text-indigo-600 hover:text-indigo-800"><span
                                                     class="material-icons">
                                                     visibility
                                                 </span></a>
@@ -184,9 +184,6 @@
                                         <span class="sr-only">Edit</span>
                                     </th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0 w-12">
-                                        <span class="sr-only">Show</span>
-                                    </th>
-                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0 w-12">
                                         <span class="sr-only">Delete</span>
                                     </th>
                                 </tr>
@@ -215,13 +212,6 @@
                                                     edit
                                                 </span>
                                             </a>
-                                        </td>
-                                        <td
-                                            class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><span
-                                                    class="material-icons">
-                                                    visibility
-                                                </span></a>
                                         </td>
                                         <td>
                                             <form action="{{ route('admin.category.destroy', $category->id) }}"
@@ -280,9 +270,6 @@
                                         <span class="sr-only">Edit</span>
                                     </th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0 w-12">
-                                        <span class="sr-only">Show</span>
-                                    </th>
-                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0 w-12">
                                         <span class="sr-only">Delete</span>
                                     </th>
                                 </tr>
@@ -331,13 +318,6 @@
                                                     edit
                                                 </span>
                                             </a>
-                                        </td>
-                                        <td
-                                            class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><span
-                                                    class="material-icons">
-                                                    visibility
-                                                </span></a>
                                         </td>
                                         <td>
                                             <form action="{{ route('admin.discounts.destroy', $discount->id) }}"
