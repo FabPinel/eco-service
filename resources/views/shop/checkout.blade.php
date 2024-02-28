@@ -5,7 +5,7 @@
         <div class="mx-auto max-w-2xl lg:max-w-none">
             <h1 class="sr-only">Checkout</h1>
 
-            <form action="/session" method="post" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+            <form id="main-form" action="/session" method="post" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
                 <!-- Informations de livraison à gauche -->
                 <div>
                     <div>
@@ -165,6 +165,8 @@
                         </fieldset>
                     </div>
                 </div>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            </form>
 
                 <!-- Order summary -->
                 <div class="mt-10 lg:mt-0">
@@ -219,19 +221,59 @@
                             <div class="flex items-center justify-between border-t border-gray-200 pt-6">
                                 <dt class="text-base font-medium">Total (TTC)</dt>
                                 <dd class="text-base font-medium text-gray-900" name="total">
-                                    {{ number_format($total, 2) }}€</dd>
+                                    @php
+                                    $discount = session('discount');
+                                    $totalAfterDiscount = $total;
+
+                                    if ($discount) {
+                                        if ($discount->discount_percent) {
+                                            $totalAfterDiscount *= (1 - $discount->discount_percent / 100);
+                                        } elseif ($discount->discount_amount) {
+                                            $totalAfterDiscount -= $discount->discount_amount;
+                                        }
+                                    }
+                                @endphp
+                                {{ number_format($totalAfterDiscount, 2) }}€                                </dd>
                             </div>
                         </dl>
 
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        @if ($appliedDiscountName)
+                            <div class="mt-4">
+                                <p class="text-green-500 font-medium">{{ $appliedDiscountName->name }} appliqué</p>
+                                <form method="POST" action="{{ route('remove.discount') }}">
+                                    @csrf
+                                    <button type="submit" class="text-red-500 underline">Supprimer la réduction</button>
+                                </form>
+                            </div>
+                        @endif
+
+
+                        <form x-data="{ submitting: false }" @submit.prevent="submitting = true; $refs.form.submit();" x-ref="form" action="{{ route('apply.discount') }}" method="post">
+                            @csrf
+                            <div class="w-fit mx-auto">
+                                <label for="discount">Code promo</label>
+                                <div class="flex">
+                                    <input type="text" id="discount" name="coupon" placeholder="Entrez votre code promo"
+                                        class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                    <button type="submit" :disabled="submitting">Appliquer</button>
+                                </div>
+                            </div>
+                        </form>
+
                         <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-                            <button type="submit"
-                                class="w-full rounded-md border border-transparent bg-[#1c3242] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Payer
-                                avec Stripe</button>
+                            <button type="button" id="submit-main-form" onclick="submitMainForm()" class="w-full rounded-md border border-transparent bg-[#1c3242] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Payer avec Stripe</button>
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
+        <script>
+            function submitMainForm() {
+                // Get the main form element
+                var mainForm = document.getElementById('main-form');
+
+                // Submit the form
+                mainForm.submit();
+            }
+        </script>
     </main>
 @endsection

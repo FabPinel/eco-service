@@ -121,6 +121,8 @@ Route::prefix('/admin/messages')->middleware(['auth', 'role:0'])->group(function
 
 // Checkout
 Route::get('/commande', [cartController::class, 'checkout'])->name('commande');
+Route::post('/apply-discount', [discountController::class, 'applyDiscount'])->name('apply.discount');
+Route::post('/remove-discount', [discountController::class, 'removeDiscount'])->name('remove.discount');
 
 //Contact
 Route::get('/contact', function () {

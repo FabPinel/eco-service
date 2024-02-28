@@ -31,7 +31,7 @@ class cartController extends Controller
     public function checkout()
     {
         $summaryData = $this->summary();
-
+        $appliedDiscountName = session('discount', null);
         $user = auth()->user();
 
         $userAddress = null;
@@ -48,6 +48,7 @@ class cartController extends Controller
             'total' => $summaryData['total'],
             'userAddress' => $userAddress,
             'allUserAddresses' => $allUserAddresses,
+            'appliedDiscountName' => $appliedDiscountName,
         ]);
     }
 
@@ -139,7 +140,6 @@ class cartController extends Controller
     public function session(Request $request)
     {
         $user = auth()->user();
-
 
         $existingAddresses = UserAddress::where('id_user', $user->id)->get();
 
@@ -235,9 +235,16 @@ class cartController extends Controller
         $subtotal = $summaryData['subtotal'];
         $total = $summaryData['total'];
 
+        $discountId = null;
+        $discount = session('discount');
+        if ($discount) {
+            $discountId = $discount->id;
+        }
+
         $order = Order::create([
             'total' => $total,
             'id_user' => $user->id,
+            'id_discount' => $discountId,
         ]);
 
         $orderItems = [];
