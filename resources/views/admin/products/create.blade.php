@@ -4,9 +4,8 @@
     <div class="space-y-10 divide-y divide-gray-900/10 mt-20">
         <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
             <div class="px-4 sm:px-0">
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
-                <p class="mt-1 text-sm leading-6 text-gray-600">This information will be displayed publicly so be careful
-                    what you share.</p>
+                <h2 class="text-base font-semibold leading-7 text-gray-900">Prdotui</h2>
+                <p class="mt-1 text-sm leading-6 text-gray-600">Dans cette section vous pouvez ajouter de nouveaux produits.</p>
             </div>
 
             <form action="{{ route('admin.products.store') }}" enctype="multipart/form-data"
