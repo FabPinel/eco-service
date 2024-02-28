@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\orderController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\authController;
+use App\Http\Controllers\contactController;
 use App\Http\Controllers\discountController;
 use App\Http\Controllers\diyController;
 use App\Http\Controllers\productController;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\shopController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\cartController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\profileController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\dashboardController;
 
 
 /*
@@ -34,12 +34,12 @@ Route::get('/boutique', function () {
 
 //Dashboard
 
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+Route::get('/admin/dashboard', [dashboardController::class, 'index'])
     ->middleware(['auth', 'role:0'])
     ->name('admin.dashboard');
-Route::get('/admin/dashboard/last-7-days', [DashboardController::class, 'getDataForLast7Days']);
-Route::get('/admin/dashboard/last-30-days', [DashboardController::class, 'getDataForLast30Days']);
-Route::get('/admin/dashboard/overall', [DashboardController::class, 'getDataForOverall']);
+Route::get('/admin/dashboard/last-7-days', [dashboardController::class, 'getDataForLast7Days']);
+Route::get('/admin/dashboard/last-30-days', [dashboardController::class, 'getDataForLast30Days']);
+Route::get('/admin/dashboard/overall', [dashboardController::class, 'getDataForOverall']);
 
 Route::get('/DIY', function () {
     return view('diy.index');
@@ -49,13 +49,13 @@ Route::get('/zero-dechet', function () {
     return view('zeroWaste.index');
 });
 //Auth
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('register', [AuthController::class, 'store'])->name('register.store');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('login.authenticate');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [authController::class, 'register'])->name('register');
+Route::post('register', [authController::class, 'store'])->name('register.store');
+Route::get('/login', [authController::class, 'login'])->name('login');
+Route::post('/authenticate', [authController::class, 'authenticate'])->name('login.authenticate');
+Route::post('/logout', [authController::class, 'logout'])->name('logout');
 
-Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
+Route::get('account/verify/{token}', [authController::class, 'verifyAccount'])->name('user.verify');
 // Boutique
 Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('shop.productName');
 
@@ -68,7 +68,7 @@ Route::prefix('/admin/produits')->middleware(['auth', 'role:0'])->group(function
     Route::get('/edit/{id}', [productController::class, 'edit'])->name('admin.products.edit');
     Route::put('/{id}', [productController::class, 'update'])->name('admin.products.update');
     Route::delete('/{id}', [productController::class, 'destroy'])->name('admin.products.destroy');
-    Route::put('/{id}/toggle-status', [ProductController::class, 'toggleStatus'])->name('admin.products.toggle-status');
+    Route::put('/{id}/toggle-status', [productController::class, 'toggleStatus'])->name('admin.products.toggle-status');
 });
 
 // Admin - Catégories
@@ -108,15 +108,15 @@ Route::put('/update-cart', [cartController::class, 'updateCart'])->name('updateC
 
 // Orders
 Route::prefix('/admin/orders')->middleware(['auth', 'role:0'])->group(function () {
-    Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
-    Route::get('/orderDetails/{id}', [OrderController::class, 'orderDetails'])->name('admin.orders.orderDetails');
-    Route::post('/orders/toggle-status/{id}', [OrderController::class, 'toggleStatus'])->name('admin.orders.toggle-status');
+    Route::get('/', [orderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/orderDetails/{id}', [orderController::class, 'orderDetails'])->name('admin.orders.orderDetails');
+    Route::post('/orders/toggle-status/{id}', [orderController::class, 'toggleStatus'])->name('admin.orders.toggle-status');
 });
 
 // Messages
 Route::prefix('/admin/messages')->middleware(['auth', 'role:0'])->group(function () {
-    Route::get('/', [ContactController::class, 'index'])->name('admin.messages.index');
-    Route::post('/', [ContactController::class, 'sendMailResponse'])->name('message.response');
+    Route::get('/', [contactController::class, 'index'])->name('admin.messages.index');
+    Route::post('/', [contactController::class, 'sendMailResponse'])->name('message.response');
 });
 
 // Checkout
@@ -131,7 +131,7 @@ Route::get('/contactConfirmation', function () {
 });
 
 
-Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.store');
+Route::post('/contact', [contactController::class, 'sendMail'])->name('contact.store');
 
 // Stripe
 Route::post('/session', [cartController::class, 'session'])->name('session');
@@ -142,7 +142,7 @@ Route::get('/votre-commande', function () {
 
 // Profil
 Route::prefix('/mon-compte')->group(function () {
-    Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
-    Route::match(['put', 'post', 'get'], '/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::match(['put', 'post', 'get'], '/address', [ProfileController::class, 'address'])->name('profile.address');
+    Route::get('/', [profileController::class, 'index'])->name('profile.index');
+    Route::match(['put', 'post', 'get'], '/update', [profileController::class, 'update'])->name('profile.update');
+    Route::match(['put', 'post', 'get'], '/address', [profileController::class, 'address'])->name('profile.address');
 });

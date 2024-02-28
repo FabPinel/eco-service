@@ -18,7 +18,7 @@
                 </div>
               </div>
             </header>
-        
+
             <!-- Stats 7 days -->
             <div x-show="activeTab === 1">
               <div class="border-b border-b-gray-900/10 lg:border-t lg:border-t-gray-900/5">
@@ -45,7 +45,7 @@
                 </div>
                 </dl>
               </div>
-        
+
               <div class="absolute left-0 top-full -z-10 mt-96 origin-top-left translate-y-40 -rotate-90 transform-gpu opacity-20 blur-3xl sm:left-1/2 sm:-ml-96 sm:-mt-10 sm:translate-y-0 sm:rotate-0 sm:transform-gpu sm:opacity-50" aria-hidden="true">
                 <div class="aspect-[1154/678] w-[72.125rem] bg-gradient-to-br from-[#1c3242] to-[#9089FC]" style="clip-path: polygon(100% 38.5%, 82.6% 100%, 60.2% 37.7%, 52.4% 32.1%, 47.5% 41.8%, 45.2% 65.6%, 27.5% 23.4%, 0.1% 35.3%, 17.9% 0%, 27.7% 23.4%, 76.2% 2.5%, 74.2% 56%, 100% 38.5%)"></div>
               </div>
@@ -77,7 +77,7 @@
                 </div>
                 </dl>
               </div>
-        
+
               <div class="absolute left-0 top-full -z-10 mt-96 origin-top-left translate-y-40 -rotate-90 transform-gpu opacity-20 blur-3xl sm:left-1/2 sm:-ml-96 sm:-mt-10 sm:translate-y-0 sm:rotate-0 sm:transform-gpu sm:opacity-50" aria-hidden="true">
                 <div class="aspect-[1154/678] w-[72.125rem] bg-gradient-to-br from-[#1c3242] to-[#9089FC]" style="clip-path: polygon(100% 38.5%, 82.6% 100%, 60.2% 37.7%, 52.4% 32.1%, 47.5% 41.8%, 45.2% 65.6%, 27.5% 23.4%, 0.1% 35.3%, 17.9% 0%, 27.7% 23.4%, 76.2% 2.5%, 74.2% 56%, 100% 38.5%)"></div>
               </div>
@@ -109,14 +109,14 @@
                 </div>
                 </dl>
               </div>
-        
+
               <div class="absolute left-0 top-full -z-10 mt-96 origin-top-left translate-y-40 -rotate-90 transform-gpu opacity-20 blur-3xl sm:left-1/2 sm:-ml-96 sm:-mt-10 sm:translate-y-0 sm:rotate-0 sm:transform-gpu sm:opacity-50" aria-hidden="true">
                 <div class="aspect-[1154/678] w-[72.125rem] bg-gradient-to-br from-[#1c3242] to-[#9089FC]" style="clip-path: polygon(100% 38.5%, 82.6% 100%, 60.2% 37.7%, 52.4% 32.1%, 47.5% 41.8%, 45.2% 65.6%, 27.5% 23.4%, 0.1% 35.3%, 17.9% 0%, 27.7% 23.4%, 76.2% 2.5%, 74.2% 56%, 100% 38.5%)"></div>
               </div>
             </div>
 
           </div>
-        
+
           <div class="space-y-16 py-16 xl:space-y-20">
             <!-- Recent activity table -->
             <div>
@@ -227,21 +227,43 @@
       </div>
     </main>
     @if ($message = Session::get('success'))
-           
-    <div id="successMessage" class="fixed bottom-4 right-4 w-1/3 flex border-l-8  border-[#34D399] bg-[#34D399] bg-opacity-[15%] px-7 py-8 shadow-md md:p-9">
-        <div class="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
-              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z" fill="white" stroke="white"></path>
-              </svg>
+
+    <div id="successMessage"
+            class="hidden md:flex fixed top-28 right-4 w-1/3 border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-7 py-8 shadow-md">
+            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#34D399]">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
+                        fill="white" stroke="white"></path>
+                </svg>
+            </div>
+            <div class="mt-4 text-center">
+                <h5 class="mb-2 text-lg font-bold text-[#34D399]">
+                   Connexion réussie
+                </h5>
+                <p class="text-sm leading-relaxed text-white">
+                   {{ $message }}
+                </p>
+            </div>
+        </div>
+        <div id="successMessage"
+            class="md:hidden fixed top-28 ml-2 mr-2 w-full flex border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-2 py-3 shadow-md">
+            <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#34D399]">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
+                        fill="white" stroke="white"></path>
+                </svg>
             </div>
             <div class="w-full">
-              <h5 class="mb-3 text-lg font-bold text-black dark:text-[#34D399]">
-                Connexion réussie
-              </h5>
-              <p class="text-base leading-relaxed text-body">
-                {{ $message }}
-              </p>
+                <h5 class="mb-2 text-lg font-bold text-[#34D399]">
+                   Connexion réussie
+                </h5>
+                <p class="text-sm leading-relaxed text-body">
+                   {{ $message }}
+                </p>
             </div>
-          </div>
+        </div>
     @endif
     @endsection

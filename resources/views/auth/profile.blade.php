@@ -2,9 +2,43 @@
 @section('pageTitle', 'Mon compte')
 @section('content')
     @if (session()->has('success'))
-    <div id="successMessage" class="fixed bottom-0 right-0 bg-green-500 text-white p-4 mb-4 mr-4 rounded shadow">
-    {{ session()->get('success') }}
-    </div>
+    <div id="successMessage"
+            class="hidden md:flex fixed top-28 right-4 w-1/3 border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-7 py-8 shadow-md">
+            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#34D399]">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
+                        fill="white" stroke="white"></path>
+                </svg>
+            </div>
+            <div class="mt-4 text-center">
+                <h5 class="mb-2 text-lg font-bold text-[#34D399]">
+                   Modification d'adresse
+                </h5>
+                <p class="text-sm leading-relaxed text-white">
+                   {{ $message }}
+                </p>
+            </div>
+        </div>
+        <div id="successMessage"
+            class="md:hidden fixed top-28 ml-2 mr-2 w-full flex border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-2 py-3 shadow-md">
+            <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#34D399]">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
+                        fill="white" stroke="white"></path>
+                </svg>
+            </div>
+            <div class="w-full">
+                <h5 class="mb-2 text-lg font-bold text-[#34D399]">
+                   Modification d'adresse
+                </h5>
+                <p class="text-sm leading-relaxed text-body">
+                   {{ $message }}
+                </p>
+            </div>
+        </div>
     @endif
     <script>
     setTimeout(function() {
@@ -41,7 +75,7 @@
                         <h2 class="text-base font-semibold leading-7 text-black">Vos Informations</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-400">Utilisez une adresse email valide pour recevoir vos emails.</p>
                     </div>
-                    
+
                     <form action="{{ route('profile.update') }}" enctype="multipart/form-data" method="POST" class="md:col-span-2">
                         @csrf
                         @method('PUT')
@@ -80,7 +114,7 @@
                         </div>
                     </form>
                 </div>
-            
+
 
                 <div class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
                     <div>
@@ -173,15 +207,15 @@
                     <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Historique de vos commandes</h1>
                     <p class="mt-2 text-sm text-gray-500">Vérifier vos numéros de commande pour toutes demandes.</p>
                   </div>
-              
+
                   <div class="mt-16">
                     <h2 class="sr-only">Commande récentes</h2>
-              
+
                     <div class="space-y-20">
                         @foreach($userOrders as $order)
                         <div>
                             <h3 class="sr-only">Commandé le <time datetime="{{ $order->created_at->format('Y-m-d') }}">{{ $order->created_at->translatedFormat('d F, Y') }}</time></h3>
-                    
+
                             <div class="rounded-lg bg-[#1c3242] px-4 py-6 sm:flex sm:items-center sm:justify-between sm:space-x-6 sm:px-6 lg:space-x-8">
                                 <dl class="flex-auto space-y-6 divide-y divide-gray-200 text-sm text-gray-600 sm:grid sm:grid-cols-3 sm:gap-x-6 sm:space-y-0 sm:divide-y-0 lg:w-1/2 lg:flex-none lg:gap-x-8">
                                     <div class="flex justify-between sm:block">
@@ -190,7 +224,7 @@
                                             <time datetime="{{ $order->created_at->format('Y-m-d') }}">
                                                 {{ $order->created_at->translatedFormat('d F, Y') }}
                                             </time>
-                                        </dd>                                        
+                                        </dd>
                                     </div>
                                     <div class="flex justify-between pt-6 sm:block sm:pt-0">
                                         <dt class="font-medium text-white">Nuémro de commande</dt>
@@ -202,7 +236,7 @@
                                     </div>
                                 </dl>
                             </div>
-                    
+
                             <table class="mt-4 w-full text-gray-500 sm:mt-6">
                                 <caption class="sr-only">Produits</caption>
                                 <thead class="sr-only text-left text-sm text-gray-500 sm:not-sr-only">
@@ -240,7 +274,7 @@
                     {!! $userOrders->links() !!}
                   </div>
                 </div>
-              </div>              
+              </div>
         </div>
-    </main>  
+    </main>
 @endsection

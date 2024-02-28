@@ -10,7 +10,7 @@ use App\Mail\SendMail;
 use App\Mail\SendMailToSender;
 use App\Mail\SendResponseMail;
 
-class ContactController extends Controller
+class contactController extends Controller
 {
 
     public function index()
