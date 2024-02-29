@@ -45,7 +45,7 @@
         document.getElementById('successMessage').remove();
     }, 5000);
     </script>
-    <main x-data="{ activeTab: parseInt(localStorage.getItem('activeTab')) || 1 }">
+    <main x-data="{ activeTab: parseInt(localStorage.getItem('activeTab')) || 1 }" x-init="activeTab = 1">
         <h1 class="sr-only">Paramètre de comptes</h1>
 
         <header class="border-b border-black/20">
