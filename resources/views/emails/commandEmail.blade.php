@@ -810,7 +810,7 @@
                                                                         <tr style="border-collapse:collapse">
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">
-                                                                                <strong>Total commande:</strong>
+                                                                                <strong>Total commande : €</strong>
                                                                             </td>
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px;color:#000000">
@@ -868,10 +868,10 @@
                                                                     style="padding:0;Margin:0;padding-bottom:5px;padding-top:10px">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#ffffff;font-size:14px">
-                                                                        Po Box 3453 Colins St.</p>
+                                                                        21 rue Marc Donadille</p>
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#ffffff;font-size:14px">
-                                                                        Ceduna 4096 Australia</p>
+                                                                        13013 MARSEILLE</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
