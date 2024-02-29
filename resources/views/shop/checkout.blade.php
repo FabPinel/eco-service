@@ -233,7 +233,14 @@ if ($discount) {
 
                             @if ($discount)
                                 <div class="flex items-center justify-between">
-                                    <dt class="text-sm">Réduction {{ $discount->name }}</dt>
+                                    <dt class="text-sm flex items-center">
+                                        <span>
+                                            Réduction
+                                        </span>
+                                        <span class="ml-2 rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-600">
+                                            {{ $discount->name }}
+                                        </span>
+                                    </dt>
                                     @if($discount->discount_amount)
                                     <dd class="text-sm font-medium text-green-500">-{{ $discount->discount_amount }}€</dd>
                                     @else
@@ -253,7 +260,7 @@ if ($discount) {
 
                         @if ($appliedDiscountName)
                             <div class="px-4 flex justify-between">
-                                <p class="text-green-400 font-medium bg-green-100 border border-green-500 py-2 px-3 rounded-lg">{{ $appliedDiscountName->name }} appliqué</p>
+                                <p class="text-green-400 font-medium bg-green-100 border border-green-500 py-2 px-3 rounded-lg">{{ $appliedDiscountName->name }}</p>
                                 <form method="POST" action="{{ route('remove.discount') }}">
                                     @csrf
                                     <button type="submit">

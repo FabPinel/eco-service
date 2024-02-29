@@ -163,12 +163,13 @@ $totalAfterDiscount = $order->total + 4.99;
                             <span> -{{ $order->discount->discount_amount }}€ </span>
                         @elseif($order->discount->discount_percent)
                             <span> -{{ $order->discount->discount_percent }}% </span>
-                        @endif
+
                     @else
                         <span class="align-left">
                             Code promo
                         </span>
                         <span> 0 </span>
+                        @endif
                     @endif
 
                     </p>

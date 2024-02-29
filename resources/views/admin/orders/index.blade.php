@@ -37,6 +37,18 @@
                     <tbody>
 
                         @foreach ($orders as $o)
+                        @php
+                            $discount = $o->discount;
+                            $totalAfterDiscount = $o->total + 4.99;
+
+                            if ($discount) {
+                                if ($discount->discount_percent) {
+                                    $totalAfterDiscount *= (1 - $discount->discount_percent / 100);
+                                } elseif ($discount->discount_amount) {
+                                    $totalAfterDiscount -= $discount->discount_amount;
+                                }
+                            }
+                        @endphp
                             <tr class="bg-white border-b h-8 dark:border-gray-700 cursor-pointer hover:bg-slate-50">
 
                                 <td class="border-b border-stroke py-3.5 pl-5 pr-6"
@@ -51,7 +63,7 @@
                                     onclick="window.location='{{ route('admin.orders.orderDetails', $o->id) }}';">
                                     <p
                                         class="w-fit px-2 py-1 text-base font-semibold rounded-md bg-amber-50 text-amber-500 ring-1 ring-inset ring-amber-600/20">
-                                        {{ $o->total }}€</p>
+                                        {{ number_format($totalAfterDiscount, 2) }}€</p>
                                 </td>
                                 <form id="statusForm_{{ $o->id }}"
                                     action="{{ route('admin.orders.toggle-status', $o->id) }}" method="POST">

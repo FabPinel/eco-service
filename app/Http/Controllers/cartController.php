@@ -314,6 +314,7 @@ class cartController extends Controller
         Mail::to($email)->send(new CommandMail($orderDetails, $userName));
 
         session()->forget('cart');
+        session()->forget('discount');
 
         return view('shop.order', compact('orderDetails'));
     }

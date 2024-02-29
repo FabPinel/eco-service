@@ -13,7 +13,7 @@ class orderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with('status', 'user')->orderBy('created_at', 'desc')->paginate(10);
+        $orders = Order::with('status', 'user', 'discount')->orderBy('created_at', 'desc')->paginate(10);
         $status = OrderStatus::all();
         $totalOrders = Order::count();
         return view('admin.orders.index', compact('orders', 'status', 'totalOrders'));

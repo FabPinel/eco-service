@@ -305,7 +305,19 @@
         }
     </style>
 </head>
+@php
+$discount = $orderDetails['discount'];
+$totalAfterDiscount = $orderDetails['total'] + 4.99; // Montant initial des frais de livraison
 
+if ($discount) {
+    if ($discount->discount_percent) {
+        $totalAfterDiscount *= (1 - $discount->discount_percent / 100);
+    } elseif ($discount->discount_amount) {
+        // Ajoutez le montant de la réduction aux frais de livraison
+        $totalAfterDiscount -= $discount->discount_amount;
+    }
+}
+@endphp
 <body
     style="width:100%;font-family:arial, 'helvetica neue', helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
     <div dir="ltr" class="es-wrapper-color" lang="fr" style="background-color:#EFEFEF"><!--[if gte mso 9]>
@@ -476,7 +488,7 @@
                                                                                 Total commande :</td>
                                                                             <td
                                                                                 style="padding:0;Margin:0;font-size:14px;line-height:21px">
-                                                                                {{ $orderDetails['total'] }}€</td>
+                                                                                {{ $totalAfterDiscount }}€</td>
                                                                         </tr>
                                                                     </table>
                                                                     <p
@@ -788,33 +800,42 @@
                                                                             </td>
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">
-                                                                                {{ $orderDetails['subtotal'] }}</td>
+                                                                                {{ $orderDetails['subtotal'] }}€</td>
                                                                         </tr>
                                                                         <tr style="border-collapse:collapse">
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">
-                                                                                Frais de livraison:</td>
+                                                                                Frais de livraison :</td>
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px;color:#000000">
-                                                                                <strong>4.99</strong>
+                                                                                <strong>4.99€</strong>
                                                                             </td>
                                                                         </tr>
                                                                         <tr style="border-collapse:collapse">
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">
-                                                                                Code promo:</td>
+                                                                                Code promo :</td>
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">
-                                                                                0.00€</td>
+                                                                                @if($orderDetails['discount'])
+                                                                                    @if($orderDetails['discount']->discount_amount)
+                                                                                    -{{ $orderDetails['discount']->discount_amount }}€
+                                                                                    @elseif($orderDetails['discount']->discount_percent)
+                                                                                    -{{ $orderDetails['discount']->discount_percent}}%
+                                                                                    @else
+                                                                                    0
+                                                                                    @endif
+                                                                                @endif
+                                                                            </td>
                                                                         </tr>
                                                                         <tr style="border-collapse:collapse">
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">
-                                                                                <strong>Total commande : €</strong>
+                                                                                <strong>Total commande : </strong>
                                                                             </td>
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px;color:#000000">
-                                                                                <strong>{{ $orderDetails['total'] }}</strong>
+                                                                                <strong>{{  $totalAfterDiscount }}€</strong>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
