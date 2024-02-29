@@ -95,7 +95,7 @@
                         </div>
                         <div class="flex justify-between">
                             <dt class="font-medium text-gray-900">Total</dt>
-                            <dd class="text-gray-900">€
+                            <dd class="text-gray-900">
                                 @php
                                 $totalAfterDiscount = $orderDetails['order']->total;
                                 $discount = $orderDetails['order']->discount;
