@@ -222,18 +222,19 @@
                                 <dt class="text-base font-medium">Total (TTC)</dt>
                                 <dd class="text-base font-medium text-gray-900" name="total">
                                     @php
-                                    $discount = session('discount');
-                                    $totalAfterDiscount = $total;
+                                        $discount = session('discount');
+                                        $totalAfterDiscount = $total;
 
-                                    if ($discount) {
-                                        if ($discount->discount_percent) {
-                                            $totalAfterDiscount *= (1 - $discount->discount_percent / 100);
-                                        } elseif ($discount->discount_amount) {
-                                            $totalAfterDiscount -= $discount->discount_amount;
+                                        if ($discount) {
+                                            if ($discount->discount_percent) {
+                                                $totalAfterDiscount *= (1 - $discount->discount_percent / 100);
+                                            } elseif ($discount->discount_amount) {
+                                                $totalAfterDiscount -= $discount->discount_amount;
+                                            }
                                         }
-                                    }
-                                @endphp
-                                {{ number_format($totalAfterDiscount, 2) }}€                                </dd>
+                                     @endphp
+                                    {{ number_format($totalAfterDiscount, 2) }}€
+                                </dd>
                             </div>
                         </dl>
 
@@ -268,10 +269,7 @@
         </div>
         <script>
             function submitMainForm() {
-                // Get the main form element
                 var mainForm = document.getElementById('main-form');
-
-                // Submit the form
                 mainForm.submit();
             }
         </script>

@@ -138,12 +138,29 @@ class cartController extends Controller
     // Stripe
 
     public function session(Request $request)
-    {
-        $user = auth()->user();
+{
+    $user = auth()->user();
 
-        $existingAddresses = UserAddress::where('id_user', $user->id)->get();
+    $existingAddresses = UserAddress::where('id_user', $user->id)->get();
 
-        if ($existingAddresses === null || $existingAddresses->isEmpty()) {
+    if ($existingAddresses === null || $existingAddresses->isEmpty()) {
+        $newAddress = UserAddress::create([
+            'first_name' => $request->input('first-name'),
+            'last_name' => $request->input('last-name'),
+            'address_line' => $request->input('address'),
+            'city' => $request->input('city'),
+            'country' => $request->input('country'),
+            'postalCode' => $request->input('postal-code'),
+            'phone' => $request->input('phone'),
+            'default' => 1,
+            'id_user' => $user->id,
+        ]);
+    } else {
+        $existingAddress = $existingAddresses->first(function ($address) use ($request) {
+            return $address->address_line === $request->input('address');
+        });
+
+        if ($existingAddress === null) {
             $newAddress = UserAddress::create([
                 'first_name' => $request->input('first-name'),
                 'last_name' => $request->input('last-name'),
@@ -152,79 +169,69 @@ class cartController extends Controller
                 'country' => $request->input('country'),
                 'postalCode' => $request->input('postal-code'),
                 'phone' => $request->input('phone'),
-                'default' => 1,
+                'default' => 0,
                 'id_user' => $user->id,
             ]);
-        } else {
-            $existingAddress = $existingAddresses->first(function ($address) use ($request) {
-                return $address->address_line === $request->input('address');
-            });
-
-            if ($existingAddress === null) {
-                $newAddress = UserAddress::create([
-                    'first_name' => $request->input('first-name'),
-                    'last_name' => $request->input('last-name'),
-                    'address_line' => $request->input('address'),
-                    'city' => $request->input('city'),
-                    'country' => $request->input('country'),
-                    'postalCode' => $request->input('postal-code'),
-                    'phone' => $request->input('phone'),
-                    'default' => 0,
-                    'id_user' => $user->id,
-                ]);
-            }
         }
+    }
 
-        session()->put('order_address', [
-            'first_name' => $request->input('first-name'),
-            'last_name' => $request->input('last-name'),
-            'address' => $request->input('address'),
-            'city' => $request->input('city'),
-            'country' => $request->input('country'),
-            'postal_code' => $request->input('postal-code'),
-            'phone' => $request->input('phone'),
-        ]);
+    session()->put('order_address', [
+        'first_name' => $request->input('first-name'),
+        'last_name' => $request->input('last-name'),
+        'address' => $request->input('address'),
+        'city' => $request->input('city'),
+        'country' => $request->input('country'),
+        'postal_code' => $request->input('postal-code'),
+        'phone' => $request->input('phone'),
+    ]);
 
-        \Stripe\Stripe::setApiKey(config('stripe.sk'));
+    \Stripe\Stripe::setApiKey(config('stripe.sk'));
 
-        $cart = session('cart', []);
+    $cart = session('cart', []);
 
-        $lineItems = [];
+    $lineItems = [];
 
-        foreach ($cart as $item) {
-            $lineItems[] = [
-                'price_data' => [
-                    'currency'     => 'eur',
-                    'product_data' => [
-                        'name' => $item['name'],
-                    ],
-                    'unit_amount'  => $item['price'] * 100,
-                ],
-                'quantity'   => $item['quantity'],
-            ];
-        }
-
+    foreach ($cart as $item) {
         $lineItems[] = [
             'price_data' => [
                 'currency'     => 'eur',
                 'product_data' => [
-                    'name' => 'Frais de livraison',
+                    'name' => $item['name'],
                 ],
-                'unit_amount'  => 499,
+                'unit_amount'  => $item['price'] * 100,
             ],
-            'quantity'   => 1,
+            'quantity'   => $item['quantity'],
         ];
-
-        $session = \Stripe\Checkout\Session::create([
-            'payment_method_types' => ['card'],
-            'line_items'  => $lineItems,
-            'mode'        => 'payment',
-            'success_url' => route('success'),
-            'cancel_url'  => route('panier'),
-        ]);
-
-        return redirect()->away($session->url);
     }
+
+    $lineItems[] = [
+        'price_data' => [
+            'currency'     => 'eur',
+            'product_data' => [
+                'name' => 'Frais de livraison',
+            ],
+            'unit_amount'  => 499,
+        ],
+        'quantity'   => 1,
+    ];
+
+    //dd($lineItems);
+    $discount = session('discount');
+
+    $session = \Stripe\Checkout\Session::create([
+        'payment_method_types' => ['card'],
+        'line_items'  => $lineItems,
+        'mode'        => 'payment',
+        'success_url' => route('success'),
+        'cancel_url'  => route('panier'),
+        'discounts' => [[
+            'coupon'     => $discount->id,
+        ]],
+    ]);
+
+    return redirect()->away($session->url);
+}
+
 
 
     public function success(Request $request)
@@ -287,6 +294,7 @@ class cartController extends Controller
             'subtotal' => $subtotal,
             'total' => $total,
             'totalItemOrder' => $totalItemOrder,
+            'discount' => $discount,
         ];
         $email = $user->email;
         $userId = $orderDetails['order']->id_user;

@@ -199,9 +199,9 @@
             </div>
         </div>
     @endif
-    {{-- <script type="text/javascript">
+     <script type="text/javascript">
         setTimeout(function() {
             document.getElementById('successMessage').remove();
         }, 5000); // La popup disparaîtra après 5 secondes (5000 millisecondes)
-    </script> --}}
+    </script>
 @endsection

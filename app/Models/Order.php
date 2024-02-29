@@ -41,6 +41,6 @@ class Order extends Model
 
     public function discount()
     {
-        return $this->belognsTo(Discount::class, 'id_discount');
+        return $this->belongsTo(Discount::class, 'id_discount');
     }
 }

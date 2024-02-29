@@ -74,18 +74,41 @@
                         <div class="flex justify-between">
                             <dt class="flex font-medium text-gray-900">
                                 Code promo
-                                <span
-                                    class="ml-2 rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-600">STUDENT50</span>
+                                @if($orderDetails['order']->discount)
+                                    <span class="ml-2 rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-600">
+                                        {{ $orderDetails['order']->discount->name }}
+                                    </span>
+                                @endif
                             </dt>
-                            <dd class="text-gray-700">-18.00€</dd>
+                            @if($orderDetails['order']->discount)
+                                @if($orderDetails['order']->discount->discount_amount && $orderDetails['order']->discount->discount_amount !== 0)
+                                    <dd class="text-gray-700">{{ $orderDetails['order']->discount->discount_amount }}€</dd>
+                                @elseif($orderDetails['order']->discount->discount_percent && $orderDetails['order']->discount->discount_percent !== 0)
+                                    <dd class="text-gray-700">{{ $orderDetails['order']->discount->discount_percent }}%</dd>
+                                @endif
+                            @endif
                         </div>
+
                         <div class="flex justify-between">
                             <dt class="font-medium text-gray-900">Frais de livraison</dt>
                             <dd class="text-gray-700">4.99€</dd>
                         </div>
                         <div class="flex justify-between">
                             <dt class="font-medium text-gray-900">Total</dt>
-                            <dd class="text-gray-900">{{ $orderDetails['order']->total }}€</dd>
+                            <dd class="text-gray-900">€
+                                @php
+                                $totalAfterDiscount = $orderDetails['order']->total;
+                                $discount = $orderDetails['order']->discount;
+                                if ($discount) {
+                                    if ($discount->discount_percent) {
+                                        $totalAfterDiscount *= (1 - $discount->discount_percent / 100);
+                                    } elseif ($discount->discount_amount) {
+                                        $totalAfterDiscount -= $discount->discount_amount;
+                                    }
+                                }
+                             @endphp
+                            {{ number_format($totalAfterDiscount, 2) }}€
+                            </dd>
                         </div>
                     </dl>
                 </div>
