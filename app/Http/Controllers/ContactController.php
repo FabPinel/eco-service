@@ -30,12 +30,23 @@ class contactController extends Controller
             'subject' => 'required',
             'email' => 'required|email',
             'message' => 'required',
-            'firstname' => 'nullable',
-            'lastname' => 'nullable',
             'enterprise' => 'nullable',
             'id_product' => 'nullable',
             'phone' => 'nullable',
         ]);
+
+        if ($request->input('firstname')) {
+            $contactFormData['firstname'] = $request->input('firstname');
+        }
+        if ($request->input('lastname')) {
+            $contactFormData['lastname'] = $request->input('lastname');
+        }
+        if ($request->input('firstname_enterprise')) {
+            $contactFormData['firstname'] = $request->input('firstname_enterprise');
+        }
+        if ($request->input('lastname_enterprise')) {
+            $contactFormData['lastname'] = $request->input('lastname_enterprise');
+        }
 
         $contact = new Contact($contactFormData);
         $contact->save();
@@ -57,8 +68,14 @@ class contactController extends Controller
         }
         if (isset($contactFormData['id_product'])) {
             $mailData['id_product'] = $contactFormData['id_product'];
+            $productId = $contactFormData['id_product'];
+            $product = Product::find($productId);
+            $mailData['productName'] = $product->name;
+            $mailData['productId'] = $product->id;
+
         }
         $mailData['email'] = $contactFormData['email'];
+        $mailData['subject'] = $contactFormData['subject'];
         $mailData['message'] = $contactFormData['message'];
 
 

@@ -72,13 +72,13 @@
                         <div class="w-full">
                             <label for="lastname">Nom</label>
                             <input type='text' id="lastname" placeholder='Nom' name="lastname"
-                                class="w-full rounded py-2.5 px-4 border-2 text-sm outline-[#1c3242]" />
+                                class="w-full rounded py-2.5 px-4 border-2 text-sm outline-[#1c3242]"/>
                         </div>
 
                         <div class="w-full">
                             <label for="firstname">Prénom</label>
                             <input type='text' id="firstname" placeholder='Prénom' name="firstname"
-                                class="w-full rounded py-2.5 px-4 border-2 text-sm outline-[#1c3242]" />
+                                class="w-full rounded py-2.5 px-4 border-2 text-sm outline-[#1c3242]"/>
                         </div>
 
                     </div>
@@ -93,7 +93,7 @@
                                 <label for="lastname" class="flex justify-between">Nom
                                     <span class="text-sm text-slate-400">Optionnel</span>
                                 </label>
-                                <input type='text' id="lastname" placeholder='Nom' name="lastname"
+                                <input type='text' id="lastname" placeholder='Nom' name="lastname_enterprise"
                                     class="w-full rounded py-2.5 px-4 border-2 text-sm outline-[#1c3242]" />
                             </div>
 
@@ -101,7 +101,7 @@
                                 <label for="firstname" class="flex justify-between">Prénom
                                     <span class="text-sm text-slate-400">Optionnel</span>
                                 </label>
-                                <input type='text' id="firstname" placeholder='Prénom' name="firstname"
+                                <input type='text' id="firstname" placeholder='Prénom' name="firstname_enterprise"
                                     class="w-full rounded py-2.5 px-4 border-2 text-sm outline-[#1c3242]" />
                             </div>
                         </div>
@@ -187,12 +187,12 @@
                                 </div>
                                 <div x-show="id_product !== null">
                                     <p>Produit sélectionné :</p>
-                                    <div class="flex flex-col items-center">
+                                    <div class="flex flex-col">
                                         <img x-bind:src="`http://127.0.0.1:8000/storage/images/${getSelectedProductInfo(id_product).media}`"
                                             alt="Product Image" class="w-16 h-16">
                                         <span x-text="getSelectedProductInfo(id_product).name"></span>
                                         <button
-                                            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                                            class="text-white w-fit mt-2 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                                             x-on:click.prevent="deselectProduct()">Désélectionner</button>
                                     </div>
                                 </div>
