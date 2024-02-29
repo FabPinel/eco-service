@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Mail\RegisterMail;
 use App\Models\DiyProduct;
 use App\Models\UserVerify;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,11 +26,13 @@ class authController extends Controller
 
     public function register()
     {
+        Redirect::setIntendedUrl(url()->previous());
         return view('auth.register');
     }
 
     public function login()
     {
+        Redirect::setIntendedUrl(url()->previous());
         return view('auth.login');
     }
 
@@ -77,13 +81,13 @@ class authController extends Controller
             'email' => $save->email,
             'phone' => $save->phone
         ];
-    
+
         Mail::send('emails.register', ['token' => $token, 'user' => $userData], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Email register verification');
         });
 
-        return redirect()->route('index')->withSuccess('Great! You have Successfully logged in');
+        return redirect()->route('index')->withSuccess('Vous êtes connecté !');
     }
 
     public function authenticate(Request $request)
@@ -103,8 +107,7 @@ class authController extends Controller
                 return redirect()->route('admin.dashboard')->with('success', "Bienvenue administrateur {$user->first_name} {$user->last_name} !");
             } else {
                 // Si l'utilisateur est un utilisateur normal
-                $intended = $request->input('intended'); // Utilisez url('/') comme valeur par défaut
-                return redirect()->to($intended);
+                return redirect()->intended(RouteServiceProvider::HOME);
             }
         }
 
@@ -118,7 +121,7 @@ class authController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login')
+        return redirect()->route('index')
             ->withSuccess('Vous êtes bien déconnecté !');;
     }
 
@@ -135,7 +138,7 @@ class authController extends Controller
     {
         $verifyUser = UserVerify::where('token', $token)->first();
 
-        $message = 'Sorry your email cannot be identified.';
+        $message = 'Votre email est incorrect';
 
         if (!is_null($verifyUser)) {
             $user = $verifyUser->user;
@@ -143,9 +146,9 @@ class authController extends Controller
             if (!$user->is_email_verified) {
                 $verifyUser->user->is_email_verified = 1;
                 $verifyUser->user->save();
-                $message = "Your e-mail is verified. You can now login.";
+                $message = "Votre e-mail est vérifié. Vous pouvez maintenant vous connecté.";
             } else {
-                $message = "Your e-mail is already verified. You can now login.";
+                $message = "Votre e-mail est déjà vérifié. Vous pouvez vous connecté.";
             }
         }
 
