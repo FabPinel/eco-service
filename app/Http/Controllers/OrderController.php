@@ -7,12 +7,13 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\OrderStatus;
+use App\Models\UserAddress;
 
 class orderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with('status', 'user')->paginate(10);
+        $orders = Order::with('status', 'user')->orderBy('created_at', 'desc')->paginate(10);
         $status = OrderStatus::all();
         $totalOrders = Order::count();
         return view('admin.orders.index', compact('orders', 'status', 'totalOrders'));
@@ -31,11 +32,12 @@ class orderController extends Controller
 
     public function orderDetails($id)
     {
-        $order = Order::with('status', 'user', 'orderItems.product')->findOrFail($id);
-        $orderItems = OrderItem::where('id_order', $order->id)->get(); //Parcours la liste des orderItems qui on pour id_order = $id
+        $order = Order::with('status', 'user', 'orderItems.product', 'discount')->findOrFail($id);
+        $orderItems = OrderItem::where('id_order', $order->id)->get();
         $user = $order->user;
+        $userAddress = UserAddress::where('id_user', $user->id)->first();
         $totalUserOrders = Order::where('id_user', $user->id)->count();
         $totalItemOrder = OrderItem::where('id_order', $order->id)->count();
-        return view('admin.orders.orderDetails', compact('order', 'orderItems', 'totalUserOrders', 'totalItemOrder'));
+        return view('admin.orders.orderDetails', compact('order', 'orderItems', 'totalUserOrders', 'totalItemOrder', 'userAddress'));
     }
 }
