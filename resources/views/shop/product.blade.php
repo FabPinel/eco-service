@@ -173,7 +173,7 @@
                 <p class="text-sm leading-relaxed text-[#34D399]">
                     L'article a bien été ajouté au panier.
                 </p>
-                <a href="http://127.0.0.1:8000/panier" class="mt-2 text-sm text-[#34D399] underline font-semibold">Voir
+                <a href="/panier" class="mt-2 text-sm text-[#34D399] underline font-semibold">Voir
                     mon panier</a>
             </div>
         </div>

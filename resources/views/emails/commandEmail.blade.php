@@ -307,7 +307,7 @@
 </head>
 @php
 $discount = $orderDetails['discount'];
-$totalAfterDiscount = $orderDetails['total'] + 4.99; // Montant initial des frais de livraison
+$totalAfterDiscount = $orderDetails['total']; // Montant initial des frais de livraison
 
 if ($discount) {
     if ($discount->discount_percent) {
@@ -488,7 +488,8 @@ if ($discount) {
                                                                                 Total commande :</td>
                                                                             <td
                                                                                 style="padding:0;Margin:0;font-size:14px;line-height:21px">
-                                                                                {{ $totalAfterDiscount }}€</td>
+                                                                                {{ number_format($totalAfterDiscount, 2) }}€
+                                                                            </td>
                                                                         </tr>
                                                                     </table>
                                                                     <p
@@ -835,7 +836,9 @@ if ($discount) {
                                                                             </td>
                                                                             <td
                                                                                 style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px;color:#000000">
-                                                                                <strong>{{  $totalAfterDiscount }}€</strong>
+                                                                                <strong>
+                                                                                    {{ number_format($totalAfterDiscount, 2) }}€
+                                                                                </strong>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
