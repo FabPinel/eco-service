@@ -1,18 +1,7 @@
 @extends('layout-admin')
 @section('pageTitle', "Edition d'un produit")
 
-<div class="container mt-2">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edition Produits</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.products.index') }}" enctype="multipart/form-data">
-                    Back</a>
-            </div>
-        </div>
-    </div>
+<div class="mt-32 w-1/4 mx-auto">
     @if (session('status'))
         <div class="alert alert-success mb-1 mt-1">
             {{ session('status') }}
@@ -23,8 +12,8 @@
         @csrf
         @method('PUT')
 
-        <div class="px-4 py-6 sm:p-8">
-            <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="p-5 mx-auto">
+            <div class="">
                 <div class="sm:col-span-4">
                     <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Nom</label>
                     <div class="mt-2">

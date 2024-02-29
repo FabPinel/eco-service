@@ -1,23 +1,13 @@
 @extends('layout-admin')
 @section('pageTitle', "Edition d'un DIY")
 
-<div class="container mx-auto w-2/4">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Modification du DIY</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.diy.index') }}" enctype="multipart/form-data"> Back</a>
-            </div>
-        </div>
-    </div>
+<div class="mt-32 w-1/4 mx-auto">
     @if (session('status'))
         <div class="alert alert-success mb-1 mt-1">
             {{ session('status') }}
         </div>
     @endif
-    <form action="{{ route('admin.diy.update', $diy->id) }}" enctype="multipart/form-data" class="m-0 border-none" method="POST">
+    <form action="{{ route('admin.diy.update', $diy->id) }}" enctype="multipart/form-data" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" method="POST">
         @csrf
         @method('PUT')
 

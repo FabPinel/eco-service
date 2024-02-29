@@ -124,7 +124,7 @@
                                         </td>
                                         <td
                                             class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href="{{ route('shop.productName', $product->id) }}" class="text-indigo-600 hover:text-indigo-800"><span
+                                            <a href="{{ route('shop.productName', $product->id) }}" class="text-[#1c3242] hover:text-[#374a56]"><span
                                                     class="material-icons">
                                                     visibility
                                                 </span></a>
