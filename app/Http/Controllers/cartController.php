@@ -218,16 +218,27 @@ class cartController extends Controller
     //dd($lineItems);
     $discount = session('discount');
 
-    $session = \Stripe\Checkout\Session::create([
-        'payment_method_types' => ['card'],
-        'line_items'  => $lineItems,
-        'mode'        => 'payment',
-        'success_url' => route('success'),
-        'cancel_url'  => route('panier'),
-        'discounts' => [[
-            'coupon'     => $discount->id,
-        ]],
-    ]);
+    if($discount){
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items'  => $lineItems,
+            'mode'        => 'payment',
+            'success_url' => route('success'),
+            'cancel_url'  => route('panier'),
+            'discounts' => [[
+                'coupon'     => $discount->id,
+            ]],
+        ]);
+    } else {
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items'  => $lineItems,
+            'mode'        => 'payment',
+            'success_url' => route('success'),
+            'cancel_url'  => route('panier'),
+        ]);
+    }
+
 
     return redirect()->away($session->url);
 }

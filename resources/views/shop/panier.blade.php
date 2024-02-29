@@ -80,7 +80,7 @@
                         </div>
                         @if ($subtotal > 0)
                         <div class="flex items-center justify-between border-t border-gray-200 pt-4">
-                            <dt class="flex items-center text-sm text-gray-600 ml-8">
+                            <dt class="flex items-center text-sm text-gray-600">
                                 <span>dont TVA (20%)</span>
                             </dt>
                             <dd class="text-sm font-medium text-gray-900">{{ number_format($subtotal * 0.2, 2) }}€

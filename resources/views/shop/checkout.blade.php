@@ -1,11 +1,23 @@
 @extends('layout')
 @section('pageTitle', "Informations de livraison")
 @section('content')
+@php
+$discount = session('discount');
+$totalAfterDiscount = $total;
+
+if ($discount) {
+    if ($discount->discount_percent) {
+        $totalAfterDiscount *= (1 - $discount->discount_percent / 100);
+    } elseif ($discount->discount_amount) {
+        $totalAfterDiscount -= $discount->discount_amount;
+    }
+}
+@endphp
     <main class="mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:max-w-none">
+        <div class="mx-auto max-w-2xl lg:max-w-none flex gap-4">
             <h1 class="sr-only">Checkout</h1>
 
-            <form id="main-form" action="/session" method="post" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+            <form id="main-form" action="/session" method="post" class="w-2/3">
                 <!-- Informations de livraison à gauche -->
                 <div>
                     <div>
@@ -169,7 +181,7 @@
             </form>
 
                 <!-- Order summary -->
-                <div class="mt-10 lg:mt-0">
+                <div class="mt-10 lg:mt-0 w-1/3">
                     <h2 class="text-lg font-medium text-gray-900">Résumé de votre commande</h2>
 
                     <div class="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
@@ -210,7 +222,7 @@
                                     {{ number_format($subtotal, 2) }}€</dd>
                             </div>
                             <div class="flex items-center justify-between">
-                                <dt class="text-sm ml-8">dont TVA (20%)</dt>
+                                <dt class="text-sm">dont TVA (20%)</dt>
                                 <dd class="text-sm font-medium text-gray-900">{{ number_format($subtotal * 0.2, 2) }}€
                                 </dd>
                             </div>
@@ -218,32 +230,37 @@
                                 <dt class="text-sm">Frais de livraison</dt>
                                 <dd class="text-sm font-medium text-gray-900">4.99€</dd>
                             </div>
+
+                            @if ($discount)
+                                <div class="flex items-center justify-between">
+                                    <dt class="text-sm">Réduction {{ $discount->name }}</dt>
+                                    @if($discount->discount_amount)
+                                    <dd class="text-sm font-medium text-green-500">-{{ $discount->discount_amount }}€</dd>
+                                    @else
+                                    <dd class="text-sm font-medium text-green-500">-{{ $discount->discount_percent }}%</dd>
+                                    @endif
+                                </div>
+                            @endif
+
+
                             <div class="flex items-center justify-between border-t border-gray-200 pt-6">
                                 <dt class="text-base font-medium">Total (TTC)</dt>
                                 <dd class="text-base font-medium text-gray-900" name="total">
-                                    @php
-                                        $discount = session('discount');
-                                        $totalAfterDiscount = $total;
-
-                                        if ($discount) {
-                                            if ($discount->discount_percent) {
-                                                $totalAfterDiscount *= (1 - $discount->discount_percent / 100);
-                                            } elseif ($discount->discount_amount) {
-                                                $totalAfterDiscount -= $discount->discount_amount;
-                                            }
-                                        }
-                                     @endphp
                                     {{ number_format($totalAfterDiscount, 2) }}€
                                 </dd>
                             </div>
                         </dl>
 
                         @if ($appliedDiscountName)
-                            <div class="mt-4">
-                                <p class="text-green-500 font-medium">{{ $appliedDiscountName->name }} appliqué</p>
+                            <div class="px-4 flex justify-between">
+                                <p class="text-green-400 font-medium bg-green-100 border border-green-500 py-2 px-3 rounded-lg">{{ $appliedDiscountName->name }} appliqué</p>
                                 <form method="POST" action="{{ route('remove.discount') }}">
                                     @csrf
-                                    <button type="submit" class="text-red-500 underline">Supprimer la réduction</button>
+                                    <button type="submit">
+                                        <svg class="w-6 h-6 bg-red-500 text-white rounded-md" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6m0 12L6 6"/>
+                                          </svg>
+                                    </button>
                                 </form>
                             </div>
                         @endif
@@ -251,12 +268,14 @@
 
                         <form x-data="{ submitting: false }" @submit.prevent="submitting = true; $refs.form.submit();" x-ref="form" action="{{ route('apply.discount') }}" method="post">
                             @csrf
-                            <div class="w-fit mx-auto">
+                            <div class="py-2 px-4">
                                 <label for="discount">Code promo</label>
                                 <div class="flex">
                                     <input type="text" id="discount" name="coupon" placeholder="Entrez votre code promo"
-                                        class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    <button type="submit" :disabled="submitting">Appliquer</button>
+                                        class="block w-fit py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                    <button type="submit" :disabled="submitting" class="ml-3 rounded-md border border-slate-200 shadow-sm p-2">Appliquer
+
+                                    </button>
                                 </div>
                             </div>
                         </form>
