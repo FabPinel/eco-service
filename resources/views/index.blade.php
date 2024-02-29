@@ -112,7 +112,7 @@
         @if ($message = Session::get('success'))
 
        <div id="successMessage"
-            class="hidden md:flex fixed top-28 right-4 w-1/3 border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-7 py-8 shadow-md">
+       class="hidden md:flex fixed top-28 right-4 w-1/3 border-l-8 border-[#34D399] bg-[#CBF5E6] px-7 py-8 shadow-md">
             <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#34D399]">
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -124,13 +124,13 @@
                 <h5 class="mb-2 text-lg font-bold text-[#34D399]">
                    Connexion réussie
                 </h5>
-                <p class="text-sm leading-relaxed text-white">
+                <p class="text-sm leading-relaxed text-[#34D399]">
                    {{ $message }}
                 </p>
             </div>
         </div>
         <div id="successMessage"
-            class="flex md:hidden fixed top-28 ml-2 mr-2 w-full border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-2 py-3 shadow-md">
+            class="flex md:hidden fixed top-28 ml-2 mr-2 w-full border-l-8 border-[#34D399] bg-[#CBF5E6] px-2 py-3 shadow-md">
             <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#34D399]">
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +143,7 @@
                 <h5 class="mb-2 text-lg font-bold text-[#34D399]">
                    Connexion réussie
                 </h5>
-                <p class="text-sm leading-relaxed text-body">
+                <p class="text-sm leading-relaxed text-[#34D399]">
                    {{ $message }}
                 </p>
             </div>

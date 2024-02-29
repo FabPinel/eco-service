@@ -1,43 +1,43 @@
 @extends('layout')
 @section('pageTitle', 'Mon compte')
 @section('content')
-    @if (session()->has('success'))
-    <div id="successMessage"
-            class="hidden md:flex fixed top-28 right-4 w-1/3 border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-7 py-8 shadow-md">
-            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#34D399]">
-                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
-                        fill="white" stroke="white"></path>
-                </svg>
-            </div>
-            <div class="mt-4 text-center">
-                <h5 class="mb-2 text-lg font-bold text-[#34D399]">
-                   Modification d'adresse
-                </h5>
-                <p class="text-sm leading-relaxed text-white">
-                   {{ $message }}
-                </p>
-            </div>
+    @if ($message = Session::get('success'))
+        <div id="successMessage"
+        class="hidden md:flex fixed top-28 right-4 w-1/3 border-l-8 border-[#34D399] bg-[#CBF5E6] px-7 py-8 shadow-md">
+        <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#34D399]">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
+                    fill="white" stroke="white"></path>
+            </svg>
+        </div>
+        <div class="mt-4 text-center">
+            <h5 class="mb-2 text-lg font-bold text-[#34D399]">
+            Modification sauvegardée
+            </h5>
+            <p class="text-sm leading-relaxed text-[#34D399]">
+            {{ $message }}
+            </p>
+        </div>
         </div>
         <div id="successMessage"
-            class="md:hidden fixed top-28 ml-2 mr-2 w-full flex border-l-8 border-[#34D399] bg-[#34D399] bg-opacity-[30%] px-2 py-3 shadow-md">
-            <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#34D399]">
-                <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
-                        fill="white" stroke="white"></path>
-                </svg>
-            </div>
-            <div class="w-full">
-                <h5 class="mb-2 text-lg font-bold text-[#34D399]">
-                   Modification d'adresse
-                </h5>
-                <p class="text-sm leading-relaxed text-body">
-                   {{ $message }}
-                </p>
-            </div>
+        class="md:hidden fixed top-28 ml-2 mr-2 w-full flex border-l-8 border-[#34D399] bg-[#CBF5E6] px-2 py-3 shadow-md">
+        <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#34D399]">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
+                    fill="white" stroke="white"></path>
+            </svg>
+        </div>
+        <div class="w-full">
+            <h5 class="mb-2 text-lg font-bold text-[#34D399]">
+            Modification sauvegardée
+            </h5>
+            <p class="text-sm leading-relaxed text-[#34D399]">
+            {{ $message }}
+            </p>
+        </div>
         </div>
     @endif
     <script>
