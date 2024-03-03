@@ -24,6 +24,9 @@ class discountController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+        ], [
+            'name.required' => 'Le nom est requis',
+            'description.required' => 'La description est requise',
         ]);
 
         $discountPercentValue = $request->input('discount_percent');
@@ -41,7 +44,7 @@ class discountController extends Controller
             'discount_amount' => $discountAmount,
         ]);
 
-        return redirect()->route('admin.products.index')->with('success', 'Discount has been created successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Le code promo à bien été créé');
     }
 
 
@@ -94,5 +97,25 @@ class discountController extends Controller
         ]);
 
         return redirect()->route('admin.products.index')->with('success', 'Le statut de la promo a été mis à jour avec succès');
+    }
+
+    public function applyDiscount(Request $request)
+    {
+        $coupon = $request->input('coupon');
+        $discount = Discount::where('name', $coupon)->where('active', true)->first();
+        // dd($coupon, $discount);
+        if ($discount) {
+            session(['discount_code' => $coupon, 'discount' => $discount]);
+            return redirect()->back()->with('success', 'Code promo appliqué avec succès.');
+        } else {
+            return redirect()->back()->with('error', 'Code promo invalide.');
+        }
+    }
+
+    public function removeDiscount()
+    {
+        session()->forget('discount');
+
+        return redirect()->back(); // Redirigez où vous voulez après avoir supprimé le code promo
     }
 }

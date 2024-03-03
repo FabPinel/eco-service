@@ -1,12 +1,8 @@
 @extends('layout-admin')
+@section('pageTitle', "Création d'un DIY")
 @section('admin-content')
     <div class="space-y-10 divide-y divide-gray-900/10 mt-20">
-        <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
-            <div class="px-4 sm:px-0">
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Diy</h2>
-                <p class="mt-1 text-sm leading-6 text-gray-600">Créer un diy.</p>
-            </div>
-
+        <div class="w-1/4 mx-auto">
             <form action="{{ route('admin.diy.store') }}" enctype="multipart/form-data"
                 class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" method="POST"
                 x-data="{
@@ -157,7 +153,8 @@
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div class="p-4 bg-white border-b border-gray-200">
                                 <div class='w-full mx-auto'>
-                                    <div class="relative flex items-center w-full h-12 shadow-sm rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+                                    <div
+                                        class="relative flex items-center w-full h-12 shadow-sm rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
                                         <div class="grid place-items-center h-full w-12 text-gray-300">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -221,19 +218,13 @@
 
                 <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                     <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Annuler</button>
-                    <button type="submit" class="rounded-md bg-[#1c3242] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600  @click="updateSelectedProducts" ...>
+                    <button type="submit"
+                        class="rounded-md bg-[#1c3242] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#374a56] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600  @click="updateSelectedProducts"
+                        ...>
                         Sauvegarder
                     </button>
                 </div>
             </form>
-            {{-- <script>
-                methods: {
-                    updateSelectedProducts() {
-                        document.getElementById('selectedProducts').value = JSON.stringify(this.selectedProducts);
-                    }
-
-                }
-            </script> --}}
         </div>
     </div>
 @endsection

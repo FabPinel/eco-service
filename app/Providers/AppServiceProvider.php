@@ -24,10 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $products = Product::all();
+        $products = Product::where('active', true)->get();
         $categories = Category::all();
         $discounts = Discount::all();
-        $diy = DIY::all();
+        $diy = DIY::paginate(8);
         $productsHome = Product::paginate(5);
         $diyHome = DIY::paginate(3);
         View::share('products', $products);

@@ -50,7 +50,7 @@
                 </div>
                 <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                     <div class="flow-root">
-                        <a href="/admin/commandes" class="-m-2 block p-2 font-medium text-gray-900">Commandes</a>
+                        <a href="{{ route('admin.orders.index') }}" class="-m-2 block p-2 font-medium text-gray-900">Commandes</a>
                     </div>
                 </div>
                 <div class="space-y-6 border-t border-gray-200 px-4 py-6">
@@ -127,7 +127,7 @@
                                         <div class="flex">
                                             <div class="relative flex">
                                                 <button type="button"
-                                                    onclick="window.location.href='{{ url('/admin/produits') }}'"
+                                                    onclick="window.location.href='{{ route('admin.products.index') }}'"
                                                     class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
                                                     aria-expanded="false">
                                                     Produits
@@ -145,19 +145,15 @@
                                         </div>
                                         <div class="flex">
                                             <div class="relative flex">
-                                                <button type="button"
-                                                    class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"
-                                                    aria-expanded="false">
-                                                    Commandes
-                                                    <span
-                                                        class="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out"
-                                                        aria-hidden="true"></span>
-                                                </button>
+
+
+                                                        <a href="{{ route('admin.orders.index') }}" class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">Commandes</a>
+
                                             </div>
                                         </div>
                                         <a href="{{ route('admin.diy.index') }}"
                                             class="flex items-center text-sm font-medium text-white">DIY</a>
-                                        <a href="#"
+                                        <a href="{{ route('admin.messages.index') }}"
                                             class="flex items-center text-sm font-medium text-white">Messages</a>
                                         <button type="button" onclick="window.location.href='{{ url('/') }}'"
                                             class="relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out"

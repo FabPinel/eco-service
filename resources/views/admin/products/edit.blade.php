@@ -1,17 +1,7 @@
 @extends('layout-admin')
+@section('pageTitle', "Edition d'un produit")
 
-<div class="container mt-2">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Product</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.products.index') }}" enctype="multipart/form-data">
-                    Back</a>
-            </div>
-        </div>
-    </div>
+<div class="mt-32 w-1/4 mx-auto">
     @if (session('status'))
         <div class="alert alert-success mb-1 mt-1">
             {{ session('status') }}
@@ -22,8 +12,8 @@
         @csrf
         @method('PUT')
 
-        <div class="px-4 py-6 sm:p-8">
-            <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="p-5 mx-auto">
+            <div class="">
                 <div class="sm:col-span-4">
                     <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Nom</label>
                     <div class="mt-2">
@@ -66,10 +56,11 @@
                 </div>
 
                 <div class="col-span-full">
-                    <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Informations complémentaires</label>
+                    <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Informations
+                        complémentaires</label>
                     <div class="mt-2">
                         <textarea id="information" name="information" rows="3"
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $product->short_description }}</textarea>
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $product->information }}</textarea>
                     </div>
                 </div>
 
@@ -111,7 +102,7 @@
         <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
             <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Annuler</button>
             <button type="submit"
-                class="rounded-md bg-[#D8A48F] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#E4C8AF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Savegarder</button>
+                class="rounded-md bg-[#D8A48F] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#E4C8AF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sauvegarder</button>
         </div>
     </form>
 </div>

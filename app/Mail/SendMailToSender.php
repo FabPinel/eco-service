@@ -14,14 +14,14 @@ class SendMailToSender extends Mailable
     use Queueable, SerializesModels;
 
     public $mailData;
-    public $formData;
+    public $contactFormData;
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData, $formData)
+    public function __construct($mailData, $contactFormData)
     {
         $this->mailData = $mailData;
-        $this->formData = $formData;
+        $this->contactFormData = $contactFormData;
     }
 
     /**
@@ -30,7 +30,7 @@ class SendMailToSender extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->formData['subject'],
+            subject: 'Demande de contact Eco-service',
         );
     }
 

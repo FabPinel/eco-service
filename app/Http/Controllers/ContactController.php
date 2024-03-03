@@ -8,13 +8,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use App\Mail\SendMailToSender;
+use App\Mail\SendResponseMail;
 
-class ContactController extends Controller
+class contactController extends Controller
 {
 
-    public function productsContact() {
+    public function index()
+    {
+        $messages = Contact::with('product')->orderBy('created_at', 'desc')->paginate(10);
+        $totalMessages = Contact::count();
+        return view('admin.messages.index', compact('messages', 'totalMessages'));
+    }
+    public function productsContact()
+    {
         $products = Product::all();
-    return view('shop.contact', compact('products'));
+        return view('shop.contact', compact('products'));
     }
     public function sendMail(Request $request)
     {
@@ -22,12 +30,23 @@ class ContactController extends Controller
             'subject' => 'required',
             'email' => 'required|email',
             'message' => 'required',
-            'firstname' => 'nullable',
-            'lastname' => 'nullable',
             'enterprise' => 'nullable',
             'id_product' => 'nullable',
             'phone' => 'nullable',
         ]);
+
+        if ($request->input('firstname')) {
+            $contactFormData['firstname'] = $request->input('firstname');
+        }
+        if ($request->input('lastname')) {
+            $contactFormData['lastname'] = $request->input('lastname');
+        }
+        if ($request->input('firstname_enterprise')) {
+            $contactFormData['firstname'] = $request->input('firstname_enterprise');
+        }
+        if ($request->input('lastname_enterprise')) {
+            $contactFormData['lastname'] = $request->input('lastname_enterprise');
+        }
 
         $contact = new Contact($contactFormData);
         $contact->save();
@@ -49,13 +68,37 @@ class ContactController extends Controller
         }
         if (isset($contactFormData['id_product'])) {
             $mailData['id_product'] = $contactFormData['id_product'];
+            $productId = $contactFormData['id_product'];
+            $product = Product::find($productId);
+            $mailData['productName'] = $product->name;
+            $mailData['productId'] = $product->id;
+
         }
         $mailData['email'] = $contactFormData['email'];
+        $mailData['subject'] = $contactFormData['subject'];
         $mailData['message'] = $contactFormData['message'];
 
 
-        Mail::to('gayraud854@gmail.com')->send(new SendMail($mailData, $contactFormData));
+        Mail::to('ecoserviceg3@gmail.com')->send(new SendMail($mailData, $contactFormData));
         Mail::to($email)->send(new SendMailToSender($mailData, $contactFormData));
-        return "L'email à bien été envoyé";
+        return view('shop.contactConfirmation', compact('contactFormData'));
+    }
+
+    public function sendMailResponse(Request $request)
+    {
+        $responseFormData = $request->validate([
+            'emailFrom' => 'required',
+            'emailTo' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        $email = $request->emailTo;
+
+        $responseMailData['message'] = $responseFormData['message'];
+        $responseMailData['subject'] = $responseFormData['subject'];
+
+        Mail::to($email)->send(new SendResponseMail($responseFormData, $responseMailData));
+        return redirect()->back()->with('success', "L'email a bien été envoyé");
     }
 }

@@ -12,9 +12,9 @@ class productController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(10);
-        $categories = Category::paginate(10);
-        $discounts = Discount::paginate(10);
+    $products = Product::orderBy('created_at', 'desc')->paginate(10);
+        $categories = Category::orderBy('created_at', 'desc')->paginate(10);
+        $discounts = Discount::orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.products.index', compact('products', 'categories', 'discounts'));
     }
@@ -30,10 +30,22 @@ class productController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+            'information' => 'required',
             'price' => 'required',
             'id_category' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'media' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
+            'media' => 'required|mimes:jpeg,jpg,png,svg,webp|max:10000',
+        ], [
+            'name.required' => 'Le nom est requis',
+            'description.required' => 'La description est requise',
+            'information.required' => 'Il faut entrer les informations du produit',
+            'price.required' => 'Veuillez renseigner un prix',
+            'id_category.required' => 'Vous devez associer une catégorie',
+            'quantity.required' => 'Il faut renseigner la quantité',
+            'media.required' => "Il faut ajouter une image au produit",
+            'media.mimes' => "Votre image n'a pas le bon format, formats autorisés : jpeg,jpg,gif,svg,webp",
+            'media.max' => "Votre image est trop lourde. max : 10 mo",
+            'media.image' => "Votre image est trop lourde. max : 10 mo",
         ]);
 
         $data = $request->except('media');
@@ -47,7 +59,7 @@ class productController extends Controller
         }
         Product::create($data);
 
-        return redirect()->route('admin.products.index')->with('success', 'Product has been created successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Le produit a bien été créé');
     }
 
     public function edit(string $id)
@@ -107,11 +119,14 @@ class productController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+        ], [
+            'name.required' => 'Le nom est requis',
+            'description.required' => 'La description est requise',
         ]);
 
         Category::create($request->post());
 
-        return redirect()->route('admin.products.index')->with('success', 'Category has been created successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'La catégorie à bien été créée');
     }
 
     public function show(Product $product)
@@ -159,6 +174,6 @@ class productController extends Controller
             'active' => !$product->active,
         ]);
 
-        return redirect()->route('admin.products.index')->with('success', 'Le statut de la promo a été mis à jour avec succès');
+        return redirect()->route('admin.products.index')->with('success', 'Le statut du produit a bien été mis à jour');
     }
 }

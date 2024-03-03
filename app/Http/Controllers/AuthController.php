@@ -5,29 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Mail\RegisterMail;
 use App\Models\DiyProduct;
+use App\Models\UserVerify;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class authController extends Controller
 {
 
     public function __construct()
     {
         $this->middleware('guest')->except([
-            'logout', 'dashboard'
+            'logout', 'index'
         ]);
     }
 
     public function register()
     {
+        Redirect::setIntendedUrl(url()->previous());
         return view('auth.register');
     }
 
     public function login()
     {
+        Redirect::setIntendedUrl(url()->previous());
         return view('auth.login');
     }
 
@@ -61,21 +66,28 @@ class AuthController extends Controller
         $save->remember_token = Str::random(30);
         $save->save();
 
-        Mail::to($save->email)->send(new RegisterMail($save));
+        $idUser = $save->id;
+        $token = Str::random(64);
 
-        return redirect('login')->with('success', "Veuillez valider votre adresse email");
-    }
+        UserVerify::create([
+            'user_id' => $idUser,
+            'token' => $token
+        ]);
 
-    public function verify($token)
-    {
-        $user = User::where('remember_token', '=', $token)->first();
-        if (!empty($user)) {
-            $user->email_verified_at = date('Y-m-d H:i:s');
-            $user->save();
-            return redirect('login')->with('success', "Votre compte à bien été créé");
-        } else {
-            abort(404);
-        }
+        $userData = [
+            'username' => $save->username,
+            'first_name' => $save->first_name,
+            'last_name' => $save->last_name,
+            'email' => $save->email,
+            'phone' => $save->phone
+        ];
+
+        Mail::send('emails.register', ['token' => $token, 'user' => $userData], function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject('Email register verification');
+        });
+
+        return redirect()->route('index')->withSuccess('Vous êtes connecté !');
     }
 
     public function authenticate(Request $request)
@@ -87,11 +99,20 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('index')->with('success', 'You have successfully logged in!');
+
+            $user = Auth::user();
+
+            if ($user->role == 0) {
+                // Si l'utilisateur est un administrateur
+                return redirect()->route('admin.dashboard')->with('success', "Bienvenue administrateur {$user->first_name} {$user->last_name} !");
+            } else {
+                // Si l'utilisateur est un utilisateur normal
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
         }
 
         return back()->withErrors([
-            'email' => 'Your provided credentials do not match in our records.',
+            'login' => "Votre adresse email ou votre mot de passe n'est pas correct",
         ])->onlyInput('email');
     }
 
@@ -100,8 +121,8 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login')
-            ->withSuccess('You have logged out successfully!');;
+        return redirect()->route('index')
+            ->withSuccess('Vous êtes bien déconnecté !');;
     }
 
     public static function getUserId()
@@ -111,5 +132,26 @@ class AuthController extends Controller
         } else {
             return null;
         }
+    }
+
+    public function verifyAccount($token)
+    {
+        $verifyUser = UserVerify::where('token', $token)->first();
+
+        $message = 'Votre email est incorrect';
+
+        if (!is_null($verifyUser)) {
+            $user = $verifyUser->user;
+
+            if (!$user->is_email_verified) {
+                $verifyUser->user->is_email_verified = 1;
+                $verifyUser->user->save();
+                $message = "Votre e-mail est vérifié. Vous pouvez maintenant vous connecté.";
+            } else {
+                $message = "Votre e-mail est déjà vérifié. Vous pouvez vous connecté.";
+            }
+        }
+
+        return redirect()->route('login')->with('message', $message);
     }
 }

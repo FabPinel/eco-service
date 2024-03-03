@@ -29,6 +29,11 @@ class diyController extends Controller
             'description' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
             'text' => 'required',
+        ], [
+            'title.required' => 'Le titre est requis',
+            'description.required' => 'La description est requise',
+            'image.required' => "une image est requise pour créer le DIY",
+            'text.required' => "Il faut entrer du contenu",
         ]);
 
         $data = $request->except('image ');
@@ -68,7 +73,7 @@ class diyController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
+            'image' => 'image|mimes:jpeg,png,jpg,svg,webp|max:10000',
             'text' => 'required',
         ]);
         $product = DIY::find($id);
@@ -100,7 +105,7 @@ class diyController extends Controller
 
         $diy->delete();
 
-        session()->flash('notif.success', 'Category deleted successfully!');
+        session()->flash('notif.success', 'La catégorie à bien été supprimée');
 
         return redirect()->route('admin.diy.index');
     }

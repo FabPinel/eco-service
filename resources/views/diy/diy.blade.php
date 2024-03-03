@@ -1,4 +1,5 @@
 @extends('layout')
+@section('pageTitle', $diy->title )
 @section('content')
 <!-- component -->
 <html>
@@ -21,14 +22,14 @@
     @if($diy->image) 
         <!-- Image principale -->
         <div class="mx-5">
-            <img src="{{ asset('storage/images/' . $diy->image) }}" class="mx-auto block">
+            <img src="{{ asset('storage/app/public/images/' . $diy->image) }}" class="mx-auto block">
         </div>
     @endif
     <!-- Espace -->
     <div class="my-5"></div>
     <!-- Contenu -->
     <div class="px-5 w-full mx-auto border-b py-3">
-        <h1><strong>Pourquoi {{ $diy->title }} ?</strong></h1>
+        <h1><strong>{{ $diy->title }}</strong></h1>
         <p class="my-1">{{ $diy->text }}</p>
     </div>
     <!-- Espace -->
@@ -94,7 +95,7 @@
                             <a href="{{ route('shop.productName', $diyProduct->product->id) }}" class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto">
                                 <span aria-hidden="true" class="absolute inset-0">
                                     <img class="h-full w-full object-cover object-center"
-                                        src="{{ asset('storage/images/' . $diyProduct->product->media) }}"
+                                        src="{{ asset('storage/app/public/images/' . $diyProduct->product->media) }}"
                                         alt="{{ $diyProduct->product->name }}">
                                 </span>
                                 <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"></span>

@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\orderController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\authController;
+use App\Http\Controllers\contactController;
 use App\Http\Controllers\discountController;
 use App\Http\Controllers\diyController;
 use App\Http\Controllers\productController;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\shopController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\cartController;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\profileController;
+use App\Http\Controllers\dashboardController;
 
 
 /*
@@ -27,12 +31,15 @@ Route::get('/', [Controller::class, 'index'])->name('index');
 Route::get('/boutique', function () {
     return view('shop.index');
 });
-Route::get('/produit', function () {
-    return view('shop.products');
-});
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'role:0']);
+
+//Dashboard
+
+Route::get('/admin/dashboard', [dashboardController::class, 'index'])
+    ->middleware(['auth', 'role:0'])
+    ->name('admin.dashboard');
+Route::get('/admin/dashboard/last-7-days', [dashboardController::class, 'getDataForLast7Days']);
+Route::get('/admin/dashboard/last-30-days', [dashboardController::class, 'getDataForLast30Days']);
+Route::get('/admin/dashboard/overall', [dashboardController::class, 'getDataForOverall']);
 
 Route::get('/DIY', function () {
     return view('diy.index');
@@ -42,19 +49,18 @@ Route::get('/zero-dechet', function () {
     return view('zeroWaste.index');
 });
 //Auth
-Route::post('register', [AuthController::class, 'store'])->name('register.store');
-Route::get('verify/{token}', [AuthController::class, 'verify']);
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/register', [authController::class, 'register'])->name('register');
+Route::post('register', [authController::class, 'store'])->name('register.store');
+Route::get('/login', [authController::class, 'login'])->name('login');
+Route::post('/authenticate', [authController::class, 'authenticate'])->name('login.authenticate');
+Route::post('/logout', [authController::class, 'logout'])->name('logout');
 
-Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('login.authenticate');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
+Route::get('account/verify/{token}', [authController::class, 'verifyAccount'])->name('user.verify');
 // Boutique
 Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('shop.productName');
 
 // Admin - Produits
-Route::prefix('/admin/products')->middleware(['auth', 'role:0'])->group(function () {
+Route::prefix('/admin/produits')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [productController::class, 'index'])->name('admin.products.index');
     Route::get('/create', [productController::class, 'create'])->name('admin.products.create');
     Route::post('/', [productController::class, 'store'])->name('admin.products.store');
@@ -62,11 +68,11 @@ Route::prefix('/admin/products')->middleware(['auth', 'role:0'])->group(function
     Route::get('/edit/{id}', [productController::class, 'edit'])->name('admin.products.edit');
     Route::put('/{id}', [productController::class, 'update'])->name('admin.products.update');
     Route::delete('/{id}', [productController::class, 'destroy'])->name('admin.products.destroy');
-    Route::put('/{id}/toggle-status', [ProductController::class, 'toggleStatus'])->name('admin.products.toggle-status');
+    Route::put('/{id}/toggle-status', [productController::class, 'toggleStatus'])->name('admin.products.toggle-status');
 });
 
 // Admin - Catégories
-Route::prefix('/admin/category')->group(function () {
+Route::prefix('/admin/category')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/create', [productController::class, 'createCategory'])->name('admin.category.create');
     Route::post('/', [productController::class, 'storeCategory'])->name('admin.category.store');
     Route::get('/edit/{id}', [productController::class, 'editCategory'])->name('admin.category.edit');
@@ -75,7 +81,7 @@ Route::prefix('/admin/category')->group(function () {
 });
 
 // Admin - Promo
-Route::prefix('/admin/discounts')->group(function () {
+Route::prefix('/admin/discounts')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/create', [discountController::class, 'create'])->name('admin.discounts.create');
     Route::post('/', [discountController::class, 'store'])->name('admin.discounts.store');
     Route::get('/edit/{id}', [discountController::class, 'edit'])->name('admin.discounts.edit');
@@ -85,7 +91,7 @@ Route::prefix('/admin/discounts')->group(function () {
 });
 
 // Admin - DIY
-Route::prefix('/admin/diy')->group(function () {
+Route::prefix('/admin/diy')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [diyController::class, 'index'])->name('admin.diy.index');
     Route::get('/create', [diyController::class, 'create'])->name('admin.diy.create');
     Route::post('/', [diyController::class, 'store'])->name('admin.diy.store');
@@ -100,12 +106,45 @@ Route::post('/ajouter-au-panier/{productId}', [cartController::class, 'addToCart
 Route::delete('/remove-from-cart', [cartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::put('/update-cart', [cartController::class, 'updateCart'])->name('updateCart');
 
+// Orders
+Route::prefix('/admin/orders')->middleware(['auth', 'role:0'])->group(function () {
+    Route::get('/', [orderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/orderDetails/{id}', [orderController::class, 'orderDetails'])->name('admin.orders.orderDetails');
+    Route::post('/orders/toggle-status/{id}', [orderController::class, 'toggleStatus'])->name('admin.orders.toggle-status');
+});
+
+// Messages
+Route::prefix('/admin/messages')->middleware(['auth', 'role:0'])->group(function () {
+    Route::get('/', [contactController::class, 'index'])->name('admin.messages.index');
+    Route::post('/', [contactController::class, 'sendMailResponse'])->name('message.response');
+});
+
 // Checkout
 Route::get('/commande', [cartController::class, 'checkout'])->name('commande');
+Route::post('/apply-discount', [discountController::class, 'applyDiscount'])->name('apply.discount');
+Route::post('/remove-discount', [discountController::class, 'removeDiscount'])->name('remove.discount');
 
 //Contact
 Route::get('/contact', function () {
     return view('shop.contact');
 });
+Route::get('/contactConfirmation', function () {
+    return view('shop.contactConfirmation');
+});
 
-Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.store');
+
+Route::post('/contact', [contactController::class, 'sendMail'])->name('contact.store');
+
+// Stripe
+Route::post('/session', [cartController::class, 'session'])->name('session');
+Route::get('/success', [cartController::class, 'success'])->name('success');
+Route::get('/votre-commande', function () {
+    return view('shop.order');
+});
+
+// Profil
+Route::prefix('/mon-compte')->group(function () {
+    Route::get('/', [profileController::class, 'index'])->name('profile.index');
+    Route::match(['put', 'post', 'get'], '/update', [profileController::class, 'update'])->name('profile.update');
+    Route::match(['put', 'post', 'get'], '/address', [profileController::class, 'address'])->name('profile.address');
+});
