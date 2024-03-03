@@ -173,7 +173,7 @@
                                                     }"
                                                     x-on:click="selectProduct(product.id)">
                                                     <img class="w-16 h-16 object-cover object-center"
-                                                        :src=`http://127.0.0.1:8000/storage/images/${product.media}`
+                                                        :src=`/storage/app/public/images/${product.media}`
                                                         alt="product.name">
 
                                                     <h3 x-text="product.name" class="mt-4 font-medium text-gray-900"
@@ -188,7 +188,7 @@
                                 <div x-show="id_product !== null">
                                     <p>Produit sélectionné :</p>
                                     <div class="flex flex-col">
-                                        <img x-bind:src="`http://127.0.0.1:8000/storage/images/${getSelectedProductInfo(id_product).media}`"
+                                        <img :src=`https://eco-service.labo-g4.fr/storage/app/public/images/${getSelectedProductInfo(id_product).media}`
                                             alt="Product Image" class="w-16 h-16">
                                         <span x-text="getSelectedProductInfo(id_product).name"></span>
                                         <button

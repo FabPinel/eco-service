@@ -146,10 +146,10 @@
                         <th class="w-4/12 py-6 pl-4 pr-4 lg:pr-10">
                             <p class="text-center font-medium">Message</p>
                         </th>
-                        <th class="w-1/12 py-6 pl-4 pr-4 lg:pr-10">
+                        <th class="w-2/12 py-6 pl-4 pr-4 lg:pr-10">
                             <p class="text-center font-medium">Produit</p>
                         </th>
-                        <th class="w-2/12 py-6 pl-4 pr-4 lg:pr-10">
+                        <th class="w-1/12 py-6 pl-4 pr-4 lg:pr-10">
                             <p class="text-center font-medium">Date</p>
                         </th>
                     </tr>
@@ -194,7 +194,7 @@
                                     {{ Str::limit($m->message, $limit = 160, $end = '...') }}
                                 </p>
                             </td>
-                            <td class="w-1/12 py-4 pl-4 pr-4 lg:pr-10">
+                            <td class="w-2/12 py-4 pl-4 pr-4 lg:pr-10">
                                 <p class="text-center text-xs xl:text-base">
                                     @if ($m->product)
                                         <a href="#">{{ $m->product->name }}</a>
@@ -202,7 +202,7 @@
                                     @endif
                                 </p>
                             </td>
-                            <td class="w-2/12 py-4 pl-4 pr-4 lg:pr-10">
+                            <td class="w-1/12 py-4 pl-4 pr-4 lg:pr-10">
                                 <p class="text-center text-xs xl:text-base">
                                     {{ $m->created_at->format('d/m/Y') }} à {{ $m->created_at->format('H:i') }}
                                 </p>

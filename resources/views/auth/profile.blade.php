@@ -252,7 +252,7 @@
                                     <tr>
                                         <td class="py-6 pr-8">
                                             <div class="flex items-center">
-                                                <img src="{{ asset('storage/images/' . $item->product->media) }}" alt="{{ $item->product->name }}" class="mr-6 h-16 w-16 rounded object-cover object-center">
+                                                <img src="{{ asset('storage/app/public/images/' . $item->product->media) }}" alt="{{ $item->product->name }}" class="mr-6 h-16 w-16 rounded object-cover object-center">
                                                 <div>
                                                     <div class="font-medium text-gray-900">{{ $item->product->name }}</div>
                                                     <div class="mt-1 sm:hidden">{{ number_format($item->product->price, 2) }}€</div>

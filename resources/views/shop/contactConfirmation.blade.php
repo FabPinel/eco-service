@@ -1,7 +1,7 @@
 @extends('layout')
 @section('pageTitle', "Message envoyé ! ")
 @section('content')
-    <div class="bg-white md:py-10">
+    <div class="bg-white py-48">
         <div class="flex justify-center items-center">
             <div>
                 <svg class="block mx-auto" width="125" height="125" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

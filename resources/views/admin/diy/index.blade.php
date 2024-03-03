@@ -49,10 +49,12 @@
                                             </div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                            <div class="text-gray-900">{{ $d->title }}</div>
+                                            <div class="text-gray-900">{{ Str::limit($d->title, $limit = 50, $end = '...') }}</div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                            <div class="text-gray-900">{{ $d->description }}</div>
+                                            <div class="text-gray-900">
+                                         {{ Str::limit($d->description, $limit = 100, $end = '...') }}
+</div>
                                         </td>
                                         <td
                                             class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">

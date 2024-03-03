@@ -9,7 +9,7 @@
                     <div class="aspect-h-1 aspect-w-1 w-full">
                         <!-- Tab panel, show/hide based on tab state. -->
                         <div id="tabs-1-panel-1" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
-                            <img src="{{ asset('storage/images/' . $product->media) }}" alt="{{ $product->name }}"
+                            <img src="{{ asset('storage/app/public/images/' . $product->media) }}" alt="{{ $product->name }}"
                                 class="h-full w-full object-cover object-center sm:rounded-lg">
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                                             class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto">
                                             <span aria-hidden="true" class="absolute inset-0">
                                                 <img class="h-full w-full object-cover object-center"
-                                                    src="{{ asset('storage/images/' . $product->media) }}"
+                                                    src="{{ asset('storage/app/public/images/' . $product->media) }}"
                                                     alt="{{ $product->name }}">
                                             </span>
                                             <span aria-hidden="true"

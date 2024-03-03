@@ -623,14 +623,14 @@ if ($discount) {
                                         <td align="left"
                                             style="Margin:0;padding-top:5px;padding-bottom:10px;padding-left:20px;padding-right:20px">
                                             <!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:178px" valign="top"><![endif]-->
-                                            @foreach ($orderDetails['orderItems'] as $orderItem)
+                                             @foreach ($orderDetails['orderItems'] as $orderItem)
                                                 <table cellspacing="0" cellpadding="0" align="right" role="none"
-                                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%;">
                                                     <tr style="border-collapse:collapse">
                                                         <td align="left" style="padding:0;Margin:0;width:362px">
                                                             <table width="100%" cellspacing="0" cellpadding="0"
                                                                 role="presentation"
-                                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%;">
                                                                 <tr style="border-collapse:collapse">
                                                                     <td align="left" style="padding:0;Margin:0">
                                                                         <p
@@ -644,9 +644,9 @@ if ($discount) {
                                                                             role="presentation">
                                                                             <tr style="border-collapse:collapse">
                                                                                 <td style="padding:0;Margin:0">
-                                                                                    <img src="{{ url('storage/images/' . $orderItem->product->media) }}"
+                                                                                    <img src="{{ url('storage/app/public/images/' . $orderItem->product->media) }}"
                                                                                         alt="{{ $orderItem->product->name }}"
-                                                                                        style="height: 32px;width: 32px;object-fit: cover;object-position: center;">
+                                                                                        style="height: 120px;width: 120px;object-fit: cover;object-position: center;">
                                                                                 </td>
                                                                                 <td style="padding:0;Margin:0">
                                                                                     {{ $orderItem->product->name }}
@@ -921,57 +921,7 @@ if ($discount) {
                                             <!--[if mso]></td><td style="width:20px"></td><td style="width:362px" valign="top"><![endif]-->
                                             <table cellspacing="0" cellpadding="0" align="right" role="none"
                                                 style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                <tr style="border-collapse:collapse">
-                                                    <td align="left" style="padding:0;Margin:0;width:362px">
-                                                        <table width="100%" cellspacing="0" cellpadding="0"
-                                                            role="presentation"
-                                                            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                            <tr style="border-collapse:collapse">
-                                                                <td class="es-m-txt-c" align="left"
-                                                                    style="padding:0;Margin:0;padding-top:15px;padding-bottom:20px">
-                                                                    <p
-                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:30px;color:#ffffff;font-size:20px">
-                                                                        Information</p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="border-collapse:collapse">
-                                                                <td class="es-m-txt-c" align="left"
-                                                                    style="padding:0;Margin:0">
-                                                                    <p
-                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#ffffff;font-size:14px">
-                                                                        Vector graphics designed by <a target="_blank"
-                                                                            href="http://www.freepik.com/"
-                                                                            style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#ffffff;font-size:14px">Freepik</a>.
-                                                                    </p>
-                                                                    <p
-                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#ffffff;font-size:14px">
-                                                                        You are receiving this email because you have
-                                                                        visited our site or asked us about regular
-                                                                        newsletter</p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="border-collapse:collapse">
-                                                                <td align="left" class="es-m-txt-c"
-                                                                    style="padding:0;Margin:0;padding-top:10px">
-                                                                    <p
-                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;color:#333333;font-size:12px">
-                                                                        <a target="_blank" href=""
-                                                                            style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#ffffff;font-size:12px;line-height:18px"
-                                                                            class="unsubscribe">Unsubscribe</a><span
-                                                                            style="color:#FFFFFF"> ♦ <a
-                                                                                target="_blank"
-                                                                                href="https://viewstripo.email"
-                                                                                style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#ffffff;font-size:12px">Update
-                                                                                Preferences</a> ♦ <a target="_blank"
-                                                                                href="https://viewstripo.email"
-                                                                                style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#ffffff;font-size:12px">Customer
-                                                                                Support</a></span>
-                                                                    </p>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
+                                                
                                             </table><!--[if mso]></td></tr></table><![endif]-->
                                         </td>
                                     </tr>

@@ -79,7 +79,7 @@ class contactController extends Controller
         $mailData['message'] = $contactFormData['message'];
 
 
-        Mail::to('gayraud854@gmail.com')->send(new SendMail($mailData, $contactFormData));
+        Mail::to('ecoserviceg3@gmail.com')->send(new SendMail($mailData, $contactFormData));
         Mail::to($email)->send(new SendMailToSender($mailData, $contactFormData));
         return view('shop.contactConfirmation', compact('contactFormData'));
     }

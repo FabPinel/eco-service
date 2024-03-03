@@ -29,7 +29,7 @@
                 Promo
             </li>
         </ul>
-        <div class="px-4 sm:px-6 lg:px-8 mt-20" x-show="activeTab === 1">
+        <div class="px-4 sm:px-6 lg:px-8 py-6 mt-20" x-show="activeTab === 1">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Produits</h1>
@@ -85,7 +85,7 @@
                                             <div class="flex items-center">
                                                 <div class="h-14 w-14 flex-shrink-0">
                                                     <img class="h-14 w-14 rounded-md object-contain"
-                                                        src="{{ asset('storage/images/' . $product->media) }}"
+                                                        src="{{ asset('storage/app/public/images/' . $product->media) }}"
                                                         alt="{{ $product->name }}">
                                                 </div>
                                             </div>
@@ -355,7 +355,7 @@
             </div>
             <div class="mt-4 text-center">
                 <h5 class="mb-2 text-lg font-bold text-[#34D399]">
-                   Nouveau produit
+                  Produit
                 </h5>
                 <p class="text-sm leading-relaxed text-[#34D399]">
                    {{ $message }}
@@ -374,7 +374,7 @@
             </div>
             <div class="w-full">
                 <h5 class="mb-2 text-lg font-bold text-[#34D399]">
-                   Nouveau produit
+                  Produit
                 </h5>
                 <p class="text-sm leading-relaxed text-[#34D399]">
                    {{ $message }}

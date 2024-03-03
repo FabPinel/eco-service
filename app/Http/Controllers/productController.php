@@ -12,9 +12,9 @@ class productController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(10);
-        $categories = Category::paginate(10);
-        $discounts = Discount::paginate(10);
+    $products = Product::orderBy('created_at', 'desc')->paginate(10);
+        $categories = Category::orderBy('created_at', 'desc')->paginate(10);
+        $discounts = Discount::orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.products.index', compact('products', 'categories', 'discounts'));
     }
@@ -174,6 +174,6 @@ class productController extends Controller
             'active' => !$product->active,
         ]);
 
-        return redirect()->route('admin.products.index')->with('success', 'Le statut de la promo a été mis à jour avec succès');
+        return redirect()->route('admin.products.index')->with('success', 'Le statut du produit a bien été mis à jour');
     }
 }

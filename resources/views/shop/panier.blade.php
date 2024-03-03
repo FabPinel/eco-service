@@ -16,7 +16,7 @@
                             <li class="py-6 sm:py-10">
                                 <div class="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
                                     <div class="flex justify-between items-center sm:gap-x-6 sm:pr-0">
-                                        <img src="{{ asset('storage/images/' . $product->media) }}"
+                                        <img src="{{ asset('storage/app/public/images/' . $product->media) }}"
                                             alt="{{ $product->name }}"
                                             class="h-20 w-20 object-cover object-center sm:rounded-lg">
                                         <div>

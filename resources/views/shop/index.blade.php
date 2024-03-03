@@ -108,7 +108,7 @@
                                     <div
                                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                         <img class="h-full w-full object-cover object-center"
-                                        src="{{ asset('storage/images/' . $product->media) }}"
+                                        src="{{ asset('storage/app/public/images/' . $product->media) }}"
                                         alt="{{ $product->name }}"> 
                                     </div>
                                     <h3 class="mt-4 font-medium text-gray-900">{{ $product->name }}</h3>
