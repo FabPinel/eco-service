@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use App\Models\Reviews;
 
 class shopController extends Controller
 {
@@ -23,6 +23,11 @@ class shopController extends Controller
             ->take(5)
             ->get();
 
-        return view('shop.product', compact('product', 'relatedProducts'));
+            $reviews = Reviews::with('user')->where('id_product', $id)->orderBy('created_at', 'desc');
+            $totalReviews = $reviews->count();
+            $sumReviews = $reviews->sum('rating');
+            $averageRating = $totalReviews > 0 ? $sumReviews / $totalReviews : 0;
+
+        return view('shop.product', compact('product', 'relatedProducts', 'reviews', 'totalReviews', 'averageRating'));
     }
 }
