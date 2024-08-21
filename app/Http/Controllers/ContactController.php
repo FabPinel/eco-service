@@ -10,7 +10,7 @@ use App\Mail\SendMail;
 use App\Mail\SendMailToSender;
 use App\Mail\SendResponseMail;
 
-class contactController extends Controller
+class ContactController extends Controller
 {
 
     public function index()
@@ -100,5 +100,12 @@ class contactController extends Controller
 
         Mail::to($email)->send(new SendResponseMail($responseFormData, $responseMailData));
         return redirect()->back()->with('success', "L'email a bien été envoyé");
+    }
+    public function destroy($ids) {
+        $idsMessages = explode(',', $ids);
+        Contact::destroy($idsMessages);
+
+        session()->flash('notif.success', 'Messages deleted successfully!');
+        return redirect()->route('admin.messages.index');
     }
 }

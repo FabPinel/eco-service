@@ -1,23 +1,29 @@
 @extends('layout-admin')
 @section('pageTitle', 'Admin - Messages')
 @section('admin-content')
-    <div class="flex h-full mt-24 bg-white p-4 flex-col border-x border-stroke dark:border-strokedark">
-        <div class="sm:flex">
+    <div x-data="{ messages: [], submitForm() {
+        const url = `{{ route('admin.message.destroy', ':ids') }}`.replace(':ids', this.messages.join(','));
+        this.$refs.form.action = url;
+        this.$refs.form.submit();
+        }}"
+        class="flex h-full mt-24 bg-white p-4 flex-col border-x border-stroke dark:border-strokedark">
+        <div class="sm:flex items-center">
+            <p class="font-bold pr-2 ">({{ $totalMessages }})</p>
             <h1 class="text-base font-semibold leading-6 text-gray-900">Messages</h1>
-            <p class="font-bold pl-2 ">({{ $totalMessages }})</p>
-        </div>
-        <!-- ====== Inbox List Start -->
-        <div class="flex flex-col-reverse justify-between gap-6 py-4.5 pl-4 pr-4 sm:flex-row lg:pl-10 lg:pr-7.5">
             <div class="flex items-center gap-4 p-4">
 
-                <button>
-                    <svg class="w-6 h-6 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white"
-                        viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                    </svg>
-                </button>
-
+                <form x-ref="form" @submit.prevent="submitForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="flex" type="submit">
+                        <p x-text="messages.length" class="text-red-500 font-semibold mr-1">25</p>
+                        <svg class="w-6 h-6 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                        </svg>
+                    </button>
+                </form>
                 <button>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -132,8 +138,6 @@
                     <tr class="flex border-y border-stroke dark:border-strokedark bg-slate-100">
                         <th class="w-2/12 py-6 pl-4 pr-4 lg:pl-10">
                             <label for="checkbox-1" class="flex cursor-pointer select-none items-center font-medium">
-                                <input type="checkbox"
-                                    class="box mr-4 flex h-5 w-5 items-center bg-white justify-center rounded-[3px] border-[.5px] border-stroke bg-gray-2  dark:border-strokedark dark:bg-boxdark-2">
                                 Nom Prénom
                             </label>
                         </th>
@@ -158,21 +162,21 @@
                     @foreach ($messages as $m)
                         <tr class="flex cursor-pointer items-center text-slate-600 dark:hover:bg-boxdark-2 hover:bg-slate-100"
                             @click="showModal = true;
-             id = '[#{{ addslashes($m->id) }}]';
-             sender = '{{ addslashes($m->firstname) }} {{ addslashes($m->lastname) }}';
-             enterprise = '{{ addslashes($m->enterprise) }}';
-             subject = '{{ addslashes($m->subject) }}';
-             email = '{{ addslashes($m->email) }}';
-             message = '{{ addslashes($m->message) }}';
-             date = '{{ addslashes($m->created_at->format('d/m/Y')) }}';
-             hour = '{{ addslashes($m->created_at->format('H:i')) }}'
-             product = '{{ addslashes($m->product ? $m->product->name : '') }}';
-             phone = '+33{{ addslashes($m->phone ? $m->phone : '') }}';
-             ">
+                                id = '[#{{ addslashes($m->id) }}]';
+                                sender = '{{ addslashes($m->firstname) }} {{ addslashes($m->lastname) }}';
+                                enterprise = '{{ addslashes($m->enterprise) }}';
+                                subject = '{{ addslashes($m->subject) }}';
+                                email = '{{ addslashes($m->email) }}';
+                                message = '{{ addslashes($m->message) }}';
+                                date = '{{ addslashes($m->created_at->format('d/m/Y')) }}';
+                                hour = '{{ addslashes($m->created_at->format('H:i')) }}'
+                                product = '{{ addslashes($m->product ? $m->product->name : '') }}';
+                                phone = '+33{{ addslashes($m->phone ? $m->phone : '') }}';
+                                ">
                             <td class="w-2/12 py-6 pl-4 pr-4 lg:pl-10">
                                 <label for="checkbox-1" class="flex cursor-pointer select-none items-center font-medium">
-                                    <input type="checkbox"
-                                        class="box mr-4 flex h-5 w-5 items-center bg-white justify-center rounded-[3px] border-[.5px] border-stroke bg-gray-2  dark:border-strokedark dark:bg-boxdark-2">
+                                    <input type="checkbox" @click.stop
+                                        value={{$m->id}} x-model="messages" class="box mr-4 flex h-5 w-5 items-center bg-white justify-center rounded-[3px] border-[.5px] border-stroke bg-gray-2  dark:border-strokedark dark:bg-boxdark-2">
                                     {{ $m->firstname }} {{ $m->lastname }}
                                 </label>
                             </td>

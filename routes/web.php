@@ -59,6 +59,7 @@ Route::get('account/verify/{token}', [authController::class, 'verifyAccount'])->
 // Boutique
 Route::get('/boutique/{id}', [shopController::class, 'getProductById'])->name('shop.productName');
 
+Route::middleware('auth')->middleware('isAdmin')->group(function () {
 // Admin - Produits
 Route::prefix('/admin/produits')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [productController::class, 'index'])->name('admin.products.index');
@@ -117,7 +118,10 @@ Route::prefix('/admin/orders')->middleware(['auth', 'role:0'])->group(function (
 Route::prefix('/admin/messages')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [contactController::class, 'index'])->name('admin.messages.index');
     Route::post('/', [contactController::class, 'sendMailResponse'])->name('message.response');
+    Route::delete('/{ids}', [ContactController::class, 'destroy'])->name('admin.message.destroy');
 });
+});
+
 
 // Checkout
 Route::get('/commande', [cartController::class, 'checkout'])->name('commande');
