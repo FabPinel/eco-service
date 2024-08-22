@@ -8,7 +8,7 @@
         <a href="{{ route('diy.diyName', $d->id) }}" class="group block">
             <div aria-hidden="true"
                 class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75">
-                <img src="{{ asset('storage/app/public/images/' . $d->image) }}"
+                <img src="{{ asset('/storage/images/' . $d->image) }}"
                     class="h-52 w-96 object-cover object-center">
             </div>
             <h3 class="mt-4 text-base font-semibold text-gray-900">{{ $d->title }}</h3>

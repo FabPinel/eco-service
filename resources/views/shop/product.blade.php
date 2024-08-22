@@ -9,7 +9,7 @@
                     <div class="aspect-h-1 aspect-w-1 w-full">
                         <!-- Tab panel, show/hide based on tab state. -->
                         <div id="tabs-1-panel-1" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
-                            <img src="{{ asset('storage/app/public/images/' . $product->media) }}" alt="{{ $product->name }}"
+                            <img src="{{ asset('/storage/images/' . $product->media) }}" alt="{{ $product->name }}"
                                 class="h-full w-full object-cover object-center sm:rounded-lg">
                         </div>
                     </div>
@@ -24,29 +24,42 @@
                         <p class="mt-2 font-bold text-gray-900 text-4xl">{{ $product->price }}€</p>
                     </div>
 
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                        <svg class="w-4 h-4 text-gray-300 me-1 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                        <p class="ms-2 text-sm font-bold text-gray-900">{{$averageRating}}</p>
+                    <div class="flex items-center mt-4">
+                        @for ($i = 0; $i < 5; $i++)
+                            @php
+                                $averageRating = $product->reviews->avg('rating');
+                            @endphp
+
+                            @if ($i < floor($averageRating))
+                                <!-- Full star -->
+                                <svg class="w-4 h-4 me-1 text-[#e88229]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                </svg>
+                            @elseif ($i < ceil($averageRating))
+                                <!-- Half star -->
+                                <svg class="w-4 h-4 me-1 text-[#e88229]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <defs>
+                                        <linearGradient id="half">
+                                            <stop offset="50%" stop-color="#e88229" />
+                                            <stop offset="50%" stop-color="#1e293b" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path fill="url(#half)" d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                </svg>
+                            @else
+                                <!-- Empty star -->
+                                <svg class="w-4 h-4 me-1 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                </svg>
+                            @endif
+                        @endfor
+                        <p class="ms-2 text-sm font-bold text-gray-900">{{number_format($averageRating, 1, '.', ',')}}</p>
                         <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
                         <a href="#reviews" class="text-sm font-medium text-gray-900 underline hover:no-underline">{{$totalReviews}}</a>
                     </div>
 
-                    <div class="mt-10">
-                        <h2 class="text-sm font-medium text-gray-900">Description</h2>
+                    <div class="mt-4">
+                        <h2 class="text-base font-medium text-gray-900">Description</h2>
 
                         <div class="prose prose-sm mt-4 text-gray-500">
                             <p>{{ $product->description }}</p>
@@ -72,7 +85,11 @@
                             <p class="text-red-800">En rupture de stock !</p>
                         </div>
                     @else
-                        <div class="prose prose-sm mt-4 text-gray-500">
+                        <div class="prose prose-sm mt-4 text-gray-500 flex items-center">
+                            <span class="relative flex h-3 w-3 mr-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-green-400"></span>
+                            </span>
                             <p>Il en reste {{ $product->quantity }} en stock !</p>
                         </div>
                     @endif
@@ -151,7 +168,7 @@
                                             class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto">
                                             <span aria-hidden="true" class="absolute inset-0">
                                                 <img class="h-full w-full object-cover object-center"
-                                                    src="{{ asset('storage/app/public/images/' . $product->media) }}"
+                                                    src="{{ asset('/storage/images/' . $product->media) }}"
                                                     alt="{{ $product->name }}">
                                             </span>
                                             <span aria-hidden="true"
@@ -175,41 +192,35 @@
             @endif
 
             <section id="reviews" aria-labelledby="category-heading" class="pt-24 sm:pt-32 xl:mx-auto xl:max-w-7xl xl:px-8">
-                <h2 id="category-heading" class="text-2xl font-bold tracking-tight text-gray-900">Les avis
+                <h2 id="category-heading" class="text-2xl font-bold tracking-tight text-gray-900">
+                    Les avis
                 </h2>
 
-                <article class="mt-10 shadow-md rounded-b-xl">
-                    <div class="flex items-center mb-4 bg-gray-200 rounded-t-xl p-4">
-                        <div class="font-medium text-xl text-[#1c3242]">
-                            <p>Jese Leos</p>
+                @foreach ($reviews as $review)
+                    <article class="mt-10 shadow-md rounded-b-xl">
+                        <div class="flex items-center mb-4 bg-gray-200 rounded-t-xl p-4">
+                            <div class="font-medium text-xl text-[#1c3242]">
+                                <p>{{$review->user->first_name}} {{$review->user->last_name}}</p>
+                            </div>
+                            <div class="ml-3 w-0.5 h-6 bg-gray-500"></div>
+                            <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                <h3 class="mx-3 font-semibold text-lg">{{$review->rating}}/5</h3>
+                                @for ($i = 0; $i < 5; $i++)
+                                <svg class="w-4 h-4 {{ $i < $review->rating ? 'text-[#e88229]' : 'gray-900' }} me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                </svg>
+                                @endfor
+                            </div>
                         </div>
-                        <div class="ml-3 w-0.5 h-6 bg-gray-500"></div>
-                        <div class="flex items-center space-x-1 rtl:space-x-reverse">
-                            <h3 class="mx-3 font-semibold text-lg">4/5</h3>
-                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
-                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
-                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
-                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
-                            <svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
+                        <div class="px-3 py-2">
+                            <p class="text-gray-900 ">{{$review->comment}}</p>
+                            <time class="block ml-auto w-fit text-gray-500 text-sm">{{$review->created_at->format('F Y')}}</time>
                         </div>
-                    </div>
-                    <div class="p-4">
-                        <p class="mb-2 text-gray-900 ">This is my third Invicta Pro Diver. They are just fantastic value for money. This one arrived yesterday and the first thing I did was set the time, popped on an identical strap from another Invicta and went in the shower with it to test the waterproofing.... No problems.</p>
-                        <p class="mb-3 text-gray-900 ">It is obviously not the same build quality as those very expensive watches. But that is like comparing a Citroën to a Ferrari. This watch was well under £100! An absolute bargain.</p>
-                        <time class="block ml-auto w-fit text-gray-500 text-sm">August 2024</time>
-                    </div>
 
-                </article>
+                    </article>
+                @endforeach
+
+
 
             </section>
 

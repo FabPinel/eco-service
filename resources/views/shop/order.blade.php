@@ -18,7 +18,7 @@
                 <h3 class="sr-only">Articles</h3>
                 @foreach ($orderDetails['orderItems'] as $orderItem)
                     <div class="flex space-x-6 border-b border-gray-200 py-10">
-                        <img src="{{ asset('storage/app/public/images/' . $orderItem->product->media) }}"
+                        <img src="{{ asset('/storage/images/' . $orderItem->product->media) }}"
                             alt="{{ $orderItem->product->name }}"
                             class="h-20 w-20 flex-none rounded-lg bg-gray-100 object-cover object-center sm:h-40 sm:w-40">
                         <div class="flex flex-auto flex-col">

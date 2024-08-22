@@ -85,7 +85,7 @@
                                             <div class="flex items-center">
                                                 <div class="h-14 w-14 flex-shrink-0">
                                                     <img class="h-14 w-14 rounded-md object-contain"
-                                                        src="{{ asset('storage/app/public/images/' . $product->media) }}"
+                                                        src="{{ asset('/storage/images/' . $product->media) }}"
                                                         alt="{{ $product->name }}">
                                                 </div>
                                             </div>

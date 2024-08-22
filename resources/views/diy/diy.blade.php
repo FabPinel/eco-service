@@ -19,10 +19,10 @@
     <div class="w-full text-gray-500 px-5 pb-5 pt-2">
         {{ $diy->description }}
     </div>
-    @if($diy->image) 
+    @if($diy->image)
         <!-- Image principale -->
         <div class="mx-5">
-            <img src="{{ asset('storage/app/public/images/' . $diy->image) }}" class="mx-auto block">
+            <img src="{{ asset('/storage/images/' . $diy->image) }}" class="mx-auto block">
         </div>
     @endif
     <!-- Espace -->
@@ -35,7 +35,7 @@
     <!-- Espace -->
     <div class="my-5"></div>
     <!-- Vidéo -->
-    @if($diy->video) 
+    @if($diy->video)
             <div class="mx-5">
         <div class="relative" style="padding-bottom: 56.25%;">
             <!-- 16:9 aspect ratio -->
@@ -58,7 +58,7 @@
     <div class="my-5"></div>
 
     <!-- Ingrédients -->
-    @if($diy->recipe) 
+    @if($diy->recipe)
         <div class="px-5 w-full mx-auto border-b py-3">
             <h2 class="font-bold">Ingrédients</h2>
             <p>{{$diy->recipe}}</p>
@@ -69,7 +69,7 @@
     <div class="my-4"></div>
 
     <!-- Ustensiles -->
-    @if($diy->ustensils) 
+    @if($diy->ustensils)
         <div class="px-5 w-full mx-auto border-b py-3">
             <h2 class="font-bold">Ustensiles</h2>
             <p>{{$diy->ustensils}}</p>
@@ -78,7 +78,7 @@
 
     <!-- Espace entre les sections -->
     <div class="my-4"></div>
-    @if($diy->step) 
+    @if($diy->step)
         <!-- Étapes de la recette -->
         <div class="px-5 w-full mx-auto py-3">
             <h2 class="font-bold">Étapes de la recette</h2>
@@ -86,7 +86,7 @@
         </div>
     @endif
 
-    @if($diy->diyProducts) 
+    @if($diy->diyProducts)
         <div class="mt-4 flow-root">
             <div class="-my-2">
                 <div class="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible">
@@ -95,7 +95,7 @@
                             <a href="{{ route('shop.productName', $diyProduct->product->id) }}" class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto">
                                 <span aria-hidden="true" class="absolute inset-0">
                                     <img class="h-full w-full object-cover object-center"
-                                        src="{{ asset('storage/app/public/images/' . $diyProduct->product->media) }}"
+                                        src="{{ asset('/storage/images/' . $diyProduct->product->media) }}"
                                         alt="{{ $diyProduct->product->name }}">
                                 </span>
                                 <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"></span>

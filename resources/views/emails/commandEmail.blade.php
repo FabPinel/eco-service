@@ -644,7 +644,7 @@ if ($discount) {
                                                                             role="presentation">
                                                                             <tr style="border-collapse:collapse">
                                                                                 <td style="padding:0;Margin:0">
-                                                                                    <img src="{{ url('storage/app/public/images/' . $orderItem->product->media) }}"
+                                                                                    <img src="{{ url('/storage/images/' . $orderItem->product->media) }}"
                                                                                         alt="{{ $orderItem->product->name }}"
                                                                                         style="height: 120px;width: 120px;object-fit: cover;object-position: center;">
                                                                                 </td>
@@ -921,7 +921,7 @@ if ($discount) {
                                             <!--[if mso]></td><td style="width:20px"></td><td style="width:362px" valign="top"><![endif]-->
                                             <table cellspacing="0" cellpadding="0" align="right" role="none"
                                                 style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                
+
                                             </table><!--[if mso]></td></tr></table><![endif]-->
                                         </td>
                                     </tr>

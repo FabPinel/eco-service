@@ -23,7 +23,7 @@ class shopController extends Controller
             ->take(5)
             ->get();
 
-            $reviews = Reviews::with('user')->where('id_product', $id)->orderBy('created_at', 'desc');
+            $reviews = Reviews::with('user')->where('id_product', $id)->orderBy('created_at', 'desc')->get();
             $totalReviews = $reviews->count();
             $sumReviews = $reviews->sum('rating');
             $averageRating = $totalReviews > 0 ? $sumReviews / $totalReviews : 0;

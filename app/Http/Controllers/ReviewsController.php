@@ -13,6 +13,7 @@ class ReviewsController extends Controller
         $totalReviews = $reviews->count();
         $sumReviews = $reviews->sum('rating');
         $averageRating = $totalReviews > 0 ? $sumReviews / $totalReviews : 0;
-        return view('shop.product', compact('reviews', 'totalReviews', 'averageRating'));
+        dd($totalReviews);
+        return view('shop.index', compact('reviews', 'totalReviews', 'averageRating'));
     }
 }

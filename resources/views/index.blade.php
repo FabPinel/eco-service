@@ -45,7 +45,7 @@
                                         class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto">
                                         <span aria-hidden="true" class="absolute inset-0">
                                             <img class="h-full w-full object-cover object-center"
-                                                src="{{ asset('storage/app/public/images/' . $product->media) }}"
+                                                src="{{ asset('/storage/images/' . $product->media) }}"
                                                 alt="{{ $product->name }}">
                                         </span>
                                         <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"></span>
@@ -99,7 +99,7 @@
                         <a href="{{ route('diy.diyName', $diy->id) }}" class="group block">
                             <div aria-hidden="true"
                                 class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75">
-                                <img src="{{ asset('storage/app/public/images/' . $diy->image) }}"
+                                <img src="{{ asset('/storage/images/' . $diy->image) }}"
                                     class="h-52 w-96 object-cover object-center">
                             </div>
                             <h3 class="mt-4 text-base font-semibold text-gray-900">{{ $diy->title }}</h3>
@@ -112,7 +112,7 @@
             </section>
         </main>
         @if ($message = Session::get('success'))
-           
+
         <div id="successMessage" class="fixed bottom-4 right-4 w-1/3 flex border-l-8  border-[#34D399] bg-[#34D399] bg-opacity-[15%] px-7 py-8 shadow-md md:p-9">
             <div class="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
                   <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +133,7 @@
             setTimeout(function() {
                 document.getElementById('successMessage').remove();
             }, 5000); // La popup disparaîtra après 5 secondes (5000 millisecondes)
-        </script> 
+        </script>
     </div>
 
 

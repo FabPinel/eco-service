@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $products = Product::where('active', true)->get();
+        $products = Product::withCount('reviews')->where('active', true)->get();
         $categories = Category::all();
         $discounts = Discount::all();
         $diy = DIY::paginate(8);

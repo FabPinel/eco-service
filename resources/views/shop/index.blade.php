@@ -55,7 +55,7 @@
 
                 <section aria-labelledby="products-heading" class="pb-24 pt-6">
                     <h2 id="products-heading" class="sr-only">Products</h2>
-                    
+
                     <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4" x-data="{
                         isOpen: true,
                         selectedCategory: null,
@@ -103,21 +103,52 @@
                         <!-- Product grid -->
                         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-3 lg:gap-x-8">
                             @foreach ($products as $product)
-                                <a href="{{ route('shop.productName', $product->id) }}" class="group text-sm"
-                                    x-show="!selectedCategory || '{{ $product->id_category }}' == selectedCategory">
+                                <a href="{{ route('shop.productName', $product->id) }}" class="group text-sm" x-show="!selectedCategory || '{{ $product->id_category }}' == selectedCategory">
                                     <div
                                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                         <img class="h-full w-full object-cover object-center"
-                                        src="{{ asset('storage/app/public/images/' . $product->media) }}"
-                                        alt="{{ $product->name }}"> 
+                                        src="{{ asset('/storage/images/' . $product->media) }}"
+                                        alt="{{ $product->name }}">
                                     </div>
                                     <h3 class="mt-4 font-medium text-gray-900">{{ $product->name }}</h3>
+                                    <div class="flex mt-1">
+                                        @for ($i = 0; $i < 5; $i++)
+                                            @php
+                                                $averageRating = $product->reviews->avg('rating');
+                                            @endphp
+
+                                            @if ($i < floor($averageRating))
+                                                <!-- Full star -->
+                                                <svg class="w-4 h-4 me-1 text-[#e88229]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                </svg>
+                                            @elseif ($i < ceil($averageRating))
+                                                <!-- Half star -->
+                                                <svg class="w-4 h-4 me-1 text-[#e88229]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                    <defs>
+                                                        <linearGradient id="half">
+                                                            <stop offset="50%" stop-color="#e88229" />
+                                                            <stop offset="50%" stop-color="#1e293b" />
+                                                        </linearGradient>
+                                                    </defs>
+                                                    <path fill="url(#half)" d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                </svg>
+                                            @else
+                                                <!-- Empty star -->
+                                                <svg class="w-4 h-4 me-1 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                </svg>
+                                            @endif
+                                        @endfor
+                                        <p class="text-sm font-medium text-gray-900">({{ $product->reviews_count }})</p>
+                                    </div>
+
                                     <p class="mt-2 font-medium text-gray-900">{{ $product->price }}€</p>
                                 </a>
                             @endforeach
                         </div>
                     </div>
-                </section>                
+                </section>
             </main>
         </div>
     </div>

@@ -72,7 +72,7 @@ class cartController extends Controller
                 'quantity' => $quantity,
                 'name' => $product->name,
                 'price' => $product->price,
-                'image_url' => asset('storage/app/public/images/' . $product->media),
+                'image_url' => asset('/storage/images/' . $product->media),
             ];
         }
 
