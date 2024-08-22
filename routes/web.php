@@ -13,6 +13,7 @@ use App\Http\Controllers\cartController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\ReviewsController;
 
 
 /*
@@ -101,12 +102,6 @@ Route::prefix('/admin/diy')->middleware(['auth', 'role:0'])->group(function () {
     Route::delete('/{id}', [diyController::class, 'destroy'])->name('admin.diy.destroy');
 });
 
-// Panier
-Route::get('/panier', [cartController::class, 'panier'])->name('panier');
-Route::post('/ajouter-au-panier/{productId}', [cartController::class, 'addToCart'])->name('addToCart');
-Route::delete('/remove-from-cart', [cartController::class, 'removeFromCart'])->name('removeFromCart');
-Route::put('/update-cart', [cartController::class, 'updateCart'])->name('updateCart');
-
 // Orders
 Route::prefix('/admin/orders')->middleware(['auth', 'role:0'])->group(function () {
     Route::get('/', [orderController::class, 'index'])->name('admin.orders.index');
@@ -122,6 +117,11 @@ Route::prefix('/admin/messages')->middleware(['auth', 'role:0'])->group(function
 });
 });
 
+// Panier
+Route::get('/panier', [cartController::class, 'panier'])->name('panier');
+Route::post('/ajouter-au-panier/{productId}', [cartController::class, 'addToCart'])->name('addToCart');
+Route::delete('/remove-from-cart', [cartController::class, 'removeFromCart'])->name('removeFromCart');
+Route::put('/update-cart', [cartController::class, 'updateCart'])->name('updateCart');
 
 // Checkout
 Route::get('/commande', [cartController::class, 'checkout'])->name('commande');
@@ -152,3 +152,7 @@ Route::prefix('/mon-compte')->group(function () {
     Route::match(['put', 'post', 'get'], '/update', [profileController::class, 'update'])->name('profile.update');
     Route::match(['put', 'post', 'get'], '/address', [profileController::class, 'address'])->name('profile.address');
 });
+
+//Avis
+Route::get('/review/{token}', [ReviewsController::class, 'showReviewForm'])->name('reviews.form');
+Route::post('/review/{token}', [ReviewsController::class, 'submitReview'])->name('reviews.submit');

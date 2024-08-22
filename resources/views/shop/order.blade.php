@@ -1,6 +1,7 @@
 @extends('layout')
 @section('pageTitle', "Merci pour votre commande !")
 @section('content')
+<div x-data x-init="setTimeout(() => window.location.href = '{{ route('panier') }}', 10000)">
     <div class="bg-white">
         <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="w-full">
@@ -115,4 +116,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

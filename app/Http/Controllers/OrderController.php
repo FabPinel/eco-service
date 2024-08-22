@@ -8,8 +8,12 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\OrderStatus;
 use App\Models\UserAddress;
-
-class orderController extends Controller
+use App\Models\ReviewToken;
+use Illuminate\Support\Str;
+use App\Mail\ReviewRequestMail;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+class OrderController extends Controller
 {
     public function index()
     {
@@ -39,5 +43,21 @@ class orderController extends Controller
         $totalUserOrders = Order::where('id_user', $user->id)->count();
         $totalItemOrder = OrderItem::where('id_order', $order->id)->count();
         return view('admin.orders.orderDetails', compact('order', 'orderItems', 'totalUserOrders', 'totalItemOrder', 'userAddress'));
+    }
+
+    public function sendReviewRequest($orderId)
+    {
+        $order = Order::find($orderId);
+        $user = $order->user;
+        $token = Str::random(60);
+        $expiresAt = Carbon::now()->addDays(3);
+        ReviewToken::create([
+            'user_id' => $user->id,
+            'order_id' => $order->id,
+            'token' => $token,
+            'expires_at' => $expiresAt,
+        ]);
+        $reviewUrl = route('reviews.form', ['token' => $token]);
+        Mail::to($user->email)->send(new ReviewRequestMail($reviewUrl));
     }
 }

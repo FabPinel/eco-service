@@ -15,9 +15,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\shopController;
 use Stripe\Checkout\Session;
+use App\Services\ReviewService;
 
 class cartController extends Controller
 {
+
+    protected $reviewService;
+
+    public function __construct(ReviewService $reviewService)
+    {
+        $this->reviewService = $reviewService;
+    }
     public function panier()
     {
         $summaryData = $this->summary();
@@ -297,7 +305,7 @@ class cartController extends Controller
         ]);
 
         $totalItemOrder = OrderItem::where('id_order', $order->id)->count();
-
+        $this->reviewService->sendReviewRequest($order->id);
         $orderDetails = [
             'order' => $order,
             'orderItems' => $orderItems,
