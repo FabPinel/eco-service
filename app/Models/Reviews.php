@@ -9,17 +9,17 @@ class Reviews extends Model
 {
     use HasFactory;
 
-    protected $table = "reviews";
+    protected $table = 'reviews';
 
-    protected $fillable = ['comment', 'rating', 'id_user', 'id_product'];
+    protected $fillable = ['comment', 'rating', 'user_id', 'product_id'];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'id_product');
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

@@ -14,12 +14,14 @@ class ReviewRequestMail extends Mailable
     use Queueable, SerializesModels;
 
     public $reviewUrl;
+    public $reviewTokens;
     /**
      * Create a new message instance.
      */
-    public function __construct($reviewUrl)
+    public function __construct($reviewUrl, $reviewTokens)
     {
         $this->reviewUrl = $reviewUrl;
+        $this->reviewTokens = $reviewTokens;
     }
 
     /**

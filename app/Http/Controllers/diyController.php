@@ -65,7 +65,7 @@ class diyController extends Controller
     public function edit(string $id)
     {
         $diy = DIY::find($id);
-        return view(('admin.diy.edit'), compact('diy'));
+        return view('admin.diy.edit', compact('diy'));
     }
 
     public function update(Request $request, $id)

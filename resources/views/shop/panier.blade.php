@@ -19,13 +19,11 @@
                                         <img src="{{ asset('/storage/images/' . $product->media) }}"
                                             alt="{{ $product->name }}"
                                             class="h-20 w-20 object-cover object-center sm:rounded-lg">
-                                        <div>
-                                            <div class="flex justify-between">
+                                        <div class="w-4/12">
                                                 <h3 class="text-sm">
                                                     <a href="{{ route('shop.productName', $item['product_id']) }}"
                                                         class="font-medium text-gray-700 hover:text-gray-800">{{ $item['name'] }}</a>
                                                 </h3>
-                                            </div>
                                             <p class="mt-1 text-sm font-medium text-gray-900">{{ $item['price'] }} €</p>
                                         </div>
 
@@ -34,7 +32,7 @@
                                                 {{ $item['name'] }}</label>
                                             <input id="quantity-{{ $productId }}" name="quantity-{{ $productId }}"
                                                 type="number" value="{{ $item['quantity'] }}"
-                                                class="w-10 rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-[#1c3242] focus:outline-none focus:ring-1 focus:ring-[#1c3242] sm:text-sm"
+                                                class="w-10 rounded-md border text-center border-gray-300 py-1.5 text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-[#1c3242] focus:outline-none focus:ring-1 focus:ring-[#1c3242] sm:text-sm"
                                                 min="1" max="{{ $product->quantity }}" step="1"
                                                 inputmode="numeric" data-product-id="{{ $item['product_id'] }}"
                                                 onkeydown="return false;">

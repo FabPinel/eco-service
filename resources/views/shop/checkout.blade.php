@@ -27,7 +27,7 @@ if ($discount) {
                             <label for="email-address" class="block text-sm font-medium text-gray-700">Adresse email</label>
                             <div class="mt-1">
                                 <input type="email" id="email-address" name="email-address" autocomplete="email"
-                                    class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    class="block w-full py-2 px-2 rounded-md border border-gray-400 shadow-sm focus:outline-none focus:border-2 focus:border-[#1c3242] sm:text-sm"
                                     @auth value="{{ auth()->user()->email }}" @endauth>
                             </div>
                         </div>
@@ -51,7 +51,7 @@ if ($discount) {
                             </div>
                             <div class="mt-1" x-show="{{ $userAddress ? 'true' : 'false' }}">
                                 <select id="user-address" name="user-address" autocomplete="address-line"
-                                    class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    class="block w-full py-2 px-2 rounded-md border border-gray-400 shadow-sm focus-visible:border-[#1c3242] focus-visible:ring-[#1c3242] focus-visible: sm:text-sm"
                                     x-on:change="selectedAddress = JSON.parse($event.target.value)">
                                     @foreach ($allUserAddresses as $address)
                                         <option value="{{ $address->toJson() }}"
@@ -70,7 +70,7 @@ if ($discount) {
                                     <label for="first-name" class="block text-sm font-medium text-gray-700">Prénom</label>
                                     <div class="mt-1">
                                         <input type="text" id="first-name" name="first-name" autocomplete="given-name"
-                                            class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="block w-full py-2 px-2 rounded-md border border-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1c3242] focus:border-none sm:text-sm"
                                             x-model="selectedAddress.first_name">
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@ if ($discount) {
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Nom</label>
                                     <div class="mt-1">
                                         <input type="text" id="last-name" name="last-name" autocomplete="family-name"
-                                            class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="block w-full py-2 px-2 rounded-md border border-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1c3242] focus:border-none sm:text-sm"
                                             x-model="selectedAddress.last_name">
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@ if ($discount) {
                                     <label for="address" class="block text-sm font-medium text-gray-700">Adresse</label>
                                     <div class="mt-1">
                                         <input type="text" name="address" id="address" autocomplete="street-address"
-                                            class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="block w-full py-2 px-2 rounded-md border border-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1c3242] focus:border-none sm:text-sm"
                                             x-model="selectedAddress.address_line">
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@ if ($discount) {
                                     <label for="city" class="block text-sm font-medium text-gray-700">Ville</label>
                                     <div class="mt-1">
                                         <input type="text" name="city" id="city" autocomplete="address-level2"
-                                            class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="block w-full py-2 px-2 rounded-md border border-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1c3242] focus:border-none sm:text-sm"
                                             x-model="selectedAddress.city">
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@ if ($discount) {
                                     <label for="country" class="block text-sm font-medium text-gray-700">Pays</label>
                                     <div class="mt-1">
                                         <input id="country" name="country" autocomplete="country-name"
-                                            class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="block w-full py-2 px-2 rounded-md border border-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1c3242] focus:border-none sm:text-sm"
                                             x-model="selectedAddress.country">
                                     </div>
                                 </div>
@@ -116,7 +116,7 @@ if ($discount) {
                                         postal</label>
                                     <div class="mt-1">
                                         <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
-                                            class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="block w-full py-2 px-2 rounded-md border border-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1c3242] focus:border-none sm:text-sm"
                                             x-model="selectedAddress.postalCode">
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@ if ($discount) {
                                         téléphone</label>
                                     <div class="mt-1">
                                         <input type="text" name="phone" id="phone" autocomplete="tel"
-                                            class="block w-full py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="block w-full py-2 px-2 rounded-md border border-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1c3242] focus:border-none sm:text-sm"
                                             x-model="selectedAddress.phone">
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@ if ($discount) {
                                                               Active: "ring-2 ring-indigo-500"
                                                             -->
                                 <label
-                                    class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none">
+                                    class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus-visible:outline-none">
                                     <input type="radio" name="delivery-method" value="Standard" class="sr-only"
                                         aria-labelledby="delivery-method-0-label"
                                         aria-describedby="delivery-method-0-description-0 delivery-method-0-description-1">
@@ -279,7 +279,7 @@ if ($discount) {
                                 <label for="discount">Code promo</label>
                                 <div class="flex">
                                     <input type="text" id="discount" name="coupon" placeholder="Entrez votre code promo"
-                                        class="block w-fit py-1 px-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        class="block w-fit py-1 px-2 rounded-md border border-gray-400 shadow-sm focus:outline-none focus:border-none focus:ring-2 focus:ring-[#1c3242] sm:text-sm">
                                     <button type="submit" :disabled="submitting" class="ml-3 rounded-md border border-slate-200 shadow-sm p-2">Appliquer
 
                                     </button>
@@ -288,7 +288,7 @@ if ($discount) {
                         </form>
 
                         <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-                            <button type="button" id="submit-main-form" onclick="submitMainForm()" class="w-full rounded-md border border-transparent bg-[#1c3242] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#374a56] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Payer avec Stripe</button>
+                            <button type="button" id="submit-main-form" onclick="submitMainForm()" class="w-full rounded-md border border-transparent bg-[#1c3242] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#374a56] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50">Payer avec Stripe</button>
                         </div>
                     </div>
                 </div>

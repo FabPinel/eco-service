@@ -173,7 +173,7 @@
                                                     }"
                                                     x-on:click="selectProduct(product.id)">
                                                     <img class="w-16 h-16 object-cover object-center"
-                                                        :src=`/storage/app/public/images/${product.media}`
+                                                        :src=`/storage/images/${product.media}`
                                                         alt="product.name">
 
                                                     <h3 x-text="product.name" class="mt-4 font-medium text-gray-900"

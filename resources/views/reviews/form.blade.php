@@ -6,7 +6,7 @@
     <h1 class="text-2xl font-semibold text-gray-900">Laissez un avis sur vos produits</h1>
 
     @foreach ($orderItems as $orderItem)
-        <div class="mt-8 bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+        <div x-data="{ submitted: {{ $orderItem->reviewSubmitted ? 'true' : 'false' }} }" class="mt-8 bg-white border border-gray-200 rounded-lg shadow-sm p-6">
             <div class="flex items-center">
                 <img src="{{ asset('/storage/images/' . $orderItem->product->media) }}"
                      alt="{{ $orderItem->product->name }}"
@@ -17,11 +17,9 @@
                 </div>
             </div>
 
-            <form action="" method="POST" class="mt-6" id="review-form-{{ $orderItem->id }}">
+            <!-- Formulaire de soumission -->
+            <form x-show="!submitted" action="{{ route('reviews.submit', $orderItem->reviewToken) }}" method="POST" class="mt-6">
                 @csrf
-                <!-- Token extrait de l'URL -->
-                <input type="hidden" id="token-{{ $orderItem->id }}" name="token" value="">
-
                 <!-- Note de 1 à 5 étoiles avec Alpine.js -->
                 <div x-data="{ rating: 0, hover: 0 }" @mouseleave="hover = 0" class="flex items-center mb-4">
                     <label class="block text-gray-700 font-medium mr-4">Note :</label>
@@ -39,13 +37,15 @@
                         @endfor
                     </div>
                     <!-- Champ caché pour stocker la note -->
-                    <input type="hidden" name="rating_{{ $orderItem->id }}" :value="rating">
+                    <input type="hidden" name="rating" :value="rating">
+                    <input type="hidden" name="user_id" value="{{ $order->user->id }}">
+                    <input type="hidden" name="product_id" value="{{ $orderItem->product->id }}">
                 </div>
 
                 <!-- Commentaire -->
                 <div class="mb-4">
                     <label for="comment_{{ $orderItem->id }}" class="block text-gray-700 font-medium mb-2">Votre commentaire :</label>
-                    <textarea id="comment_{{ $orderItem->id }}" name="comment_{{ $orderItem->id }}" rows="4" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent" placeholder="Partagez votre expérience avec ce produit..."></textarea>
+                    <textarea id="comment_{{ $orderItem->id }}" name="comment" rows="4" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent" placeholder="Partagez votre expérience avec ce produit..."></textarea>
                 </div>
 
                 <!-- Bouton soumettre -->
@@ -55,6 +55,11 @@
                     </button>
                 </div>
             </form>
+
+            <!-- Message de remerciement -->
+            <div x-show="submitted" class="mt-4 text-green-500">
+                Merci pour votre avis ! Votre avis a bien été pris en compte.
+            </div>
         </div>
     @endforeach
 </div>
