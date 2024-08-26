@@ -44,7 +44,7 @@ class ReviewsController extends Controller
             $reviewToken = ReviewToken::with('order')
                 ->where('token', $token)
                 ->where('expires_at', '>', Carbon::now())
-                ->first();
+                ->firstOrFail();
 
             if (!$order) {
                 $order = $reviewToken->order;
