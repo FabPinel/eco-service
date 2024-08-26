@@ -4,9 +4,12 @@
 
 <div class="max-w-3xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
     <h1 class="text-2xl font-semibold text-gray-900">Laissez un avis sur vos produits</h1>
-
     @foreach ($orderItems as $orderItem)
-        <div x-data="{ submitted: {{ $orderItem->reviewSubmitted ? 'true' : 'false' }} }" class="mt-8 bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+        @php
+            $reviewToken = \App\Models\ReviewToken::where('token', $orderItem->reviewToken)->first();
+        @endphp
+
+        <div x-data="{ submitted: {{ $reviewToken->used ? 'true' : 'false' }} }" class="mt-8 bg-white border border-gray-200 rounded-lg shadow-sm p-6">
             <div class="flex items-center">
                 <img src="{{ asset('/storage/images/' . $orderItem->product->media) }}"
                      alt="{{ $orderItem->product->name }}"

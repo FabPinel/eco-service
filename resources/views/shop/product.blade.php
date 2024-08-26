@@ -195,33 +195,41 @@
                 <h2 id="category-heading" class="text-2xl font-bold tracking-tight text-gray-900">
                     Les avis
                 </h2>
-
-                @foreach ($reviews as $review)
-                    <article class="mt-10 shadow-md rounded-b-xl">
-                        <div class="flex items-center mb-4 bg-gray-200 rounded-t-xl p-4">
-                            <div class="font-medium text-xl text-[#1c3242]">
-                                <p>{{$review->user->first_name}} {{$review->user->last_name}}</p>
+                {{--   On choisit le nombre d'avis que l'on veut afficher  --}}
+                <div x-data="{ visibleReviews: 2 }">
+                    @foreach ($reviews as $index => $review)
+                        <article class="mt-10 shadow-md rounded-b-xl" x-show="{{ $index }} < visibleReviews">
+                            <div class="flex items-center mb-4 bg-gray-200 rounded-t-xl p-4">
+                                <div class="font-medium text-xl text-[#1c3242]">
+                                    <p>{{ $review->user->first_name }} {{ $review->user->last_name }}</p>
+                                </div>
+                                <div class="ml-3 w-0.5 h-6 bg-gray-500"></div>
+                                <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                    <h3 class="mx-3 font-semibold text-lg">{{ $review->rating }}/5</h3>
+                                    @for ($i = 0; $i < 5; $i++)
+                                        <svg
+                                            class="w-4 h-4 {{ $i < $review->rating ? 'text-[#e88229]' : 'text-gray-900' }} me-1"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor"
+                                            viewBox="0 0 22 20">
+                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                        </svg>
+                                    @endfor
+                                </div>
                             </div>
-                            <div class="ml-3 w-0.5 h-6 bg-gray-500"></div>
-                            <div class="flex items-center space-x-1 rtl:space-x-reverse">
-                                <h3 class="mx-3 font-semibold text-lg">{{$review->rating}}/5</h3>
-                                @for ($i = 0; $i < 5; $i++)
-                                <svg class="w-4 h-4 {{ $i < $review->rating ? 'text-[#e88229]' : 'gray-900' }} me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                </svg>
-                                @endfor
+                            <div class="px-3 py-2">
+                                <p class="text-gray-900">{{ $review->comment }}</p>
+                                <time class="block ml-auto w-fit text-gray-500 text-sm">{{ $review->created_at->format('F Y') }}</time>
                             </div>
-                        </div>
-                        <div class="px-3 py-2">
-                            <p class="text-gray-900 ">{{$review->comment}}</p>
-                            <time class="block ml-auto w-fit text-gray-500 text-sm">{{$review->created_at->format('F Y')}}</time>
-                        </div>
+                        </article>
+                    @endforeach
 
-                    </article>
-                @endforeach
-
-
-
+                    <!-- Bouton pour afficher plus d'avis -->
+                    <button x-show="visibleReviews < {{ $reviews->count() }}" @click="visibleReviews = {{ $reviews->count() }}" class="mt-6 bg-[#1c3242] text-white px-4 py-2 rounded-md hover:bg-[#374a56]">
+                        Afficher plus d'avis ({{ $reviews->count() - 2 }}) {{--   On affiche le nombre d'avis restants  --}}
+                    </button>
+                </div>
             </section>
 
         </div>
@@ -236,14 +244,14 @@
                         fill="white" stroke="white"></path>
                 </svg>
             </div>
-            <div class="mt-4 text-center">
+            <div class="ml-4">
                 <h5 class="mb-2 text-lg font-bold text-[#34D399]">
                     Ajout au panier
                 </h5>
-                <p class="text-sm leading-relaxed text-[#34D399]">
+                <p class="mb-2 text-sm leading-relaxed text-[#34D399]">
                     L'article a bien été ajouté au panier.
                 </p>
-                <a href="/panier" class="mt-2 text-sm text-[#34D399] underline font-semibold">Voir
+                <a href="/panier" class="mt-2 text-base text-[#34D399] underline font-semibold">Voir
                     mon panier</a>
             </div>
         </div>

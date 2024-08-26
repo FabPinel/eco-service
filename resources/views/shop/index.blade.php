@@ -111,7 +111,7 @@
                                         alt="{{ $product->name }}">
                                     </div>
                                     <h3 class="mt-4 font-medium text-gray-900">{{ $product->name }}</h3>
-                                    <div class="flex mt-1">
+                                    <div class="flex items-center mt-1">
                                         @for ($i = 0; $i < 5; $i++)
                                             @php
                                                 $averageRating = $product->reviews->avg('rating');

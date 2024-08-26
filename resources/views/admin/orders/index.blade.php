@@ -10,7 +10,7 @@
                 </div>
 
             </div>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-6">
+            <div class="relative overflow-x-auto sm:rounded-lg py-6">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class=" border-b border-stroke py-3.5 pl-5 pr-6 uppercase bg-slate-100">
                         <tr>

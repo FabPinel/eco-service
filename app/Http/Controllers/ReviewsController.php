@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Reviews;
 use App\Models\OrderItem;
@@ -12,10 +13,27 @@ use Carbon\Carbon;
 
 class ReviewsController extends Controller
 {
+
+    public function index()
+    {
+        $reviews = Reviews::with('user', 'product')->orderBy('created_at', 'desc')->paginate(10);
+        $totalReviews = Reviews::count();
+
+        foreach ($reviews as $review) {
+            $review->order = Order::with('orderItems')
+                                  ->where('id_user', $review->user->id)
+                                  ->whereHas('orderItems', function ($query) use ($review) {
+                                      $query->where('id_product', $review->product->id);
+                                  })
+                                  ->first();
+        }
+        return view('admin.reviews.index', compact('reviews', 'totalReviews'));
+    }
+
+
     public function showReviewForm($accessToken)
     {
         $reviewTokens = session('reviewTokens');
-
         if (!$reviewTokens) {
             abort(404, 'Tokens not found');
         }
@@ -37,9 +55,9 @@ class ReviewsController extends Controller
                 ->where('id_product', $reviewToken->product_id)
                 ->first();
 
-            // Vérifier si l'avis a déjà été soumis
-            $orderItem->reviewSubmitted = SubmittedReviews::where('user_id', $userId)
-                ->where('product_id', $orderItem->product_id)
+             // Vérifier si l'avis a déjà été soumis
+           $orderItem->reviewSubmitted = SubmittedReviews::where('user_id', $userId)
+                 ->where('product_id', $orderItem->product_id)
                 ->exists();
 
             // Ajouter le ReviewToken au bon produit
@@ -47,7 +65,7 @@ class ReviewsController extends Controller
             $orderItems[] = $orderItem;
         }
 
-        return view('reviews.form', compact('order', 'orderItems', 'accessToken'));
+        return view('reviews.form', compact('order', 'orderItems', 'accessToken', 'reviewTokens'));
     }
 
 
@@ -86,8 +104,17 @@ public function submitReview(Request $request, $token)
     ]);
 
     // Invalider le token
-    $reviewToken->delete();
-
+    $reviewToken->used = true ;
+    $reviewToken->save();
     return redirect()->back()->with('success', 'Merci pour votre avis ! Votre avis a bien été pris en compte.');
 }
+
+public function destroy($ids) {
+    $idsReviews = explode(',', $ids);
+    Reviews::destroy($idsReviews);
+
+    session()->flash('notif.success', 'Messages deleted successfully!');
+    return redirect()->route('admin.avis.index');
+}
+
 }

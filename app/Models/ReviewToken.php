@@ -11,7 +11,7 @@ class ReviewToken extends Model
 
     protected $table = 'review_tokens';
 
-    protected $fillable = ['user_id', 'product_id', 'order_id', 'token', 'expires_at'];
+    protected $fillable = ['user_id', 'product_id', 'order_id', 'token', 'used', 'expires_at'];
 
     public function user()
     {

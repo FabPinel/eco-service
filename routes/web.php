@@ -115,6 +115,14 @@ Route::prefix('/admin/messages')->middleware(['auth', 'role:0'])->group(function
     Route::post('/', [contactController::class, 'sendMailResponse'])->name('message.response');
     Route::delete('/{ids}', [ContactController::class, 'destroy'])->name('admin.message.destroy');
 });
+
+
+// Avis
+Route::prefix('/admin/avis')->middleware(['auth', 'role:0'])->group(function () {
+    Route::get('/', [ReviewsController::class, 'index'])->name('admin.avis.index');
+    Route::delete('/{ids}', [ReviewsController::class, 'destroy'])->name('admin.avis.destroy');
+});
+
 });
 
 // Panier

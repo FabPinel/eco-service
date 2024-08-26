@@ -6,12 +6,4 @@
 
 <a href="{{ $reviewUrl }}">Laisser un avis</a>
 
-<p>Vous trouverez ci-dessous les tokens pour chaque produit :</p>
-
-<ul>
-    @foreach ($reviewTokens as $token)
-        <li>{{ $token }}</li>
-    @endforeach
-</ul>
-
 <p>Merci de votre confiance.</p>

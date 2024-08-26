@@ -1,9 +1,8 @@
 @extends('layout-admin')
 @section('pageTitle', 'Admin - DIY')
 @section('admin-content')
-    <div class="md:ml-28 md:mr-8">
-        <div class="px-4 sm:px-6 lg:px-8 mt-20" x-show="activeTab === 3">
-            <div class="sm:flex sm:items-center">
+    <div class="flex h-full mt-24 bg-white p-4 flex-col border-x border-stroke dark:border-strokedark">
+            <div class="sm:flex sm:items-center py-5">
                 <div class="sm:flex-auto">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">DIY</h1>
                     <p class="mt-2 text-sm text-gray-700">La liste de tous les diy</p>
@@ -14,12 +13,10 @@
                         un DIY</a>
                 </div>
             </div>
-            <div class="mt-8 flow-root">
-                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        <table class="min-w-full divide-y divide-gray-300">
+            <div class="h-full">
+                        <table class="h-full w-full table-auto">
                             <thead>
-                                <tr>
+                                <tr class="bg-slate-100">
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Id
                                     </th>
@@ -57,7 +54,7 @@
 </div>
                                         </td>
                                         <td
-                                            class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                            class="relative whitespace-nowrap py-5 pl-3 pr-4 center text-sm font-medium sm:pr-0">
                                             <a href="{{ route('admin.diy.edit', $d->id) }}"
                                                 class="text-slate-400 hover:text-slate-900">
                                                 <span class="material-icons">
@@ -66,13 +63,13 @@
                                             </a>
                                         </td>
                                         <td
-                                            class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                            class="relative whitespace-nowrap py-5 pl-3 pr-4 center text-sm font-medium sm:pr-0">
                                             <a href="{{ route('diy.diyName', $d->id) }}" class="text-[#1c3242] hover:text-[#374a56]"><span
                                                     class="material-icons">
                                                     visibility
                                                 </span></a>
                                         </td>
-                                        <td>
+                                        <td class="relative whitespace-nowrap py-5 pl-3 pr-4 center text-sm font-medium sm:pr-0">
                                             <form action="{{ route('admin.diy.destroy', $d->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -86,11 +83,8 @@
                             @endforeach
 
                         </table>
-                    </div>
-                </div>
                 {{-- {!! $diy->links() !!} --}}
             </div>
-        </div>
         @if ($message = Session::get('success'))
             <div id="successMessage"
             class="hidden md:flex fixed top-28 right-4 w-1/3 border-l-8 border-[#34D399] bg-[#CBF5E6] px-7 py-8 shadow-md">
