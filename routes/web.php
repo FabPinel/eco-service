@@ -163,4 +163,4 @@ Route::prefix('/mon-compte')->group(function () {
 
 //Avis
 Route::get('/review/{accessToken}', [ReviewsController::class, 'showReviewForm'])->name('reviews.form');
-Route::post('/review/{token}', [ReviewsController::class, 'submitReview'])->name('reviews.submit');
+Route::post('/reviews/submit/{token}', [ReviewsController::class, 'submitReview'])->name('reviews.submit');

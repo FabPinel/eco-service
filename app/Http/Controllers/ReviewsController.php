@@ -37,19 +37,18 @@ class ReviewsController extends Controller
         if (!$reviewTokens) {
             abort(404, 'Tokens not found');
         }
+
         $order = null;
         $orderItems = [];
-
         foreach ($reviewTokens as $token) {
             $reviewToken = ReviewToken::with('order')
                 ->where('token', $token)
                 ->where('expires_at', '>', Carbon::now())
-                ->firstOrFail();
+                ->first();
 
             if (!$order) {
                 $order = $reviewToken->order;
             }
-
             $userId = auth()->id();
             $orderItem = OrderItem::where('id_order', $order->id)
                 ->where('id_product', $reviewToken->product_id)
@@ -105,6 +104,7 @@ public function submitReview(Request $request, $token)
 
     // Invalider le token
     $reviewToken->used = true ;
+    $reviewToken->expires_at = Carbon::now()->addMinutes(15); // Expire 15 minutes après la soumission du formulaire
     $reviewToken->save();
     return redirect()->back()->with('success', 'Merci pour votre avis ! Votre avis a bien été pris en compte.');
 }
